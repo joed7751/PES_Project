@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1555455195897.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2492667968",
+    "id" : "745A5436",
+    "lastKnownWriteTime" : 1558630804,
+    "last_content_update" : 1558630804703,
+    "path" : "~/Documents/Documents19/Biogeochemistry_2019/PES_EGRET/Vernalis_EGRET/UpTruck_EGRET_Analysis_Script.R",
+    "project_path" : "UpTruck_EGRET_Analysis_Script.R",
+    "properties" : {
+        "cursorPosition" : "1,58",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

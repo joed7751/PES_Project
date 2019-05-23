@@ -1,0 +1,35 @@
+
+
+ UPPER TRUCKEE RV AT S UPPER TRUCKEE RD NR MEYERS    Inorganic nitrogen (nitrate and nitrite)
+
+ Water Year
+
+  Bootstrap process, for change from Water Year 1991 to Water Year 2011
+                   data set runs from Water Year 1990 to Water Year 2011
+  Bootstrap block length in days 200
+  bootBreak is 100  confStop is 0.7
+
+ WRTDS estimated concentration change is -0.00736  mg/L
+ WRTDS estimated flux change is         -0.0001151  10^6 kg/yr
+
+Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Reject Ho
+ best estimate is -0.00736 mg/L
+  Lower and Upper 90% CIs -0.01041 -0.00282
+ also 95% CIs -0.01124 -0.00248 
+ and 50% CIs -0.00833 -0.00485
+ approximate two-sided p-value for Conc      0.02
+* Note p-value should be considered to be < stated value
+ Likelihood that Flow Normalized Concentration is trending up =    0.00495  is trending down =      0.995
+
+Should we reject Ho that Flow Normalized Flux Trend = 0 ? Do Not Reject Ho
+ best estimate is -0.0001151 10^6 kg/year
+  Lower and Upper 90% CIs -2.76e-04  3.75e-05
+ also 95% CIs -3.47e-04  5.32e-05 
+ and 50% CIs -1.69e-04 -3.50e-05
+ approximate two-sided p-value for Flux       0.3
+ Likelihood that Flow Normalized Flux is trending up = 0.153  is trending down= 0.847
+
+ Upward trend in concentration is highly unlikely 
+ Upward trend in flux is unlikely
+ Downward trend in concentration is highly likely 
+ Downward trend in flux is likely

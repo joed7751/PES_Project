@@ -1,0 +1,34 @@
+
+
+ UPPER TRUCKEE RV AT S UPPER TRUCKEE RD NR MEYERS    Phosphorus
+
+ Water Year
+
+  Bootstrap process, for change from Water Year 1991 to Water Year 2011
+                   data set runs from Water Year 1990 to Water Year 2011
+  Bootstrap block length in days 200
+  bootBreak is 100  confStop is 0.7
+
+ WRTDS estimated concentration change is -0.00392  mg/L
+ WRTDS estimated flux change is         -0.0003109  10^6 kg/yr
+
+Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Reject Ho
+ best estimate is -0.00392 mg/L
+  Lower and Upper 90% CIs -0.010593 -0.000426
+ also 95% CIs -0.012237  0.001596 
+ and 50% CIs -0.006782 -0.002892
+ approximate two-sided p-value for Conc     0.074
+ Likelihood that Flow Normalized Concentration is trending up =     0.0324  is trending down =      0.968
+
+Should we reject Ho that Flow Normalized Flux Trend = 0 ? Do Not Reject Ho
+ best estimate is -0.0003109 10^6 kg/year
+  Lower and Upper 90% CIs -8.64e-04  1.02e-04
+ also 95% CIs -1.03e-03  2.64e-04 
+ and 50% CIs -5.87e-04 -1.85e-04
+ approximate two-sided p-value for Flux      0.18
+ Likelihood that Flow Normalized Flux is trending up = 0.088  is trending down= 0.912
+
+ Upward trend in concentration is highly unlikely 
+ Upward trend in flux is very unlikely
+ Downward trend in concentration is highly likely 
+ Downward trend in flux is very likely

@@ -1,0 +1,34 @@
+
+
+ UPPER TRUCKEE RV AT S UPPER TRUCKEE RD NR MEYERS    Kjeldahl nitrogen
+
+ Water Year
+
+  Bootstrap process, for change from Water Year 1991 to Water Year 2011
+                   data set runs from Water Year 1990 to Water Year 2011
+  Bootstrap block length in days 200
+  bootBreak is 100  confStop is 0.7
+
+ WRTDS estimated concentration change is -0.0654  mg/L
+ WRTDS estimated flux change is         -0.003084  10^6 kg/yr
+
+Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Reject Ho
+ best estimate is -0.0654 mg/L
+  Lower and Upper 90% CIs  -0.0959  -0.0316
+ also 95% CIs  -0.1081   0.7874 
+ and 50% CIs  -0.0834  -0.0532
+ approximate two-sided p-value for Conc     0.059
+ Likelihood that Flow Normalized Concentration is trending up =     0.0248  is trending down =      0.975
+
+Should we reject Ho that Flow Normalized Flux Trend = 0 ? Do Not Reject Ho
+ best estimate is -0.003084 10^6 kg/year
+  Lower and Upper 90% CIs -0.006083  0.005618
+ also 95% CIs -0.013042  0.485416 
+ and 50% CIs -0.004486 -0.002421
+ approximate two-sided p-value for Flux      0.16
+ Likelihood that Flow Normalized Flux is trending up = 0.0842  is trending down= 0.916
+
+ Upward trend in concentration is highly unlikely 
+ Upward trend in flux is very unlikely
+ Downward trend in concentration is highly likely 
+ Downward trend in flux is very likely
