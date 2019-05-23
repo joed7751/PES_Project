@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1554333337778.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2429770725",
+    "id" : "DB731748",
+    "lastKnownWriteTime" : 1499279251,
+    "last_content_update" : 1499279251,
+    "path" : "~/Documents/Documents19/Biogeochemistry_2019/Freeport_QuantileKendall/functionsForQuantileKendall.R",
+    "project_path" : "functionsForQuantileKendall.R",
+    "properties" : {
+        "cursorPosition" : "274,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
