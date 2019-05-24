@@ -65,11 +65,11 @@ eList <- as.egret(INFO, Daily, NA, NA)
 # store the annual series of discharge statistics
 annualSeries <- makeAnnualSeries(eList)
 
-# Uncomment the following for Joe
+# Uncomment the following for Joe and Dina will need to comment this out
 # -------------------------------
 setwd("/Users/joed/LTIMP_TA/LTIMP_TA2/EGRET/UT5/") # not entirely sure if this will work on a Mac or not?
 
-# Uncomment the following for Eric
+# Uncomment the following for Eric, and Dina will need to set this up for her path
 # --------------------------------
 # setwd("D:/EDM_LT/GitHub/LTIMP_TA/LTIMP_TA2/EGRET/UT5/")
 
