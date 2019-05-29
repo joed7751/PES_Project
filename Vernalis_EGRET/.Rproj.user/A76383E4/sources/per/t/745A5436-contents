@@ -22,20 +22,27 @@ library(fields)
 library(extrafont)
 loadfonts()
 
-# UPPER TRUCKEE RV AT S UPPER TRUCKEE RD NR MEYERS, CA
-# siteid: 10336580
+
+#####This script was set up for the Upper Truckee River, 
+#so will need to change everything to be relevant to the 
+#San Joaquin River at Vernalis site
+
+##Make sure that siteid is changed everywhere , the one on line 32 is correct
+
+# siteid: 11303500
 
 # By not setting a fixed start and end date, readNWIS will retrieve all available data
 # Will adjust to desired dates below.
 StartDate <- ""       # 1980-03-01
 EndDate <- ""
 
+#site id is correct for Vernalis
 # Get pure Q time series using the rloadest function (EGRET adds 0.1% of the period's mean discharge to 0 flow days
-Q <- readNWISDaily("10336580",startDate=StartDate, endDate=EndDate)
+Q <- readNWISDaily("11303500",startDate=StartDate, endDate=EndDate)
 
 # Look at flow record start and end dates
 range(Q$Date)
-#  "1990-05-12" "2011-09-30"
+#  "1923-10-01" "2019-05-28"
 
 length(Q$Q[Q$Q==0])
 # 0
@@ -43,21 +50,21 @@ length(Q$Q[Q$Q==0])
 # In write-up, make a comment about the number of 0-flow adjusted days, 
 # or else include it in a table
 
-# Now get Q data using EGRET function
-siteNumber <- "10336580"
+# Now get Q data using EGRET function, site id is correct for Vernalis
+siteNumber <- "11303500"
 QParameterCd <- "00060"
 Daily <- readNWISDaily(siteNumber, QParameterCd, StartDate, EndDate)
 
-# There are 7812 data points, and 7812 days.
-#
+# There are 33112 data points, and 34939 days.
+#discharge data jumps from 1924-09-29 to 1929-10-01
 
 # With the information above, restrict the start and end dates to avoid gaps in the data
-StartDate <- "1989-12-01"
-EndDate <- "2011-09-30"
+StartDate <- "1929-10-01"
+EndDate <- "2019-05-31"
 Daily <- readNWISDaily(siteNumber, QParameterCd, StartDate, EndDate)
 
-# Metadata retrieval
-INFO <- readNWISInfo(siteNumber = "10336580", parameterCd ="00060",interactive=FALSE)
+# Metadata retrieval, site id is correct for Vernalis
+INFO <- readNWISInfo(siteNumber = "11303500", parameterCd ="00060",interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
 
 eList <- as.egret(INFO, Daily, NA, NA)
@@ -67,7 +74,8 @@ annualSeries <- makeAnnualSeries(eList)
 
 # Uncomment the following for Joe and Dina will need to comment this out
 # -------------------------------
-setwd("/Users/joed/LTIMP_TA/LTIMP_TA2/EGRET/UT5/") # not entirely sure if this will work on a Mac or not?
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/") 
+
 
 # Uncomment the following for Eric, and Dina will need to set this up for her path
 # --------------------------------
@@ -84,58 +92,58 @@ if (file.exists(subDir)){
 
 # Plotting the results for a single discharge statistic
 # istat can range between 1-8; qUnit = 2: cfs
-tiff("Annual_Seven_Day_Min_Flow_UpperTruckee_SouthUT5.tif", height = 600, width = 800, res=120)
+tiff("Annual_Seven_Day_Min_Flow_SJVernalis.tif", height = 600, width = 800, res=120)
   plotFlowSingle(eList, istat = 2, qUnit = 2) #, showYLabels=FALSE)
 dev.off()
 
-tiff("Annual_Median_Daily_UpperTruckee_SouthUT5.tif", height = 600, width = 800, res=120)
+tiff("Annual_Median_Daily_SJVernalis.tif", height = 600, width = 800, res=120)
   plotFlowSingle(eList, istat = 4, qUnit = 2) #, showYLabels=FALSE)
 dev.off()
 
-tiff("Annual_Mean_Daily_UpperTruckee_SouthUT5.tif", height = 600, width = 800, res=120)
+tiff("Annual_Mean_Daily_SJVernalis.tif", height = 600, width = 800, res=120)
   plotFlowSingle(eList, istat = 5, qUnit = 2) #, showYLabels=FALSE)
 dev.off()
 
-tiff("Annual_Mean_Daily_UpperTruckee_SouthUT5cms.tif", height = 600, width = 800, res=120)
+tiff("Annual_Mean_Daily_SJVernaliscms.tif", height = 600, width = 800, res=120)
 plotFlowSingle(eList, istat = 5, qUnit = 2) #, showYLabels=FALSE)
 dev.off()
 
-tiff("Annual_30Day_Maximum_Q_UpperTruckee_SouthUT5.tif", height = 600, width = 800, res=120)
+tiff("Annual_30Day_Maximum_Q_SJVernalis.tif", height = 600, width = 800, res=120)
   plotFlowSingle(eList, istat = 6, qUnit = 2) #, showYLabels=FALSE)
 dev.off()
 
-tiff("Annual_7Day_Maximum_Q_UpperTruckee_SouthUT5.tif", height = 600, width = 800, res=120)
+tiff("Annual_7Day_Maximum_Q_SJVernalis.tif", height = 600, width = 800, res=120)
   plotFlowSingle(eList, istat = 7, qUnit = 2) #, showYLabels=FALSE)
 dev.off()
 
-tiff("Annual_Maximum_Q_UpperTruckee_SouthUT5.tif", height = 600, width = 800, res=120)
+tiff("Annual_Maximum_Q_SJVernalis.tif", height = 600, width = 800, res=120)
   plotFlowSingle(eList, istat = 8, qUnit = 2) #, showYLabels=FALSE)
 dev.off()
 
 #Plot changes in variability
-tiff("SD_Q_window3_UpperTruckee_SouthUT5.tif", height = 600, width = 800, res=120)
+tiff("SD_Q_window3_SJVernalis.tif", height = 600, width = 800, res=120)
   plotSDLogQ(eList, window=3)
 dev.off()
 
 #plot daily flow
-tiff("Period_Of_Record_Hydrograph_UpperTruckee_SouthUT5.tif", height = 600, width = 800, res=120)
+tiff("Period_Of_Record_Hydrograph_SJVernalis.tif", height = 600, width = 800, res=120)
   plotQTimeDaily(eList, lwd = 1,qUnit = 2) #, showYLabels=FALSE)
 dev.off()
 
 #plot daily flow
-postscript("Period_Of_Record_Hydrograph_UpperTruckee_SouthUT5.ps", family="Courier", height=3.25, width=3.25)
+postscript("Period_Of_Record_Hydrograph_SJVernalis.ps", family="Courier", height=3.25, width=3.25)
 par(mar=c(3,5,1,1))
 plotQTimeDaily(eList,cex.axis =0.65,cex.main = 0.65, cex = 0.9,lwd = 0.25,col = "blue", qUnit = 2,cex.lab=0.75) #, showYLabels=FALSE)
 #mtext(side=2, expression(paste("Flow, in  ",ft^3," ",s^-1,sep="")),line=3)
 dev.off()
 
 
-tiff("Period_Of_Record_Hydrograph_LogScale_UpperTruckee_SouthUT5.tif", height = 600, width = 800, res=120)
+tiff("Period_Of_Record_Hydrograph_LogScale_SJVernalis.tif", height = 600, width = 800, res=120)
   plotQTimeDaily(eList, lwd = 1,qUnit = 2,logScale=TRUE) #, showYLabels=FALSE)
 dev.off()
 
 #plot several graphics at once
-tiff("Plot4_window3_UpperTruckee_SouthUT5.tif", height = 600, width = 800, res=120)
+tiff("Plot4_window3_SJVernalis.tif", height = 600, width = 800, res=120)
   plotFour(eList, window=3,qUnit = 2)
 dev.off()
 
@@ -201,6 +209,8 @@ annualSeries <- makeAnnualSeries(eList)
 #############################################################
 # Restrict the dates to a window with uninterupted flow data
 #############################################################
+
+###make sure to change site id!!!!
 
 startDate <- "1990-06-01"
 endDate <- "2011-09-30"
