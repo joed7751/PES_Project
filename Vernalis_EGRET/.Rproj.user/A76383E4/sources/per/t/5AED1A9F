@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1559170275099.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "5AED1A9F",
+    "lastKnownWriteTime" : 4562198780,
+    "last_content_update" : 1559170275099,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "8E2D965D",
+        "caption" : "UT5_NH3_conc_jul_wilcox",
+        "contentUrl" : "grid_resource/gridviewer.html?env=_rs_no_env&obj=UT5_NH3_conc_jul_wilcox&cache_key=8E2D965D",
+        "displayedObservations" : 9,
+        "environment" : "_rs_no_env",
+        "expression" : "format(x)",
+        "object" : "UT5_NH3_conc_jul_wilcox",
+        "preview" : 0,
+        "totalObservations" : 9,
+        "variables" : 1
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
