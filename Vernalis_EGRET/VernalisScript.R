@@ -74,12 +74,12 @@ annualSeries <- makeAnnualSeries(eList)
 
 # Uncomment the following for Joe and Dina will need to comment this out
 # -------------------------------
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/") 
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/") 
 
 
 # Uncomment the following for Eric, and Dina will need to set this up for her path
 # --------------------------------
-# setwd("D:/EDM_LT/GitHub/LTIMP_TA/LTIMP_TA2/EGRET/UT5/")
+##### setwd("C:/EDM_LT/GitHub/LTIMP_TA/LTIMP_TA2/EGRET/UT5/")
 
 # Set working directory so plots are written to appropriate location
 subDir <- './Q'
