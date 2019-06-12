@@ -33,8 +33,8 @@ loadfonts()
 
 # By not setting a fixed start and end date, readNWIS will retrieve all available data
 # Will adjust to desired dates below.
-StartDate <- ""       # 1980-03-01
-EndDate <- ""
+StartDate <- "1971-10-01"       # 1980-03-01
+EndDate <- "2019-06-01"
 
 #site id is correct for Vernalis
 # Get pure Q time series using the rloadest function (EGRET adds 0.1% of the period's mean discharge to 0 flow days
@@ -42,7 +42,7 @@ Q <- readNWISDaily("11303500",startDate=StartDate, endDate=EndDate)
 
 # Look at flow record start and end dates
 range(Q$Date)
-#  "1923-10-01" "2019-05-28"
+#  "1971-10-01" "2019-06-01"
 
 length(Q$Q[Q$Q==0])
 # 0
@@ -50,20 +50,21 @@ length(Q$Q[Q$Q==0])
 # In write-up, make a comment about the number of 0-flow adjusted days, 
 # or else include it in a table
 
+# There are 17411 data points, and 17411 days.
 # Now get Q data using EGRET function, site id is correct for Vernalis
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 Daily <- readNWISDaily(siteNumber, QParameterCd, StartDate, EndDate)
 
-# There are 33112 data points, and 34939 days.
-#discharge data jumps from 1924-09-29 to 1929-10-01
 
-# With the information above, restrict the start and end dates to avoid gaps in the data
-StartDate <- "1929-10-01"
-EndDate <- "2019-05-31"
-Daily <- readNWISDaily(siteNumber, QParameterCd, StartDate, EndDate)
 
-# Metadata retrieval, site id is correct for Vernalis
+###### With the information above, restrict the start and end dates to avoid gaps in the data
+#StartDate <- "1929-10-01"
+#EndDate <- "2019-06-01"
+#Daily <- readNWISDaily(siteNumber, QParameterCd, StartDate, EndDate)
+############################################################################################
+
+# Metadata retrieval, site id is correct for Vernalis, INFO file will have 1 obs (for one site) and 52 veriables for that site
 INFO <- readNWISInfo(siteNumber = "11303500", parameterCd ="00060",interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
 
@@ -72,14 +73,14 @@ eList <- as.egret(INFO, Daily, NA, NA)
 # store the annual series of discharge statistics
 annualSeries <- makeAnnualSeries(eList)
 
-# Uncomment the following for Joe and Dina will need to comment this out
+
 # -------------------------------
 #setwd("/Users/joed/PES_Project/Vernalis_EGRET/") 
 
 
 # Uncomment the following for Eric, and Dina will need to set this up for her path
 # --------------------------------
-##### setwd("C:/EDM_LT/GitHub/LTIMP_TA/LTIMP_TA2/EGRET/UT5/")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 
 # Set working directory so plots are written to appropriate location
 subDir <- './Q'
@@ -212,15 +213,15 @@ annualSeries <- makeAnnualSeries(eList)
 
 ###site id is correct for Vernalis
 
-startDate <- "1971-03-01"
-endDate <- "2019-05-30"
+startDate <- "1971-10-01"
+endDate <- "2019-06-01"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00631"  # "NO3 and NO2"
-filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
+#filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
 
 ##Will need to change filePath for Dina's computer
-
+filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
 
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
