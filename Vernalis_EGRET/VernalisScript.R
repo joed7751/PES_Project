@@ -279,7 +279,7 @@ dev.off()
 tiff("Flow_on_days_sampled_vs_all_other_days_SanJVernalis_Inorg_N.tif", height = 600, width = 800, res=120)
   boxQTwice(eList, qUnit=2)
 dev.off()
-
+###########################################################################################################
 #########################################
 # Now start the Flow-Normalized Analysis
 #########################################
@@ -419,10 +419,11 @@ dev.off()
 
 localDaily <- getDaily(eList)
 
-# Will need to adjust the date range below based on each gages unique start/stop dates
-early_decade <- subset(localDaily, localDaily$Date > as.Date('1972-09-30') & localDaily$Date < as.Date('1982-10-01'))
-recent_decade <- subset(localDaily, localDaily$Date > as.Date('2009-06-01'))
-
+ #Will need to adjust the date range below based on each gages unique start/stop dates
+#early_decade <- subset(localDaily, localDaily$Date > as.Date('1972-09-30') & localDaily$Date < as.Date('1982-10-01'))
+#recent_decade <- subset(localDaily, localDaily$Date > as.Date('2009-06-01'))
+early_decade <- subset(localDaily, localDaily$Date > as.Date('1971-10-01') & localDaily$Date < as.Date('1981-10-01'))
+recent_decade <- subset(localDaily, localDaily$Date > as.Date('2009-07-01'))
 
 early_decade_monthly_mn <- aggregate(ConcDay ~ MonthSeq, data = early_decade, 'mean')
 recent_decade_monthly_mn <- aggregate(ConcDay ~ MonthSeq, data = recent_decade, 'mean')
@@ -950,22 +951,28 @@ dev.off()
 ###########
 #First do flow duration analysis
 flowDuration(eList, centerDate = "06-01", qUnit = 2, span = 30)
-date1 <- "1992-06-01"
-date2 <- "2000-06-01"
-date3 <- "2019-06-01"
+date1 <- "1972-06-01"
+date2 <- "1982-06-01"
+date3 <- "1992-06-01"
+date4 <- "2000-06-01"
+date5 <- "2009-06-01"
+date6 <- "2019-06-01"
 qLow= baseQ
 qHigh=highQ7
 
-tiff("SanJVern_Date_Discharge_NO3_conc_no_log.tif",height = 700, width = 1000, res=120)
-plotConcQSmooth(eList,date1, date2, date3,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
+#tiff("SanJVern_Date_Discharge_NO3_conc_no_log1st.tif",height = 700, width = 1000, res=120)
+plotConcQSmooth(eList,date1, date2, date3, qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
+dev.off()
+tiff("SanJVern_Date_Discharge_NO3_conc_no_log_last30years.tif",height = 700, width = 1000, res=120)
+plotConcQSmooth(eList,date4, date5, date6, qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0, printTitle=TRUE)
 dev.off()
 
-
-
+####################################################################################################################################
+####################################################################################################################################
 # ---------------------------
 # Now run the EGRETci package
 # ---------------------------
-
+####################################################################################################################################
 # Change working directory
 setwd("..")
 subDir <- 'EGRETci_plots'
