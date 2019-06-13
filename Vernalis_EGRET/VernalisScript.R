@@ -1,6 +1,6 @@
 ###This is a script taken from another study, but we will do the same thing for the PES project
 ##So, the script needs to be modifed for the Vernalis site
-
+##OP line 1119##
 # Load required libraries
 library(EGRET)
 library(dataRetrieval)
@@ -59,7 +59,7 @@ Daily <- readNWISDaily(siteNumber, QParameterCd, StartDate, EndDate)
 
 
 ###### With the information above, restrict the start and end dates to avoid gaps in the data
-#StartDate <- "1929-10-01"
+#StartDate <- "1971-10-01"
 #EndDate <- "2019-06-01"
 #Daily <- readNWISDaily(siteNumber, QParameterCd, StartDate, EndDate)
 ############################################################################################
@@ -1114,35 +1114,51 @@ save(repAnnual,file="RepAnnual")
 
 
 
-
+##########################################################################################################################################
 #############################################################################
 # Now do Orthophosphate, water, filtered, milligrams per liter as phosphorus
 #############################################################################
 
 parameterCd <- "00671"
-startDate <- "1990-06-01"
-endDate <- "2011-09-30"
+startDate <- "1980-10-01"
+endDate <- "2019-06-01"
 
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 
-fileName <- "UT5_OP.csv"
+filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
+
+Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
+Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+##NWIS DIN data has a gap between 1974 and 1979.  We will need to supplement
+##the missing time using Charlie Kratzer's data
+write.csv(Sample,"NWIS_OP.csv")
+
+##Add Kratzer's data to NWIS_nitrate2.csv
+fileName <- "CK_OP_data.csv"
 Sample <- readUserSample(filePath, fileName)
-#Sample <- readNWISSample(siteNumber, parameterCd, startDate=startDate, endDate=endDate)
+removeDuplicates(Sample)
+ 
+#Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
+# Have a look at the available range of NO3 data
+range(Sample$Date)
+#  "1980-10-01" "2019-06-01"
 
 eList <- NULL
 eList <- mergeReport(INFO, Daily, Sample)
 
+######
 # Change the working directory; redirect plot output to OP folder
-setwd("../../")
+setwd("..")
 subDir <- 'OP/EGRET_plots'
 if (file.exists(subDir)){
-    setwd(file.path(getwd(),subDir))
+  setwd(file.path(getwd(),subDir))
 } else {
-    dir.create(file.path(getwd(),subDir), recursive=TRUE)
-    setwd(file.path(getwd(),subDir))
+  dir.create(file.path(getwd(),subDir), recursive = TRUE)
+  setwd(file.path(getwd(),subDir))
 }
+plotConcTimeDaily(eList)
 
 # Plot water quality data
 tiff("Conc_vs_Time_Ortho_P.tif", height = 600, width = 800, res=120)
