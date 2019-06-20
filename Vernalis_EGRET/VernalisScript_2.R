@@ -218,7 +218,7 @@ endDate <- "2019-06-01"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00631"  # "NO3 and NO2"
-#filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
+filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
 
 ##Will need to change filePath for Dina's computer
 ##filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
@@ -1119,19 +1119,19 @@ save(repAnnual,file="RepAnnual")
 # Now do Orthophosphate, water, filtered, milligrams per liter as phosphorus
 #############################################################################
 
-startDate <- "1971-10-01"
-endDate <- "2019-06-1"
+startDate <- "1974-10-01"
+endDate <- "2019-05-30"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00671"
 filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
-Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+#Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 
-write.csv(Sample,"C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NWIS_OP.csv")
+#write.csv(Sample,"C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NWIS_OP.csv")
 
-##Add Kratzer's data 
-fileName <- "CK_OP_data.csv"
+##Add Kratzer's data to NWIS data
+fileName <- "Vern_NWIS_and_KratzerOP.csv"
 Sample <- readUserSample(filePath, fileName)
 removeDuplicates(Sample)
 
@@ -1140,13 +1140,14 @@ INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interac
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
 # Have a look at the available range of NO3 data
 range(Sample$Date)
-#  "1980-10-01" "2019-06-01"
+#  "1974-10-02" "2019-05-07"
 
 eList <- NULL
 eList <- mergeReport(INFO, Daily, Sample)
 
 ######
 # Change the working directory; redirect plot output to OP folder
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 subDir <- 'OP/EGRET_plots'
 if (file.exists(subDir)){
@@ -1198,6 +1199,7 @@ paStart <- 10
 localDaily <- getDaily(eList_OP)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = '_OP_RawVals.txt', quote=FALSE, row.names=FALSE)
+write.csv(Daily,'localDailyOP.csv')
 
 
 # Plot the annual average concentration and annual flow-normalized concentration
@@ -1868,7 +1870,7 @@ startDate <- "1971-10-01"
 endDate <- "2019-06-1"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
-parameterCd <- "00635"  # "TN"
+parameterCd <- "00625"  # "TKN"
 filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
 
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
@@ -1886,7 +1888,7 @@ INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interac
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
 
 
-# Have a look at the available range of NH3 data
+# Have a look at the available range of TKN data
 range(Sample$Date)
 #  "1971-10-01" "2019-06-01"
 
@@ -2602,17 +2604,18 @@ endDate <- "2019-06-01"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00665"  # "TP"
-filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
-
-setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+#filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
+filePath <- ("/Users/joed/PES_Project/Vernalis_EGRET/")
+#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
-Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
-##NWIS DIN data has a gap between 1974 and 1979.  We will need to supplement
-##the missing time using Charlie Kratzer's data
-write.csv(Sample,"C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NWIS_TP.csv")
+#Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 
-##Add Kratzer's data 
-fileName <- "CK_TP_data.csv"
+##the missing time using Charlie Kratzer's data
+#write.csv(Sample,"C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NWIS_TP.csv")
+
+##Set fileName to combined Kratzer and NWIS data set
+fileName <- "NWIS_and_Kratzer_TP.csv"
 Sample <- readUserSample(filePath, fileName)
 removeDuplicates(Sample)
 
@@ -2626,6 +2629,7 @@ range(Sample$Date)
 eList <- mergeReport(INFO, Daily, Sample)
 
 # Change the working directory; redirect plot output to TP folder
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/")
 subDir <- 'TP/EGRET_plots'
 if (file.exists(subDir)){
@@ -2676,7 +2680,7 @@ paStart <- 10
 localDaily <- getDaily(eList_TP)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = '_TP_RawVals.txt', quote=FALSE, row.names=FALSE)
-
+write.csv(Daily,"localDailyTP.csv")
 
 # Plot the annual average concentration and annual flow-normalized concentration
 tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_SanJVernalis_TP.tif", height = 600, width = 800, res=120)
@@ -2788,7 +2792,7 @@ highQ7_txt_cfs <- format(highQ7 * 35.315, digits=2)
 # The following bit of script generates a figure discussed by Joe in an email on 6/2/17
 # -------------------------------------------------------------------------------------
 
-tiff("Discharge_specific_trends_SSC_centered_on_06-01.tif", height = 600, width = 1200, res=120)
+tiff("Discharge_specific_trends_centered_on_06-01.tif", height = 600, width = 1200, res=120)
 par(mar=c(4,6,4.1,8))
 plotConcTimeSmooth(eList, q1 = baseQ, q2 = medQ, q3 = highQ7, centerDate='06-01', 
                    yearStart=localDaily$waterYear[1], yearEnd=localDaily$waterYear[nrow(localDaily)], 
@@ -3332,21 +3336,22 @@ save(repAnnual,file="RepAnnual")
 #############################################################
 # Working on SSC
 #############################################################
-startDate <- "1990-06-01"
-endDate <- "2011-09-30"
+startDate <- "1970-10-01"
+endDate <- "2018-12-30"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "80154"  # "SSC"
-fileName <- "_SSC.csv"
+#fileName <- "_SSC.csv"
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
-Sample <- readUserSample(filePath, fileName)
-#Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+#Sample <- readUserSample(filePath, fileName)
+Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+removeDuplicates(Sample)
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
 
 # Have a look at the available range of TP data
 range(Sample$Date)
-#"1990-06-07" "2011-09-06"
+#"1970-12-01" "2018-12-19"
 eList <- mergeReport(INFO, Daily, Sample)
 
 # Change the working directory; redirect plot output to NH3 folder
@@ -3399,6 +3404,8 @@ paStart <- 10
 localDaily <- getDaily(eList)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = '_SSC_RawVals.txt', quote=FALSE, row.names=FALSE)
+
+write.csv(Daily,'localDaily_Vern_SSC.csv')
 
 # Plot the annual average concentration and annual flow-normalized concentration
 tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_SanJVernalis_SSC.tif", height = 600, width = 800, res=120)
@@ -4052,21 +4059,25 @@ save(repAnnual,file="RepAnnual")
 # Working on NH4
 #############################################################
 
-startDate <- "1990-06-01"
-endDate <- "2011-09-30"
+startDate <- "1974-10-02"
+endDate <- "2019-05-30"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00608"  # "NH4"
-fileName <- "_NH3.csv"
+#fileName <- "_NH3.csv"
+filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
+##The file below contains the combined NWIS and Kratzer data sets
+fileName <- "NWIS_and_Kratzer_NH3.csv"
 Sample <- readUserSample(filePath, fileName)
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+#write.csv(Sample,"NWIS_NH3.csv")
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
 
 # Have a look at the available range of NH3 data
 range(Sample$Date)
-#"1990-06-07" "2011-09-06"
+#"1974-10-02" "2019-05-07"
 eList <- mergeReport(INFO, Daily, Sample)
 
 # Change the working directory; redirect plot output to NH4 folder
@@ -4119,7 +4130,9 @@ paLong <- 12
 paStart <- 10
 localDaily <- getDaily(eList_NH3)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
-write.table(localAnnualResults, file = '_NH3_RawVals.txt', quote=FALSE, row.names=FALSE)
+write.table(localAnnualResults, file = 'Vernalis_NH3_RawVals.txt', quote=FALSE, row.names=FALSE)
+
+write.csv(Daily,'localDailyNH3.csv')
 
 # Plot the annual average concentration and annual flow-normalized concentration
 tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_SanJVernalis_NH4.tif", height = 600, width = 800, res=120)
