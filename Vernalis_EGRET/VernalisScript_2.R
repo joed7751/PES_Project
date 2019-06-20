@@ -3336,7 +3336,7 @@ save(repAnnual,file="RepAnnual")
 #############################################################
 # Working on SSC
 #############################################################
-startDate <- "1970-10-01"
+startDate <- "1985-01-01"
 endDate <- "2018-12-30"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
@@ -3351,7 +3351,7 @@ INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$stat
 
 # Have a look at the available range of TP data
 range(Sample$Date)
-#"1970-12-01" "2018-12-19"
+#"1985-01-15" "2018-12-19"
 eList <- mergeReport(INFO, Daily, Sample)
 
 # Change the working directory; redirect plot output to NH3 folder
@@ -3403,7 +3403,7 @@ paLong <- 12
 paStart <- 10
 localDaily <- getDaily(eList)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
-write.table(localAnnualResults, file = '_SSC_RawVals.txt', quote=FALSE, row.names=FALSE)
+write.table(localAnnualResults, file = 'Vernalis_SSC_RawVals.txt', quote=FALSE, row.names=FALSE)
 
 write.csv(Daily,'localDaily_Vern_SSC.csv')
 
