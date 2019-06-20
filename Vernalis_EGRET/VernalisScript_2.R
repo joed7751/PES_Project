@@ -221,8 +221,8 @@ parameterCd <- "00631"  # "NO3 and NO2"
 #filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
 
 ##Will need to change filePath for Dina's computer
-filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
-
+##filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 ##NWIS DIN data has a gap between 1974 and 1979.  We will need to supplement
@@ -245,7 +245,8 @@ range(Sample$Date)
 eList <- mergeReport(INFO, Daily, Sample)
 
 # Change the working directory; redirect plot output to NO3 folder
-setwd("..")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+
 subDir <- 'NO3/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -1126,11 +1127,10 @@ parameterCd <- "00671"
 filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
-##NWIS DIN data has a gap between 1974 and 1979.  We will need to supplement
-##the missing time using Charlie Kratzer's data
-write.csv(Sample,"NWIS_OP.csv")
 
-##Add Kratzer's data to NWIS_nitrate2.csv
+write.csv(Sample,"C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NWIS_OP.csv")
+
+##Add Kratzer's data 
 fileName <- "CK_OP_data.csv"
 Sample <- readUserSample(filePath, fileName)
 removeDuplicates(Sample)
@@ -1379,93 +1379,93 @@ dev.off()
 # ----------------------------------------------------------------------
 early_jan <- subset(early_decade_monthly_mn, month==1)
 recent_jan <- subset(recent_decade_monthly_mn, month==1)
-Vernalis_OP_conc_jan_wilcox <- wilcox.test(recent_jan$ConcDay, early_jan$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_conc_jan_wilcox <- wilcox.test(recent_jan$ConcDay, early_jan$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_feb <- subset(early_decade_monthly_mn, month==2)
 recent_feb <- subset(recent_decade_monthly_mn, month==2)
-Vernalis_OP_conc_feb_wilcox <- wilcox.test(recent_feb$ConcDay, early_feb$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_conc_feb_wilcox <- wilcox.test(recent_feb$ConcDay, early_feb$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_mar <- subset(early_decade_monthly_mn, month==3)
 recent_mar <- subset(recent_decade_monthly_mn, month==3)
-Vernalis_OP_conc_mar_wilcox <- wilcox.test(recent_mar$ConcDay, early_mar$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_conc_mar_wilcox <- wilcox.test(recent_mar$ConcDay, early_mar$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_apr <- subset(early_decade_monthly_mn, month==4)
 recent_apr <- subset(recent_decade_monthly_mn, month==4)
-Vernalis_OP_conc_apr_wilcox <- wilcox.test(recent_apr$ConcDay, early_apr$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_conc_apr_wilcox <- wilcox.test(recent_apr$ConcDay, early_apr$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_may <- subset(early_decade_monthly_mn, month==5)
 recent_may <- subset(recent_decade_monthly_mn, month==5)
-Vernalis_OP_conc_may_wilcox <- wilcox.test(recent_may$ConcDay, early_may$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_conc_may_wilcox <- wilcox.test(recent_may$ConcDay, early_may$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jun <- subset(early_decade_monthly_mn, month==6)
 recent_jun <- subset(recent_decade_monthly_mn, month==6)
-Vernalis_OP_conc_jun_wilcox <- wilcox.test(recent_jun$ConcDay, early_jun$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_conc_jun_wilcox <- wilcox.test(recent_jun$ConcDay, early_jun$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jul <- subset(early_decade_monthly_mn, month==7)
 recent_jul <- subset(recent_decade_monthly_mn, month==7)
-Vernalis_OP_conc_jul_wilcox <- wilcox.test(recent_jul$ConcDay, early_jul$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_conc_jul_wilcox <- wilcox.test(recent_jul$ConcDay, early_jul$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_aug <- subset(early_decade_monthly_mn, month==8)
 recent_aug <- subset(recent_decade_monthly_mn, month==8)
-Vernalis_OP_conc_aug_wilcox <- wilcox.test(recent_aug$ConcDay, early_aug$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_conc_aug_wilcox <- wilcox.test(recent_aug$ConcDay, early_aug$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_sep <- subset(early_decade_monthly_mn, month==9)
 recent_sep <- subset(recent_decade_monthly_mn, month==9)
-Vernalis_OP_conc_sep_wilcox <- wilcox.test(recent_sep$ConcDay, early_sep$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_conc_sep_wilcox <- wilcox.test(recent_sep$ConcDay, early_sep$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_oct <- subset(early_decade_monthly_mn, month==10)
 recent_oct <- subset(recent_decade_monthly_mn, month==10)
-Vernalis_OP_conc_oct_wilcox <- wilcox.test(recent_oct$ConcDay, early_oct$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_conc_oct_wilcox <- wilcox.test(recent_oct$ConcDay, early_oct$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_nov <- subset(early_decade_monthly_mn, month==11)
 recent_nov <- subset(recent_decade_monthly_mn, month==11)
-Vernalis_OP_conc_nov_wilcox <- wilcox.test(recent_nov$ConcDay, early_nov$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_conc_nov_wilcox <- wilcox.test(recent_nov$ConcDay, early_nov$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_dec <- subset(early_decade_monthly_mn, month==12)
 recent_dec <- subset(recent_decade_monthly_mn, month==12)
-Vernalis_OP_conc_dec_wilcox <- wilcox.test(recent_dec$ConcDay, early_dec$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_conc_dec_wilcox <- wilcox.test(recent_dec$ConcDay, early_dec$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 Conc_compare <- data.frame(chng_est=c(SanJVernalis_OP_conc_oct_wilcox$est,
                                       SanJVernalis_OP_conc_nov_wilcox$est,
-                                      SanJVernali_OP_conc_dec_wilcox$est,
-                                      SanJVernali_OP_conc_jan_wilcox$est,
-                                      SanJVernali_OP_conc_feb_wilcox$est,
-                                      SanJVernali_OP_conc_mar_wilcox$est,
-                                      SanJVernali_OP_conc_apr_wilcox$est,
-                                      SanJVernali_OP_conc_may_wilcox$est,
-                                      SanJVernali_OP_conc_jun_wilcox$est,
-                                      SanJVernali_OP_conc_jul_wilcox$est,
-                                      SanJVernali_OP_conc_aug_wilcox$est,
-                                      SanJVernali_OP_conc_sep_wilcox$est),
+                                      SanJVernalis_OP_conc_dec_wilcox$est,
+                                      SanJVernalis_OP_conc_jan_wilcox$est,
+                                      SanJVernalis_OP_conc_feb_wilcox$est,
+                                      SanJVernalis_OP_conc_mar_wilcox$est,
+                                      SanJVernalis_OP_conc_apr_wilcox$est,
+                                      SanJVernalis_OP_conc_may_wilcox$est,
+                                      SanJVernalis_OP_conc_jun_wilcox$est,
+                                      SanJVernalis_OP_conc_jul_wilcox$est,
+                                      SanJVernalis_OP_conc_aug_wilcox$est,
+                                      SanJVernalis_OP_conc_sep_wilcox$est),
                            low_conf=c(SanJVernalis_OP_conc_oct_wilcox$conf.int[1],
-                                      SanJVernali_OP_conc_nov_wilcox$conf.int[1],
-                                      SanJVernali_OP_conc_dec_wilcox$conf.int[1],
-                                      SanJVernali_OP_conc_jan_wilcox$conf.int[1],
-                                      SanJVernali_OP_conc_feb_wilcox$conf.int[1],
-                                      SanJVernali_OP_conc_mar_wilcox$conf.int[1],
-                                      SanJVernali_OP_conc_apr_wilcox$conf.int[1],
-                                      SanJVernali_OP_conc_may_wilcox$conf.int[1],
-                                      SanJVernali_OP_conc_jun_wilcox$conf.int[1],
-                                      SanJVernali_OP_conc_jul_wilcox$conf.int[1],
-                                      SanJVernali_OP_conc_aug_wilcox$conf.int[1],
-                                      SanJVernali_OP_conc_sep_wilcox$conf.int[1]),
+                                      SanJVernalis_OP_conc_nov_wilcox$conf.int[1],
+                                      SanJVernalis_OP_conc_dec_wilcox$conf.int[1],
+                                      SanJVernalis_OP_conc_jan_wilcox$conf.int[1],
+                                      SanJVernalis_OP_conc_feb_wilcox$conf.int[1],
+                                      SanJVernalis_OP_conc_mar_wilcox$conf.int[1],
+                                      SanJVernalis_OP_conc_apr_wilcox$conf.int[1],
+                                      SanJVernalis_OP_conc_may_wilcox$conf.int[1],
+                                      SanJVernalis_OP_conc_jun_wilcox$conf.int[1],
+                                      SanJVernalis_OP_conc_jul_wilcox$conf.int[1],
+                                      SanJVernalis_OP_conc_aug_wilcox$conf.int[1],
+                                      SanJVernalis_OP_conc_sep_wilcox$conf.int[1]),
                            up_conf=c(SanJVernalis_OP_conc_oct_wilcox$conf.int[2],
-                                     SanJVernali_OP_conc_nov_wilcox$conf.int[2],
-                                     SanJVernali_OP_conc_dec_wilcox$conf.int[2],
-                                     SanJVernali_OP_conc_jan_wilcox$conf.int[2],
-                                     SanJVernali_OP_conc_feb_wilcox$conf.int[2],
-                                     SanJVernali_OP_conc_mar_wilcox$conf.int[2],
-                                     SanJVernali_OP_conc_apr_wilcox$conf.int[2],
-                                     SanJVernali_OP_conc_may_wilcox$conf.int[2],
-                                     SanJVernali_OP_conc_jun_wilcox$conf.int[2],
-                                     SanJVernali_OP_conc_jul_wilcox$conf.int[2],
-                                     SanJVernali_OP_conc_aug_wilcox$conf.int[2],
-                                     SanJVernali_OP_conc_sep_wilcox$conf.int[2]))
+                                     SanJVernalis_OP_conc_nov_wilcox$conf.int[2],
+                                     SanJVernalis_OP_conc_dec_wilcox$conf.int[2],
+                                     SanJVernalis_OP_conc_jan_wilcox$conf.int[2],
+                                     SanJVernalis_OP_conc_feb_wilcox$conf.int[2],
+                                     SanJVernalis_OP_conc_mar_wilcox$conf.int[2],
+                                     SanJVernalis_OP_conc_apr_wilcox$conf.int[2],
+                                     SanJVernalis_OP_conc_may_wilcox$conf.int[2],
+                                     SanJVernalis_OP_conc_jun_wilcox$conf.int[2],
+                                     SanJVernalis_OP_conc_jul_wilcox$conf.int[2],
+                                     SanJVernalis_OP_conc_aug_wilcox$conf.int[2],
+                                     SanJVernalis_OP_conc_sep_wilcox$conf.int[2]))
 
-write.table(Conc_compare, "SanJVernali_OP_conc_wilcox.txt", quote=FALSE, row.names=FALSE)
+write.table(Conc_compare, "SanJVernalis_OP_conc_wilcox.txt", quote=FALSE, row.names=FALSE)
 
 rng <- max(abs(c(Conc_compare$up_conf, Conc_compare$low_conf)))
-tiff("SanJVernali_OP_conc_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
+tiff("SanJVernalis_OP_conc_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
 par(mar=c(4,5,0.5,0.5))
 plot(seq(1:12), Conc_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng, rng), xlab="Month", ylab=expression(paste("Median Concentration Change, mg  ",L^-1,sep='')), las=1)
 plotCI(seq(1:12), Conc_compare$chng_est, ui=Conc_compare$up_conf, li=Conc_compare$low_conf, pch=16, add=TRUE)
@@ -1511,89 +1511,89 @@ dev.off()
 # Apply Wilcox.text to the monthly loads here...
 early_jan_flx <- subset(early_decade_monthly_flx, month==1)
 recent_jan_flx <- subset(recent_decade_monthly_flx, month==1)
-SanJVernali_OP_flux_jan_wilcox <- wilcox.test(recent_jan_flx$FluxDay, early_jan_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_flux_jan_wilcox <- wilcox.test(recent_jan_flx$FluxDay, early_jan_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_feb_flx <- subset(early_decade_monthly_flx, month==2)
 recent_feb_flx <- subset(recent_decade_monthly_flx, month==2)
-SanJVernali_OP_flux_feb_wilcox <- wilcox.test(recent_feb_flx$FluxDay, early_feb_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_flux_feb_wilcox <- wilcox.test(recent_feb_flx$FluxDay, early_feb_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_mar_flx <- subset(early_decade_monthly_flx, month==3)
 recent_mar_flx <- subset(recent_decade_monthly_flx, month==3)
-SanJVernali_OP_flux_mar_wilcox <- wilcox.test(recent_mar_flx$FluxDay, early_mar_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_flux_mar_wilcox <- wilcox.test(recent_mar_flx$FluxDay, early_mar_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_apr_flx <- subset(early_decade_monthly_flx, month==4)
 recent_apr_flx <- subset(recent_decade_monthly_flx, month==4)
-SanJVernali_OP_flux_apr_wilcox <- wilcox.test(recent_apr_flx$FluxDay, early_apr_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_flux_apr_wilcox <- wilcox.test(recent_apr_flx$FluxDay, early_apr_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_may_flx <- subset(early_decade_monthly_flx, month==5)
 recent_may_flx <- subset(recent_decade_monthly_flx, month==5)
-SanJVernali_OP_flux_may_wilcox <- wilcox.test(recent_may_flx$FluxDay, early_may_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_flux_may_wilcox <- wilcox.test(recent_may_flx$FluxDay, early_may_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jun_flx <- subset(early_decade_monthly_flx, month==6)
 recent_jun_flx <- subset(recent_decade_monthly_flx, month==6)
-SanJVernali_OP_flux_jun_wilcox <- wilcox.test(recent_jun_flx$FluxDay, early_jun_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_flux_jun_wilcox <- wilcox.test(recent_jun_flx$FluxDay, early_jun_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jul_flx <- subset(early_decade_monthly_flx, month==7)
 recent_jul_flx <- subset(recent_decade_monthly_flx, month==7)
-SanJVernali_OP_flux_jul_wilcox <- wilcox.test(recent_jul_flx$FluxDay, early_jul_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_flux_jul_wilcox <- wilcox.test(recent_jul_flx$FluxDay, early_jul_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_aug_flx <- subset(early_decade_monthly_flx, month==8)
 recent_aug_flx <- subset(recent_decade_monthly_flx, month==8)
-SanJVernali_OP_flux_aug_wilcox <- wilcox.test(recent_aug_flx$FluxDay, early_aug_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_flux_aug_wilcox <- wilcox.test(recent_aug_flx$FluxDay, early_aug_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_sep_flx <- subset(early_decade_monthly_flx, month==9)
 recent_sep_flx <- subset(recent_decade_monthly_flx, month==9)
-SanJVernali_OP_flux_sep_wilcox <- wilcox.test(recent_sep_flx$FluxDay, early_sep_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_flux_sep_wilcox <- wilcox.test(recent_sep_flx$FluxDay, early_sep_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_oct_flx <- subset(early_decade_monthly_flx, month==10)
 recent_oct_flx <- subset(recent_decade_monthly_flx, month==10)
-SanJVernali_OP_flux_oct_wilcox <- wilcox.test(recent_oct_flx$FluxDay, early_oct_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_flux_oct_wilcox <- wilcox.test(recent_oct_flx$FluxDay, early_oct_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_nov_flx <- subset(early_decade_monthly_flx, month==11)
 recent_nov_flx <- subset(recent_decade_monthly_flx, month==11)
-SanJVernali_OP_flux_nov_wilcox <- wilcox.test(recent_nov_flx$FluxDay, early_nov_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_flux_nov_wilcox <- wilcox.test(recent_nov_flx$FluxDay, early_nov_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_dec_flx <- subset(early_decade_monthly_flx, month==12)
 recent_dec_flx <- subset(recent_decade_monthly_flx, month==12)
-SanJVernali_OP_flux_dec_wilcox <- wilcox.test(recent_dec_flx$FluxDay, early_dec_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_OP_flux_dec_wilcox <- wilcox.test(recent_dec_flx$FluxDay, early_dec_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 
-Flux_compare <- data.frame(chng_est=c(SanJVernali_OP_flux_oct_wilcox$est,
-                                      SanJVernali_OP_flux_nov_wilcox$est,
-                                      SanJVernali_OP_flux_dec_wilcox$est,
-                                      SanJVernali_OP_flux_jan_wilcox$est,
-                                      SanJVernali_OP_flux_feb_wilcox$est,
-                                      SanJVernali_OP_flux_mar_wilcox$est,
-                                      SanJVernali_OP_flux_apr_wilcox$est,
-                                      SanJVernali_OP_flux_may_wilcox$est,
-                                      SanJVernali_OP_flux_jun_wilcox$est,
-                                      SanJVernali_OP_flux_jul_wilcox$est,
-                                      SanJVernali_OP_flux_aug_wilcox$est,
-                                      SanJVernali_OP_flux_sep_wilcox$est),
-                           low_conf=c(SanJVernali_OP_flux_oct_wilcox$conf.int[1],
-                                      SanJVernali_OP_flux_nov_wilcox$conf.int[1],
-                                      SanJVernali_OP_flux_dec_wilcox$conf.int[1],
-                                      SanJVernali_OP_flux_jan_wilcox$conf.int[1],
-                                      SanJVernali_OP_flux_feb_wilcox$conf.int[1],
-                                      SanJVernali_OP_flux_mar_wilcox$conf.int[1],
-                                      SanJVernali_OP_flux_apr_wilcox$conf.int[1],
-                                      SanJVernali_OP_flux_may_wilcox$conf.int[1],
-                                      SanJVernali_OP_flux_jun_wilcox$conf.int[1],
-                                      SanJVernali_OP_flux_jul_wilcox$conf.int[1],
-                                      SanJVernali_OP_flux_aug_wilcox$conf.int[1],
-                                      SanJVernali_OP_flux_sep_wilcox$conf.int[1]),
-                           up_conf=c(SanJVernali_OP_flux_oct_wilcox$conf.int[2],
-                                     SanJVernali_OP_flux_nov_wilcox$conf.int[2],
-                                     SanJVernali_OP_flux_dec_wilcox$conf.int[2],
-                                     SanJVernali_OP_flux_jan_wilcox$conf.int[2],
-                                     SanJVernali_OP_flux_feb_wilcox$conf.int[2],
-                                     SanJVernali_OP_flux_mar_wilcox$conf.int[2],
-                                     SanJVernali_OP_flux_apr_wilcox$conf.int[2],
-                                     SanJVernali_OP_flux_may_wilcox$conf.int[2],
-                                     SanJVernali_OP_flux_jun_wilcox$conf.int[2],
-                                     SanJVernali_OP_flux_jul_wilcox$conf.int[2],
-                                     SanJVernali_OP_flux_aug_wilcox$conf.int[2],
-                                     SanJVernali_OP_flux_sep_wilcox$conf.int[2]))
+Flux_compare <- data.frame(chng_est=c(SanJVernalis_OP_flux_oct_wilcox$est,
+                                      SanJVernalis_OP_flux_nov_wilcox$est,
+                                      SanJVernalis_OP_flux_dec_wilcox$est,
+                                      SanJVernalis_OP_flux_jan_wilcox$est,
+                                      SanJVernalis_OP_flux_feb_wilcox$est,
+                                      SanJVernalis_OP_flux_mar_wilcox$est,
+                                      SanJVernalis_OP_flux_apr_wilcox$est,
+                                      SanJVernalis_OP_flux_may_wilcox$est,
+                                      SanJVernalis_OP_flux_jun_wilcox$est,
+                                      SanJVernalis_OP_flux_jul_wilcox$est,
+                                      SanJVernalis_OP_flux_aug_wilcox$est,
+                                      SanJVernalis_OP_flux_sep_wilcox$est),
+                           low_conf=c(SanJVernalis_OP_flux_oct_wilcox$conf.int[1],
+                                      SanJVernalis_OP_flux_nov_wilcox$conf.int[1],
+                                      SanJVernalis_OP_flux_dec_wilcox$conf.int[1],
+                                      SanJVernalis_OP_flux_jan_wilcox$conf.int[1],
+                                      SanJVernalis_OP_flux_feb_wilcox$conf.int[1],
+                                      SanJVernalis_OP_flux_mar_wilcox$conf.int[1],
+                                      SanJVernalis_OP_flux_apr_wilcox$conf.int[1],
+                                      SanJVernalis_OP_flux_may_wilcox$conf.int[1],
+                                      SanJVernalis_OP_flux_jun_wilcox$conf.int[1],
+                                      SanJVernalis_OP_flux_jul_wilcox$conf.int[1],
+                                      SanJVernalis_OP_flux_aug_wilcox$conf.int[1],
+                                      SanJVernalis_OP_flux_sep_wilcox$conf.int[1]),
+                           up_conf=c(SanJVernalis_OP_flux_oct_wilcox$conf.int[2],
+                                     SanJVernalis_OP_flux_nov_wilcox$conf.int[2],
+                                     SanJVernalis_OP_flux_dec_wilcox$conf.int[2],
+                                     SanJVernalis_OP_flux_jan_wilcox$conf.int[2],
+                                     SanJVernalis_OP_flux_feb_wilcox$conf.int[2],
+                                     SanJVernalis_OP_flux_mar_wilcox$conf.int[2],
+                                     SanJVernalis_OP_flux_apr_wilcox$conf.int[2],
+                                     SanJVernalis_OP_flux_may_wilcox$conf.int[2],
+                                     SanJVernalis_OP_flux_jun_wilcox$conf.int[2],
+                                     SanJVernalis_OP_flux_jul_wilcox$conf.int[2],
+                                     SanJVernalis_OP_flux_aug_wilcox$conf.int[2],
+                                     SanJVernalis_OP_flux_sep_wilcox$conf.int[2]))
 
 write.table(Flux_compare, "_OP_flux_wilcox.txt", quote=FALSE, row.names=FALSE)
 
@@ -1802,7 +1802,7 @@ plotHistogramTrend2 <-
     axis(4, tcl = 0.5, labels = FALSE)
   }
 
-tiff("histo_NH3_UpTruck_Trend_conc_flux.tif", height = 700, width = 1200, res=120)
+tiff("histo_NH3_SanJVernalis_Trend_conc_flux.tif", height = 700, width = 1200, res=120)
 par(mfrow=c(1,2))
 plotHistogramTrend2(eBoot, caseSetUp, eList, flux=FALSE, xSeq = seq(-8000,8000,5),las=1,xlim=c(-100,100))
 abline(h=0)
@@ -1844,12 +1844,12 @@ plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxi
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
-setSweave("_OP_Conc_UpperT_EGRETCI",7,7)
+setSweave("_OP_Conc_SanJVernalis_EGRETCI",7,7)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
 
-setSweave("_OP_Flux_UpperT_EGRETCI",7,7)
+setSweave("_OP_Flux_SanJVernalis_EGRETCI",7,7)
 plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
@@ -1869,12 +1869,22 @@ endDate <- "2019-06-1"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00635"  # "TN"
-fileName <- "Vernalis_TKN.csv"
+filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
+
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
+Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+write.csv(Sample,"C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NWIS_TKN.csv")
+
+##Add Kratzer's data 
+fileName <- "CK_TN_data.csv"
 Sample <- readUserSample(filePath, fileName)
-#Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+removeDuplicates(Sample)
+
+
+
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
+
 
 # Have a look at the available range of NH3 data
 range(Sample$Date)
@@ -1882,8 +1892,10 @@ range(Sample$Date)
 
 eList <- mergeReport(INFO, Daily, Sample)
 plotConcTime(eList)
+
+
 # Change the working directory; redirect plot output to TKN folder
-setwd("../..")
+setwd ("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/")
 subDir <- 'TKN/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -1932,7 +1944,7 @@ paLong <- 12
 paStart <- 10
 localDaily <- getDaily(eList_TN)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
-write.table(localAnnualResults, file = '_TKN_RawVals.txt', quote=FALSE, row.names=FALSE)
+write.table(localAnnualResults, file = 'SanJVernalis_TKN_RawVals.txt', quote=FALSE, row.names=FALSE)
 
 # Plot the annual average concentration and annual flow-normalized concentration
 tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_SanJVernalis_TN.tif", height = 600, width = 800, res=120)
@@ -2189,93 +2201,93 @@ dev.off()
 # ----------------------------------------------------------------------
 early_jan <- subset(early_decade_monthly_mn, month==1)
 recent_jan <- subset(recent_decade_monthly_mn, month==1)
-_TKN_conc_jan_wilcox <- wilcox.test(recent_jan$ConcDay, early_jan$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_conc_jan_wilcox <- wilcox.test(recent_jan$ConcDay, early_jan$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_feb <- subset(early_decade_monthly_mn, month==2)
 recent_feb <- subset(recent_decade_monthly_mn, month==2)
-_TKN_conc_feb_wilcox <- wilcox.test(recent_feb$ConcDay, early_feb$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_conc_feb_wilcox <- wilcox.test(recent_feb$ConcDay, early_feb$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_mar <- subset(early_decade_monthly_mn, month==3)
 recent_mar <- subset(recent_decade_monthly_mn, month==3)
-_TKN_conc_mar_wilcox <- wilcox.test(recent_mar$ConcDay, early_mar$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_conc_mar_wilcox <- wilcox.test(recent_mar$ConcDay, early_mar$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_apr <- subset(early_decade_monthly_mn, month==4)
 recent_apr <- subset(recent_decade_monthly_mn, month==4)
-_TKN_conc_apr_wilcox <- wilcox.test(recent_apr$ConcDay, early_apr$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_conc_apr_wilcox <- wilcox.test(recent_apr$ConcDay, early_apr$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_may <- subset(early_decade_monthly_mn, month==5)
 recent_may <- subset(recent_decade_monthly_mn, month==5)
-_TKN_conc_may_wilcox <- wilcox.test(recent_may$ConcDay, early_may$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_conc_may_wilcox <- wilcox.test(recent_may$ConcDay, early_may$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jun <- subset(early_decade_monthly_mn, month==6)
 recent_jun <- subset(recent_decade_monthly_mn, month==6)
-_TKN_conc_jun_wilcox <- wilcox.test(recent_jun$ConcDay, early_jun$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_conc_jun_wilcox <- wilcox.test(recent_jun$ConcDay, early_jun$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jul <- subset(early_decade_monthly_mn, month==7)
 recent_jul <- subset(recent_decade_monthly_mn, month==7)
-_TKN_conc_jul_wilcox <- wilcox.test(recent_jul$ConcDay, early_jul$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_conc_jul_wilcox <- wilcox.test(recent_jul$ConcDay, early_jul$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_aug <- subset(early_decade_monthly_mn, month==8)
 recent_aug <- subset(recent_decade_monthly_mn, month==8)
-_TKN_conc_aug_wilcox <- wilcox.test(recent_aug$ConcDay, early_aug$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_conc_aug_wilcox <- wilcox.test(recent_aug$ConcDay, early_aug$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_sep <- subset(early_decade_monthly_mn, month==9)
 recent_sep <- subset(recent_decade_monthly_mn, month==9)
-_TKN_conc_sep_wilcox <- wilcox.test(recent_sep$ConcDay, early_sep$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_conc_sep_wilcox <- wilcox.test(recent_sep$ConcDay, early_sep$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_oct <- subset(early_decade_monthly_mn, month==10)
 recent_oct <- subset(recent_decade_monthly_mn, month==10)
-_TKN_conc_oct_wilcox <- wilcox.test(recent_oct$ConcDay, early_oct$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_conc_oct_wilcox <- wilcox.test(recent_oct$ConcDay, early_oct$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_nov <- subset(early_decade_monthly_mn, month==11)
 recent_nov <- subset(recent_decade_monthly_mn, month==11)
-_TKN_conc_nov_wilcox <- wilcox.test(recent_nov$ConcDay, early_nov$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_conc_nov_wilcox <- wilcox.test(recent_nov$ConcDay, early_nov$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_dec <- subset(early_decade_monthly_mn, month==12)
 recent_dec <- subset(recent_decade_monthly_mn, month==12)
-_TKN_conc_dec_wilcox <- wilcox.test(recent_dec$ConcDay, early_dec$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_conc_dec_wilcox <- wilcox.test(recent_dec$ConcDay, early_dec$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
-Conc_compare <- data.frame(chng_est=c(_TKN_conc_oct_wilcox$est,
-                                      _TKN_conc_nov_wilcox$est,
-                                      _TKN_conc_dec_wilcox$est,
-                                      _TKN_conc_jan_wilcox$est,
-                                      _TKN_conc_feb_wilcox$est,
-                                      _TKN_conc_mar_wilcox$est,
-                                      _TKN_conc_apr_wilcox$est,
-                                      _TKN_conc_may_wilcox$est,
-                                      _TKN_conc_jun_wilcox$est,
-                                      _TKN_conc_jul_wilcox$est,
-                                      _TKN_conc_aug_wilcox$est,
-                                      _TKN_conc_sep_wilcox$est),
-                           low_conf=c(_TKN_conc_oct_wilcox$conf.int[1],
-                                      _TKN_conc_nov_wilcox$conf.int[1],
-                                      _TKN_conc_dec_wilcox$conf.int[1],
-                                      _TKN_conc_jan_wilcox$conf.int[1],
-                                      _TKN_conc_feb_wilcox$conf.int[1],
-                                      _TKN_conc_mar_wilcox$conf.int[1],
-                                      _TKN_conc_apr_wilcox$conf.int[1],
-                                      _TKN_conc_may_wilcox$conf.int[1],
-                                      _TKN_conc_jun_wilcox$conf.int[1],
-                                      _TKN_conc_jul_wilcox$conf.int[1],
-                                      _TKN_conc_aug_wilcox$conf.int[1],
-                                      _TKN_conc_sep_wilcox$conf.int[1]),
-                           up_conf=c(_TKN_conc_oct_wilcox$conf.int[2],
-                                     _TKN_conc_nov_wilcox$conf.int[2],
-                                     _TKN_conc_dec_wilcox$conf.int[2],
-                                     _TKN_conc_jan_wilcox$conf.int[2],
-                                     _TKN_conc_feb_wilcox$conf.int[2],
-                                     _TKN_conc_mar_wilcox$conf.int[2],
-                                     _TKN_conc_apr_wilcox$conf.int[2],
-                                     _TKN_conc_may_wilcox$conf.int[2],
-                                     _TKN_conc_jun_wilcox$conf.int[2],
-                                     _TKN_conc_jul_wilcox$conf.int[2],
-                                     _TKN_conc_aug_wilcox$conf.int[2],
-                                     _TKN_conc_sep_wilcox$conf.int[2]))
+Conc_compare <- data.frame(chng_est=c(SanJVernalis_TKN_conc_oct_wilcox$est,
+                                      SanJVernalis_TKN_conc_nov_wilcox$est,
+                                      SanJVernalis_TKN_conc_dec_wilcox$est,
+                                      SanJVernalis_TKN_conc_jan_wilcox$est,
+                                      SanJVernalis_TKN_conc_feb_wilcox$est,
+                                      SanJVernalis_TKN_conc_mar_wilcox$est,
+                                      SanJVernalis_TKN_conc_apr_wilcox$est,
+                                      SanJVernalis_TKN_conc_may_wilcox$est,
+                                      SanJVernalis_TKN_conc_jun_wilcox$est,
+                                      SanJVernalis_TKN_conc_jul_wilcox$est,
+                                      SanJVernalis_TKN_conc_aug_wilcox$est,
+                                      SanJVernalis_TKN_conc_sep_wilcox$est),
+                           low_conf=c(SanJVernalis_TKN_conc_oct_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_conc_nov_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_conc_dec_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_conc_jan_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_conc_feb_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_conc_mar_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_conc_apr_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_conc_may_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_conc_jun_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_conc_jul_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_conc_aug_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_conc_sep_wilcox$conf.int[1]),
+                           up_conf=c(SanJVernalis_TKN_conc_oct_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_conc_nov_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_conc_dec_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_conc_jan_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_conc_feb_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_conc_mar_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_conc_apr_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_conc_may_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_conc_jun_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_conc_jul_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_conc_aug_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_conc_sep_wilcox$conf.int[2]))
 
-write.table(Conc_compare, "_TKN_conc_wilcox.txt", quote=FALSE, row.names=FALSE)
+write.table(Conc_compare, "SanJVernalis_TKN_conc_wilcox.txt", quote=FALSE, row.names=FALSE)
 
 rng <- max(abs(c(Conc_compare$up_conf, Conc_compare$low_conf)))
-tiff("_TKN_conc_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
+tiff("SanJVernalis_TKN_conc_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
 par(mar=c(4,5,0.5,0.5))
 plot(seq(1:12), Conc_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng, rng), xlab="Month", ylab=expression(paste("Median Concentration Change, mg  ",L^-1,sep='')), las=1)
 plotCI(seq(1:12), Conc_compare$chng_est, ui=Conc_compare$up_conf, li=Conc_compare$low_conf, pch=16, add=TRUE)
@@ -2309,7 +2321,7 @@ mdat3 <- matrix(c(early_decade_mon_mn_flx$FluxDay, recent_decade_mon_mn_flx$Flux
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 mx <- max(c((early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay), (recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay)))
-tiff("timing_shift_in_TKN_load_monthly_means.tif", height=800, width=900, res=130)
+tiff("timing_shift_inSanJVernalis_TKN_load_monthly_means.tif", height=800, width=900, res=130)
 x <- barplot(mdat3, beside=TRUE, las=1, ylim=c(0,mx), col = c("lightblue", "mistyrose"))
 abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn_flx$FluxDay - early_decade_mon_sd_flx$FluxDay, x1=x[1,], y1=early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
@@ -2321,94 +2333,94 @@ dev.off()
 # Apply Wilcox.text to the monthly loads here...
 early_jan_flx <- subset(early_decade_monthly_flx, month==1)
 recent_jan_flx <- subset(recent_decade_monthly_flx, month==1)
-_TKN_flux_jan_wilcox <- wilcox.test(recent_jan_flx$FluxDay, early_jan_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_flux_jan_wilcox <- wilcox.test(recent_jan_flx$FluxDay, early_jan_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_feb_flx <- subset(early_decade_monthly_flx, month==2)
 recent_feb_flx <- subset(recent_decade_monthly_flx, month==2)
-_TKN_flux_feb_wilcox <- wilcox.test(recent_feb_flx$FluxDay, early_feb_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_flux_feb_wilcox <- wilcox.test(recent_feb_flx$FluxDay, early_feb_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_mar_flx <- subset(early_decade_monthly_flx, month==3)
 recent_mar_flx <- subset(recent_decade_monthly_flx, month==3)
-_TKN_flux_mar_wilcox <- wilcox.test(recent_mar_flx$FluxDay, early_mar_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_flux_mar_wilcox <- wilcox.test(recent_mar_flx$FluxDay, early_mar_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_apr_flx <- subset(early_decade_monthly_flx, month==4)
 recent_apr_flx <- subset(recent_decade_monthly_flx, month==4)
-_TKN_flux_apr_wilcox <- wilcox.test(recent_apr_flx$FluxDay, early_apr_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_flux_apr_wilcox <- wilcox.test(recent_apr_flx$FluxDay, early_apr_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_may_flx <- subset(early_decade_monthly_flx, month==5)
 recent_may_flx <- subset(recent_decade_monthly_flx, month==5)
-_TKN_flux_may_wilcox <- wilcox.test(recent_may_flx$FluxDay, early_may_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_flux_may_wilcox <- wilcox.test(recent_may_flx$FluxDay, early_may_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jun_flx <- subset(early_decade_monthly_flx, month==6)
 recent_jun_flx <- subset(recent_decade_monthly_flx, month==6)
-_TKN_flux_jun_wilcox <- wilcox.test(recent_jun_flx$FluxDay, early_jun_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_flux_jun_wilcox <- wilcox.test(recent_jun_flx$FluxDay, early_jun_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jul_flx <- subset(early_decade_monthly_flx, month==7)
 recent_jul_flx <- subset(recent_decade_monthly_flx, month==7)
-_TKN_flux_jul_wilcox <- wilcox.test(recent_jul_flx$FluxDay, early_jul_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_flux_jul_wilcox <- wilcox.test(recent_jul_flx$FluxDay, early_jul_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_aug_flx <- subset(early_decade_monthly_flx, month==8)
 recent_aug_flx <- subset(recent_decade_monthly_flx, month==8)
-_TKN_flux_aug_wilcox <- wilcox.test(recent_aug_flx$FluxDay, early_aug_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_flux_aug_wilcox <- wilcox.test(recent_aug_flx$FluxDay, early_aug_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_sep_flx <- subset(early_decade_monthly_flx, month==9)
 recent_sep_flx <- subset(recent_decade_monthly_flx, month==9)
-_TKN_flux_sep_wilcox <- wilcox.test(recent_sep_flx$FluxDay, early_sep_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_flux_sep_wilcox <- wilcox.test(recent_sep_flx$FluxDay, early_sep_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_oct_flx <- subset(early_decade_monthly_flx, month==10)
 recent_oct_flx <- subset(recent_decade_monthly_flx, month==10)
-_TKN_flux_oct_wilcox <- wilcox.test(recent_oct_flx$FluxDay, early_oct_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_flux_oct_wilcox <- wilcox.test(recent_oct_flx$FluxDay, early_oct_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_nov_flx <- subset(early_decade_monthly_flx, month==11)
 recent_nov_flx <- subset(recent_decade_monthly_flx, month==11)
-_TKN_flux_nov_wilcox <- wilcox.test(recent_nov_flx$FluxDay, early_nov_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_flux_nov_wilcox <- wilcox.test(recent_nov_flx$FluxDay, early_nov_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_dec_flx <- subset(early_decade_monthly_flx, month==12)
 recent_dec_flx <- subset(recent_decade_monthly_flx, month==12)
-_TKN_flux_dec_wilcox <- wilcox.test(recent_dec_flx$FluxDay, early_dec_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TKN_flux_dec_wilcox <- wilcox.test(recent_dec_flx$FluxDay, early_dec_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 
-Flux_compare <- data.frame(chng_est=c(_TKN_flux_oct_wilcox$est,
-                                      _TKN_flux_nov_wilcox$est,
-                                      _TKN_flux_dec_wilcox$est,
-                                      _TKN_flux_jan_wilcox$est,
-                                      _TKN_flux_feb_wilcox$est,
-                                      _TKN_flux_mar_wilcox$est,
-                                      _TKN_flux_apr_wilcox$est,
-                                      _TKN_flux_may_wilcox$est,
-                                      _TKN_flux_jun_wilcox$est,
-                                      _TKN_flux_jul_wilcox$est,
-                                      _TKN_flux_aug_wilcox$est,
-                                      _TKN_flux_sep_wilcox$est),
-                           low_conf=c(_TKN_flux_oct_wilcox$conf.int[1],
-                                      _TKN_flux_nov_wilcox$conf.int[1],
-                                      _TKN_flux_dec_wilcox$conf.int[1],
-                                      _TKN_flux_jan_wilcox$conf.int[1],
-                                      _TKN_flux_feb_wilcox$conf.int[1],
-                                      _TKN_flux_mar_wilcox$conf.int[1],
-                                      _TKN_flux_apr_wilcox$conf.int[1],
-                                      _TKN_flux_may_wilcox$conf.int[1],
-                                      _TKN_flux_jun_wilcox$conf.int[1],
-                                      _TKN_flux_jul_wilcox$conf.int[1],
-                                      _TKN_flux_aug_wilcox$conf.int[1],
-                                      _TKN_flux_sep_wilcox$conf.int[1]),
-                           up_conf=c(_TKN_flux_oct_wilcox$conf.int[2],
-                                     _TKN_flux_nov_wilcox$conf.int[2],
-                                     _TKN_flux_dec_wilcox$conf.int[2],
-                                     _TKN_flux_jan_wilcox$conf.int[2],
-                                     _TKN_flux_feb_wilcox$conf.int[2],
-                                     _TKN_flux_mar_wilcox$conf.int[2],
-                                     _TKN_flux_apr_wilcox$conf.int[2],
-                                     _TKN_flux_may_wilcox$conf.int[2],
-                                     _TKN_flux_jun_wilcox$conf.int[2],
-                                     _TKN_flux_jul_wilcox$conf.int[2],
-                                     _TKN_flux_aug_wilcox$conf.int[2],
-                                     _TKN_flux_sep_wilcox$conf.int[2]))
+Flux_compare <- data.frame(chng_est=c(SanJVernalis_TKN_flux_oct_wilcox$est,
+                                      SanJVernalis_TKN_flux_nov_wilcox$est,
+                                      SanJVernalis_TKN_flux_dec_wilcox$est,
+                                      SanJVernalis_TKN_flux_jan_wilcox$est,
+                                      SanJVernalis_TKN_flux_feb_wilcox$est,
+                                      SanJVernalis_TKN_flux_mar_wilcox$est,
+                                      SanJVernalis_TKN_flux_apr_wilcox$est,
+                                      SanJVernalis_TKN_flux_may_wilcox$est,
+                                      SanJVernalis_TKN_flux_jun_wilcox$est,
+                                      SanJVernalis_TKN_flux_jul_wilcox$est,
+                                      SanJVernalis_TKN_flux_aug_wilcox$est,
+                                      SanJVernalis_TKN_flux_sep_wilcox$est),
+                           low_conf=c(SanJVernalis_TKN_flux_oct_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_flux_nov_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_flux_dec_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_flux_jan_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_flux_feb_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_flux_mar_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_flux_apr_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_flux_may_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_flux_jun_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_flux_jul_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_flux_aug_wilcox$conf.int[1],
+                                      SanJVernalis_TKN_flux_sep_wilcox$conf.int[1]),
+                           up_conf=c(SanJVernalis_TKN_flux_oct_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_flux_nov_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_flux_dec_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_flux_jan_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_flux_feb_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_flux_mar_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_flux_apr_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_flux_may_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_flux_jun_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_flux_jul_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_flux_aug_wilcox$conf.int[2],
+                                     SanJVernalis_TKN_flux_sep_wilcox$conf.int[2]))
 
-write.table(Flux_compare, "_TKN_flux_wilcox.txt", quote=FALSE, row.names=FALSE)
+write.table(Flux_compare, "SanJVernalis_TKN_flux_wilcox.txt", quote=FALSE, row.names=FALSE)
 
 rng_flx <- max(abs(c(Flux_compare$up_conf, Flux_compare$low_conf)))
-tiff("_TKN_flux_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
+tiff("SanJVernalis_TKN_flux_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
 par(mar=c(4,5,0.5,0.5))
 plot(seq(1:12), Flux_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng_flx, rng_flx), xlab="Month", ylab=expression(paste("Median Flux Change, kg",sep='')), las=1)
 plotCI(seq(1:12), Flux_compare$chng_est, ui=Flux_compare$up_conf, li=Flux_compare$low_conf, pch=16, add=TRUE)
@@ -2427,7 +2439,7 @@ date3 <- "2010-06-01"
 qLow= baseQ
 qHigh=highQ7
 
-tiff("_Date_Discharge_TKN_conc_no_log.tif",height = 700, width = 1000, res=120)
+tiff("_Date_DischargeSanJVernalis_TKN_conc_no_log.tif",height = 700, width = 1000, res=120)
 plotConcQSmooth(eList,date1, date2, date3,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
 dev.off()
 
@@ -2562,12 +2574,12 @@ plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxi
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
-setSweave("_TKN_Conc_EGRETCI",7,7)
+setSweave("SanJVernalis_TKN_Conc_EGRETCI",7,7)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
 
-setSweave("_TKN_Flux_EGRETCI",7,7)
+setSweave("SanJVernalis_TKN_Flux_EGRETCI",7,7)
 plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
@@ -2585,14 +2597,24 @@ save(repAnnual,file="RepAnnual")
 # Working on TP
 #############################################################
 
-startDate <- "1990-06-01"
-endDate <- "2011-09-30"
+startDate <- "1971-10-01"
+endDate <- "2019-06-01"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00665"  # "TP"
-fileName <- "_TP.csv"
+filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
+
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
+Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+##NWIS DIN data has a gap between 1974 and 1979.  We will need to supplement
+##the missing time using Charlie Kratzer's data
+write.csv(Sample,"C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NWIS_TP.csv")
+
+##Add Kratzer's data 
+fileName <- "CK_TP_data.csv"
 Sample <- readUserSample(filePath, fileName)
+removeDuplicates(Sample)
 
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
@@ -2600,11 +2622,11 @@ INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$stat
 
 # Have a look at the available range of TP data
 range(Sample$Date)
-#"1990-06-07" "2011-09-06"
+#"1971-10-14" "2019-05-07"
 eList <- mergeReport(INFO, Daily, Sample)
 
 # Change the working directory; redirect plot output to TP folder
-setwd("../..")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/")
 subDir <- 'TP/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -2667,7 +2689,7 @@ plotFluxHist(eList, plotFlowNorm = TRUE) # fluxMax) # fluxMax
 dev.off()
 
 # Look for a trend change:
-tableChange(eList, fluxUnit=6, yearPoints=c(1990,1998,2001,2011))
+tableChange(eList, fluxUnit=6, yearPoints=c(1971,1981,1991,2001,2011))
 
 #UPPER TRUCKEE RV AT S UPPER TRUCKEE RD NR MEYERS 
 #Phosphorus
@@ -2868,8 +2890,8 @@ dev.off()
 localDaily <- getDaily(eList)
 
 # Will need to adjust the date range below based on each gages unique start/stop dates
-early_decade <- subset(localDaily, localDaily$Date > as.Date('1990-09-30') & localDaily$Date < as.Date('2000-10-01'))
-recent_decade <- subset(localDaily, localDaily$Date > as.Date('2001-09-30'))
+early_decade <- subset(localDaily, localDaily$Date > as.Date('1971-10-01') & localDaily$Date < as.Date('1981-10-01'))
+recent_decade <- subset(localDaily, localDaily$Date > as.Date('2009-07-01'))
 
 
 early_decade_monthly_mn <- aggregate(ConcDay ~ MonthSeq, data = early_decade, 'mean')
@@ -2891,7 +2913,7 @@ recent_decade_mon_sd <- recent_decade_mon_sd[c(10:12,1:9),]
 
 mdat2 <- matrix(c(early_decade_mon_mn$ConcDay, recent_decade_mon_mn$ConcDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1990-2000", "2001-2011"),
+                dimnames = list(c("1972-1982", "2009-2019"),
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 # Be sure to adjust the legend's first decade start and stop year correctly
@@ -2904,7 +2926,7 @@ abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn$ConcDay - early_decade_mon_sd$ConcDay, x1=x[1,], y1=early_decade_mon_mn$ConcDay + early_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
 arrows(x0=x[2,], y0=recent_decade_mon_mn$ConcDay - recent_decade_mon_sd$ConcDay, x1=x[2,], y1=recent_decade_mon_mn$ConcDay + recent_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
 mtext(side=2, expression(paste(TP,', mg ',L^-1,sep='')), line=3)
-legend(x=25, y=0.9 * mx, c("1990-2000", "2001-2011"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+legend(x=25, y=0.9 * mx, c("1972-1982", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
 
@@ -2912,93 +2934,93 @@ dev.off()
 # ----------------------------------------------------------------------
 early_jan <- subset(early_decade_monthly_mn, month==1)
 recent_jan <- subset(recent_decade_monthly_mn, month==1)
-_TP_conc_jan_wilcox <- wilcox.test(recent_jan$ConcDay, early_jan$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_conc_jan_wilcox <- wilcox.test(recent_jan$ConcDay, early_jan$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_feb <- subset(early_decade_monthly_mn, month==2)
 recent_feb <- subset(recent_decade_monthly_mn, month==2)
-_TP_conc_feb_wilcox <- wilcox.test(recent_feb$ConcDay, early_feb$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_conc_feb_wilcox <- wilcox.test(recent_feb$ConcDay, early_feb$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_mar <- subset(early_decade_monthly_mn, month==3)
 recent_mar <- subset(recent_decade_monthly_mn, month==3)
-_TP_conc_mar_wilcox <- wilcox.test(recent_mar$ConcDay, early_mar$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_conc_mar_wilcox <- wilcox.test(recent_mar$ConcDay, early_mar$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_apr <- subset(early_decade_monthly_mn, month==4)
 recent_apr <- subset(recent_decade_monthly_mn, month==4)
-_TP_conc_apr_wilcox <- wilcox.test(recent_apr$ConcDay, early_apr$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_conc_apr_wilcox <- wilcox.test(recent_apr$ConcDay, early_apr$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_may <- subset(early_decade_monthly_mn, month==5)
 recent_may <- subset(recent_decade_monthly_mn, month==5)
-_TP_conc_may_wilcox <- wilcox.test(recent_may$ConcDay, early_may$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_conc_may_wilcox <- wilcox.test(recent_may$ConcDay, early_may$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jun <- subset(early_decade_monthly_mn, month==6)
 recent_jun <- subset(recent_decade_monthly_mn, month==6)
-_TP_conc_jun_wilcox <- wilcox.test(recent_jun$ConcDay, early_jun$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_conc_jun_wilcox <- wilcox.test(recent_jun$ConcDay, early_jun$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jul <- subset(early_decade_monthly_mn, month==7)
 recent_jul <- subset(recent_decade_monthly_mn, month==7)
-_TP_conc_jul_wilcox <- wilcox.test(recent_jul$ConcDay, early_jul$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_conc_jul_wilcox <- wilcox.test(recent_jul$ConcDay, early_jul$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_aug <- subset(early_decade_monthly_mn, month==8)
 recent_aug <- subset(recent_decade_monthly_mn, month==8)
-_TP_conc_aug_wilcox <- wilcox.test(recent_aug$ConcDay, early_aug$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_conc_aug_wilcox <- wilcox.test(recent_aug$ConcDay, early_aug$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_sep <- subset(early_decade_monthly_mn, month==9)
 recent_sep <- subset(recent_decade_monthly_mn, month==9)
-_TP_conc_sep_wilcox <- wilcox.test(recent_sep$ConcDay, early_sep$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_conc_sep_wilcox <- wilcox.test(recent_sep$ConcDay, early_sep$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_oct <- subset(early_decade_monthly_mn, month==10)
 recent_oct <- subset(recent_decade_monthly_mn, month==10)
-_TP_conc_oct_wilcox <- wilcox.test(recent_oct$ConcDay, early_oct$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_conc_oct_wilcox <- wilcox.test(recent_oct$ConcDay, early_oct$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_nov <- subset(early_decade_monthly_mn, month==11)
 recent_nov <- subset(recent_decade_monthly_mn, month==11)
-_TP_conc_nov_wilcox <- wilcox.test(recent_nov$ConcDay, early_nov$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_conc_nov_wilcox <- wilcox.test(recent_nov$ConcDay, early_nov$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_dec <- subset(early_decade_monthly_mn, month==12)
 recent_dec <- subset(recent_decade_monthly_mn, month==12)
-_TP_conc_dec_wilcox <- wilcox.test(recent_dec$ConcDay, early_dec$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_conc_dec_wilcox <- wilcox.test(recent_dec$ConcDay, early_dec$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
-Conc_compare <- data.frame(chng_est=c(_TP_conc_oct_wilcox$est,
-                                      _TP_conc_nov_wilcox$est,
-                                      _TP_conc_dec_wilcox$est,
-                                      _TP_conc_jan_wilcox$est,
-                                      _TP_conc_feb_wilcox$est,
-                                      _TP_conc_mar_wilcox$est,
-                                      _TP_conc_apr_wilcox$est,
-                                      _TP_conc_may_wilcox$est,
-                                      _TP_conc_jun_wilcox$est,
-                                      _TP_conc_jul_wilcox$est,
-                                      _TP_conc_aug_wilcox$est,
-                                      _TP_conc_sep_wilcox$est),
-                           low_conf=c(_TP_conc_oct_wilcox$conf.int[1],
-                                      _TP_conc_nov_wilcox$conf.int[1],
-                                      _TP_conc_dec_wilcox$conf.int[1],
-                                      _TP_conc_jan_wilcox$conf.int[1],
-                                      _TP_conc_feb_wilcox$conf.int[1],
-                                      _TP_conc_mar_wilcox$conf.int[1],
-                                      _TP_conc_apr_wilcox$conf.int[1],
-                                      _TP_conc_may_wilcox$conf.int[1],
-                                      _TP_conc_jun_wilcox$conf.int[1],
-                                      _TP_conc_jul_wilcox$conf.int[1],
-                                      _TP_conc_aug_wilcox$conf.int[1],
-                                      _TP_conc_sep_wilcox$conf.int[1]),
-                           up_conf=c(_TP_conc_oct_wilcox$conf.int[2],
-                                     _TP_conc_nov_wilcox$conf.int[2],
-                                     _TP_conc_dec_wilcox$conf.int[2],
-                                     _TP_conc_jan_wilcox$conf.int[2],
-                                     _TP_conc_feb_wilcox$conf.int[2],
-                                     _TP_conc_mar_wilcox$conf.int[2],
-                                     _TP_conc_apr_wilcox$conf.int[2],
-                                     _TP_conc_may_wilcox$conf.int[2],
-                                     _TP_conc_jun_wilcox$conf.int[2],
-                                     _TP_conc_jul_wilcox$conf.int[2],
-                                     _TP_conc_aug_wilcox$conf.int[2],
-                                     _TP_conc_sep_wilcox$conf.int[2]))
+Conc_compare <- data.frame(chng_est=c(SanJVernalis_TP_conc_oct_wilcox$est,
+                                      SanJVernalis_TP_conc_nov_wilcox$est,
+                                      SanJVernalis_TP_conc_dec_wilcox$est,
+                                      SanJVernalis_TP_conc_jan_wilcox$est,
+                                      SanJVernalis_TP_conc_feb_wilcox$est,
+                                      SanJVernalis_TP_conc_mar_wilcox$est,
+                                      SanJVernalis_TP_conc_apr_wilcox$est,
+                                      SanJVernalis_TP_conc_may_wilcox$est,
+                                      SanJVernalis_TP_conc_jun_wilcox$est,
+                                      SanJVernalis_TP_conc_jul_wilcox$est,
+                                      SanJVernalis_TP_conc_aug_wilcox$est,
+                                      SanJVernalis_TP_conc_sep_wilcox$est),
+                           low_conf=c(SanJVernalis_TP_conc_oct_wilcox$conf.int[1],
+                                      SanJVernalis_TP_conc_nov_wilcox$conf.int[1],
+                                      SanJVernalis_TP_conc_dec_wilcox$conf.int[1],
+                                      SanJVernalis_TP_conc_jan_wilcox$conf.int[1],
+                                      SanJVernalis_TP_conc_feb_wilcox$conf.int[1],
+                                      SanJVernalis_TP_conc_mar_wilcox$conf.int[1],
+                                      SanJVernalis_TP_conc_apr_wilcox$conf.int[1],
+                                      SanJVernalis_TP_conc_may_wilcox$conf.int[1],
+                                      SanJVernalis_TP_conc_jun_wilcox$conf.int[1],
+                                      SanJVernalis_TP_conc_jul_wilcox$conf.int[1],
+                                      SanJVernalis_TP_conc_aug_wilcox$conf.int[1],
+                                      SanJVernalis_TP_conc_sep_wilcox$conf.int[1]),
+                           up_conf=c(SanJVernalis_TP_conc_oct_wilcox$conf.int[2],
+                                     SanJVernalis_TP_conc_nov_wilcox$conf.int[2],
+                                     SanJVernalis_TP_conc_dec_wilcox$conf.int[2],
+                                     SanJVernalis_TP_conc_jan_wilcox$conf.int[2],
+                                     SanJVernalis_TP_conc_feb_wilcox$conf.int[2],
+                                     SanJVernalis_TP_conc_mar_wilcox$conf.int[2],
+                                     SanJVernalis_TP_conc_apr_wilcox$conf.int[2],
+                                     SanJVernalis_TP_conc_may_wilcox$conf.int[2],
+                                     SanJVernalis_TP_conc_jun_wilcox$conf.int[2],
+                                     SanJVernalis_TP_conc_jul_wilcox$conf.int[2],
+                                     SanJVernalis_TP_conc_aug_wilcox$conf.int[2],
+                                     SanJVernalis_TP_conc_sep_wilcox$conf.int[2]))
 
-write.table(Conc_compare, "_TP_conc_wilcox.txt", quote=FALSE, row.names=FALSE)
+write.table(Conc_compare, "SanJVernalis_TP_conc_wilcox.txt", quote=FALSE, row.names=FALSE)
 
 rng <- max(abs(c(Conc_compare$up_conf, Conc_compare$low_conf)))
-tiff("_TP_conc_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
+tiff("SanJVernalis_TP_conc_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
 par(mar=c(4,5,0.5,0.5))
 plot(seq(1:12), Conc_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng, rng), xlab="Month", ylab=expression(paste("Median Concentration Change, mg  ",L^-1,sep='')), las=1)
 plotCI(seq(1:12), Conc_compare$chng_est, ui=Conc_compare$up_conf, li=Conc_compare$low_conf, pch=16, add=TRUE)
@@ -3044,94 +3066,94 @@ dev.off()
 # Apply Wilcox.text to the monthly loads here...
 early_jan_flx <- subset(early_decade_monthly_flx, month==1)
 recent_jan_flx <- subset(recent_decade_monthly_flx, month==1)
-_TP_flux_jan_wilcox <- wilcox.test(recent_jan_flx$FluxDay, early_jan_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_flux_jan_wilcox <- wilcox.test(recent_jan_flx$FluxDay, early_jan_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_feb_flx <- subset(early_decade_monthly_flx, month==2)
 recent_feb_flx <- subset(recent_decade_monthly_flx, month==2)
-_TP_flux_feb_wilcox <- wilcox.test(recent_feb_flx$FluxDay, early_feb_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_flux_feb_wilcox <- wilcox.test(recent_feb_flx$FluxDay, early_feb_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_mar_flx <- subset(early_decade_monthly_flx, month==3)
 recent_mar_flx <- subset(recent_decade_monthly_flx, month==3)
-_TP_flux_mar_wilcox <- wilcox.test(recent_mar_flx$FluxDay, early_mar_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_flux_mar_wilcox <- wilcox.test(recent_mar_flx$FluxDay, early_mar_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_apr_flx <- subset(early_decade_monthly_flx, month==4)
 recent_apr_flx <- subset(recent_decade_monthly_flx, month==4)
-_TP_flux_apr_wilcox <- wilcox.test(recent_apr_flx$FluxDay, early_apr_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_flux_apr_wilcox <- wilcox.test(recent_apr_flx$FluxDay, early_apr_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_may_flx <- subset(early_decade_monthly_flx, month==5)
 recent_may_flx <- subset(recent_decade_monthly_flx, month==5)
-_TP_flux_may_wilcox <- wilcox.test(recent_may_flx$FluxDay, early_may_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_flux_may_wilcox <- wilcox.test(recent_may_flx$FluxDay, early_may_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jun_flx <- subset(early_decade_monthly_flx, month==6)
 recent_jun_flx <- subset(recent_decade_monthly_flx, month==6)
-_TP_flux_jun_wilcox <- wilcox.test(recent_jun_flx$FluxDay, early_jun_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_flux_jun_wilcox <- wilcox.test(recent_jun_flx$FluxDay, early_jun_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jul_flx <- subset(early_decade_monthly_flx, month==7)
 recent_jul_flx <- subset(recent_decade_monthly_flx, month==7)
-_TP_flux_jul_wilcox <- wilcox.test(recent_jul_flx$FluxDay, early_jul_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_flux_jul_wilcox <- wilcox.test(recent_jul_flx$FluxDay, early_jul_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_aug_flx <- subset(early_decade_monthly_flx, month==8)
 recent_aug_flx <- subset(recent_decade_monthly_flx, month==8)
-_TP_flux_aug_wilcox <- wilcox.test(recent_aug_flx$FluxDay, early_aug_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_flux_aug_wilcox <- wilcox.test(recent_aug_flx$FluxDay, early_aug_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_sep_flx <- subset(early_decade_monthly_flx, month==9)
 recent_sep_flx <- subset(recent_decade_monthly_flx, month==9)
-_TP_flux_sep_wilcox <- wilcox.test(recent_sep_flx$FluxDay, early_sep_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_flux_sep_wilcox <- wilcox.test(recent_sep_flx$FluxDay, early_sep_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_oct_flx <- subset(early_decade_monthly_flx, month==10)
 recent_oct_flx <- subset(recent_decade_monthly_flx, month==10)
-_TP_flux_oct_wilcox <- wilcox.test(recent_oct_flx$FluxDay, early_oct_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_flux_oct_wilcox <- wilcox.test(recent_oct_flx$FluxDay, early_oct_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_nov_flx <- subset(early_decade_monthly_flx, month==11)
 recent_nov_flx <- subset(recent_decade_monthly_flx, month==11)
-_TP_flux_nov_wilcox <- wilcox.test(recent_nov_flx$FluxDay, early_nov_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_flux_nov_wilcox <- wilcox.test(recent_nov_flx$FluxDay, early_nov_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_dec_flx <- subset(early_decade_monthly_flx, month==12)
 recent_dec_flx <- subset(recent_decade_monthly_flx, month==12)
-_TP_flux_dec_wilcox <- wilcox.test(recent_dec_flx$FluxDay, early_dec_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+SanJVernalis_TP_flux_dec_wilcox <- wilcox.test(recent_dec_flx$FluxDay, early_dec_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 
-Flux_compare <- data.frame(chng_est=c(_TP_flux_oct_wilcox$est,
-                                      _TP_flux_nov_wilcox$est,
-                                      _TP_flux_dec_wilcox$est,
-                                      _TP_flux_jan_wilcox$est,
-                                      _TP_flux_feb_wilcox$est,
-                                      _TP_flux_mar_wilcox$est,
-                                      _TP_flux_apr_wilcox$est,
-                                      _TP_flux_may_wilcox$est,
-                                      _TP_flux_jun_wilcox$est,
-                                      _TP_flux_jul_wilcox$est,
-                                      _TP_flux_aug_wilcox$est,
-                                      _TP_flux_sep_wilcox$est),
-                           low_conf=c(_TP_flux_oct_wilcox$conf.int[1],
-                                      _TP_flux_nov_wilcox$conf.int[1],
-                                      _TP_flux_dec_wilcox$conf.int[1],
-                                      _TP_flux_jan_wilcox$conf.int[1],
-                                      _TP_flux_feb_wilcox$conf.int[1],
-                                      _TP_flux_mar_wilcox$conf.int[1],
-                                      _TP_flux_apr_wilcox$conf.int[1],
-                                      _TP_flux_may_wilcox$conf.int[1],
-                                      _TP_flux_jun_wilcox$conf.int[1],
-                                      _TP_flux_jul_wilcox$conf.int[1],
-                                      _TP_flux_aug_wilcox$conf.int[1],
-                                      _TP_flux_sep_wilcox$conf.int[1]),
-                           up_conf=c(_TP_flux_oct_wilcox$conf.int[2],
-                                     _TP_flux_nov_wilcox$conf.int[2],
-                                     _TP_flux_dec_wilcox$conf.int[2],
-                                     _TP_flux_jan_wilcox$conf.int[2],
-                                     _TP_flux_feb_wilcox$conf.int[2],
-                                     _TP_flux_mar_wilcox$conf.int[2],
-                                     _TP_flux_apr_wilcox$conf.int[2],
-                                     _TP_flux_may_wilcox$conf.int[2],
-                                     _TP_flux_jun_wilcox$conf.int[2],
-                                     _TP_flux_jul_wilcox$conf.int[2],
-                                     _TP_flux_aug_wilcox$conf.int[2],
-                                     _TP_flux_sep_wilcox$conf.int[2]))
+Flux_compare <- data.frame(chng_est=c(SanJVernalis_TP_flux_oct_wilcox$est,
+                                      SanJVernalis_TP_flux_nov_wilcox$est,
+                                      SanJVernalis_TP_flux_dec_wilcox$est,
+                                      SanJVernalis_TP_flux_jan_wilcox$est,
+                                      SanJVernalis_TP_flux_feb_wilcox$est,
+                                      SanJVernalis_TP_flux_mar_wilcox$est,
+                                      SanJVernalis_TP_flux_apr_wilcox$est,
+                                      SanJVernalis_TP_flux_may_wilcox$est,
+                                      SanJVernalis_TP_flux_jun_wilcox$est,
+                                      SanJVernalis_TP_flux_jul_wilcox$est,
+                                      SanJVernalis_TP_flux_aug_wilcox$est,
+                                      SanJVernalis_TP_flux_sep_wilcox$est),
+                           low_conf=c(SanJVernalis_TP_flux_oct_wilcox$conf.int[1],
+                                      SanJVernalis_TP_flux_nov_wilcox$conf.int[1],
+                                      SanJVernalis_TP_flux_dec_wilcox$conf.int[1],
+                                      SanJVernalis_TP_flux_jan_wilcox$conf.int[1],
+                                      SanJVernalis_TP_flux_feb_wilcox$conf.int[1],
+                                      SanJVernalis_TP_flux_mar_wilcox$conf.int[1],
+                                      SanJVernalis_TP_flux_apr_wilcox$conf.int[1],
+                                      SanJVernalis_TP_flux_may_wilcox$conf.int[1],
+                                      SanJVernalis_TP_flux_jun_wilcox$conf.int[1],
+                                      SanJVernalis_TP_flux_jul_wilcox$conf.int[1],
+                                      SanJVernalis_TP_flux_aug_wilcox$conf.int[1],
+                                      SanJVernalis_TP_flux_sep_wilcox$conf.int[1]),
+                           up_conf=c(SanJVernalis_TP_flux_oct_wilcox$conf.int[2],
+                                     SanJVernalis_TP_flux_nov_wilcox$conf.int[2],
+                                     SanJVernalis_TP_flux_dec_wilcox$conf.int[2],
+                                     SanJVernalis_TP_flux_jan_wilcox$conf.int[2],
+                                     SanJVernalis_TP_flux_feb_wilcox$conf.int[2],
+                                     SanJVernalis_TP_flux_mar_wilcox$conf.int[2],
+                                     SanJVernalis_TP_flux_apr_wilcox$conf.int[2],
+                                     SanJVernalis_TP_flux_may_wilcox$conf.int[2],
+                                     SanJVernalis_TP_flux_jun_wilcox$conf.int[2],
+                                     SanJVernalis_TP_flux_jul_wilcox$conf.int[2],
+                                     SanJVernalis_TP_flux_aug_wilcox$conf.int[2],
+                                     SanJVernalis_TP_flux_sep_wilcox$conf.int[2]))
 
-write.table(Flux_compare, "_TP_flux_wilcox.txt", quote=FALSE, row.names=FALSE)
+write.table(Flux_compare, "SanJVernalis_TP_fluxwilcox.txt", quote=FALSE, row.names=FALSE)
 
 rng_flx <- max(abs(c(Flux_compare$up_conf, Flux_compare$low_conf)))
-tiff("_TP_flux_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
+tiff("SanJVernalis_TP_fluxshift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
 par(mar=c(4,5,0.5,0.5))
 plot(seq(1:12), Flux_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng_flx, rng_flx), xlab="Month", ylab=expression(paste("Median Flux Change, kg",sep='')), las=1)
 plotCI(seq(1:12), Flux_compare$chng_est, ui=Flux_compare$up_conf, li=Flux_compare$low_conf, pch=16, add=TRUE)
@@ -3147,17 +3169,22 @@ dev.off()
 ###########
 #First do flow duration analysis
 flowDuration(eList, centerDate = "06-01", qUnit = 2, span = 30)
-date1 <- "1991-06-01"
-date2 <- "2000-06-01"
-date3 <- "2010-06-01"
+date1 <- "1971-06-01"
+date2 <- "1981-06-01"
+date3 <- "1991-06-01"
+date4 <- "2001-06-01"
+date5 <- "2011-06-01"
+
 qLow= baseQ
 qHigh=highQ7
 
-tiff("_Date_Discharge_TP_conc_no_log.tif",height = 700, width = 1000, res=120)
+tiff("_Date1_Discharge_TP_conc_no_log.tif",height = 700, width = 1000, res=120)
 plotConcQSmooth(eList,date1, date2, date3,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
 dev.off()
 
-
+tiff("_Date2_Discharge_TP_conc_no_log.tif",height = 700, width = 1000, res=120)
+plotConcQSmooth(eList,date3, date4, date5,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
+dev.off()
 
 
 # ---------------------------
@@ -3290,7 +3317,7 @@ plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, sh
 polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
 
-setSweave("_TP_Flux_EGRETCI",7,7)
+setSweave("SanJVernalis_TP_fluxEGRETCI",7,7)
 plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
