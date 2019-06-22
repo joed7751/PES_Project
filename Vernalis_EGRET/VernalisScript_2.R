@@ -208,12 +208,12 @@ eList <- setPA(eList, paStart = 10, paLong = 12)
 annualSeries <- makeAnnualSeries(eList)
 
 #############################################################
-# Now do the analysis for DIN, NO3 plus NO2
+# Now do the analysis for DIN: NO3 plus NO2
 #############################################################
 
 ###site id is correct for Vernalis
 
-startDate <- "1971-10-01"
+startDate <- "1971-03-01"
 endDate <- "2019-06-01"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
@@ -221,8 +221,9 @@ parameterCd <- "00631"  # "NO3 and NO2"
 filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
 
 ##Will need to change filePath for Dina's computer
-##filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
+#filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 ##NWIS DIN data has a gap between 1974 and 1979.  We will need to supplement
@@ -232,7 +233,7 @@ write.csv(Sample,"NWIS_nitrate.csv")
 ##Add Kratzer's data to NWIS_nitrate2.csv
 fileName <- "NWIS_nitrate2.csv"
 Sample <- readUserSample(filePath, fileName)
-removeDuplicates(Sample)
+Sample <- removeDuplicates()
 
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
@@ -240,7 +241,7 @@ INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$stat
 
 # Have a look at the available range of NO3 data
 range(Sample$Date)
-#  "1971-03-02" "2019-03-12"
+#  "1971-03-02" "2019-05-07"
 
 eList <- mergeReport(INFO, Daily, Sample)
 
@@ -296,7 +297,7 @@ paStart <- 10
 localDaily <- getDaily(eList)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = 'SanJ_Vernalis_NO3_RawVals.txt', quote=FALSE, row.names=FALSE)
-
+write.csv(Daily,'localDailyNO3.csv')
 
 # Determine which flow rates to use for discharge-specific trends
 
@@ -445,7 +446,7 @@ recent_decade_mon_sd <- recent_decade_mon_sd[c(10:12,1:9),]
 
 mdat2 <- matrix(c(early_decade_mon_mn$ConcDay, recent_decade_mon_mn$ConcDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1972-1982", "2009-2019"),
+                dimnames = list(c("1971-1981", "2009-2019"),
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 # Be sure to adjust the legend's first decade start and stop year correctly
@@ -458,7 +459,7 @@ abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn$ConcDay - early_decade_mon_sd$ConcDay, x1=x[1,], y1=early_decade_mon_mn$ConcDay + early_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
 arrows(x0=x[2,], y0=recent_decade_mon_mn$ConcDay - recent_decade_mon_sd$ConcDay, x1=x[2,], y1=recent_decade_mon_mn$ConcDay + recent_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
 mtext(side=2, expression(paste(NO[3],', mg ',L^-1,sep='')), line=3)
-legend(x=25, y=0.9 * mx, c("1972-1982", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+legend(x=25, y=0.9 * mx, c("1971-1981", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
 
@@ -592,7 +593,7 @@ abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn_flx$FluxDay - early_decade_mon_sd_flx$FluxDay, x1=x[1,], y1=early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
 arrows(x0=x[2,], y0=recent_decade_mon_mn_flx$FluxDay - recent_decade_mon_sd_flx$FluxDay, x1=x[2,], y1=recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
 mtext(side=2, expression(paste(NO[3],', kg ',month^-1,sep='')), line=2.5)
-legend(x=30, y=0.9 * mx, c("1972-1982", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+legend(x=30, y=0.9 * mx, c("1971-1981", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
 # Apply Wilcox.text to the monthly loads here...
@@ -1124,7 +1125,10 @@ endDate <- "2019-05-30"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00671"
+
 filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
+filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
+
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 
@@ -1133,7 +1137,7 @@ Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 ##Add Kratzer's data to NWIS data
 fileName <- "Vern_NWIS_and_KratzerOP.csv"
 Sample <- readUserSample(filePath, fileName)
-removeDuplicates(Sample)
+Sample <- removeDuplicates()
 
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
@@ -1148,6 +1152,7 @@ eList <- mergeReport(INFO, Daily, Sample)
 ######
 # Change the working directory; redirect plot output to OP folder
 #setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 subDir <- 'OP/EGRET_plots'
 if (file.exists(subDir)){
@@ -1338,8 +1343,8 @@ localDaily <- getDaily(eList)
 
 # Will need to adjust the date range below based on each gages unique start/stop dates
 
-early_decade <- subset(localDaily, localDaily$Date > as.Date('1980-10-01') & localDaily$Date < as.Date('1990-10-01'))
-recent_decade <- subset(localDaily, localDaily$Date > as.Date('2009-07-01'))
+early_decade <- subset(localDaily, localDaily$Date > as.Date('1974-10-01') & localDaily$Date < as.Date('1984-10-01'))
+recent_decade <- subset(localDaily, localDaily$Date > as.Date('2009-06-01'))
 
 early_decade_monthly_mn <- aggregate(ConcDay ~ MonthSeq, data = early_decade, 'mean')
 recent_decade_monthly_mn <- aggregate(ConcDay ~ MonthSeq, data = recent_decade, 'mean')
@@ -1373,7 +1378,7 @@ abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn$ConcDay - early_decade_mon_sd$ConcDay, x1=x[1,], y1=early_decade_mon_mn$ConcDay + early_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
 arrows(x0=x[2,], y0=recent_decade_mon_mn$ConcDay - recent_decade_mon_sd$ConcDay, x1=x[2,], y1=recent_decade_mon_mn$ConcDay + recent_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
 mtext(side=2, expression(paste(OP,', mg ',L^-1,sep='')), line=3)
-legend(x=25, y=0.9 * mx, c("1980-1990", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+legend(x=25, y=0.9 * mx, c("1974-1984", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
 
@@ -1507,7 +1512,7 @@ abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn_flx$FluxDay - early_decade_mon_sd_flx$FluxDay, x1=x[1,], y1=early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
 arrows(x0=x[2,], y0=recent_decade_mon_mn_flx$FluxDay - recent_decade_mon_sd_flx$FluxDay, x1=x[2,], y1=recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
 mtext(side=2, expression(paste(OP,', kg ',month^-1,sep='')), line=2.5)
-legend(x=30, y=0.9 * mx, c("1980-1990", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+legend(x=30, y=0.9 * mx, c("1974-1984", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
 # Apply Wilcox.text to the monthly loads here...
@@ -1613,13 +1618,13 @@ dev.off()
 ###########
 #First PO flow duration analysis
 flowDuration(eList, centerDate = "06-01", qUnit = 2, span = 30)
-date1 <- "1980-06-01"
+date1 <- "1974-06-01"
 date2 <- "1990-06-01"
 date3 <- "2000-06-01"
 qLow= baseQ
 qHigh=highQ7
 
-tiff("_Date1_Discharge_OP_conc_no_log.tif",height = 700, width = 1000, res=120)
+tiff("Vernalis_Date1_Discharge_OP_conc_no_log.tif",height = 700, width = 1000, res=120)
 plotConcQSmooth(eList,date1, date2, date3,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
 dev.off()
 
@@ -1631,7 +1636,7 @@ date5 <- "2019-06-01"
 qLow= baseQ
 qHigh=highQ7
 
-tiff("_Date2_Discharge_OP_conc_no_log.tif",height = 700, width = 1000, res=120)
+tiff("Vernalis_Date2_Discharge_OP_conc_no_log.tif",height = 700, width = 1000, res=120)
 plotConcQSmooth(eList,date3, date4, date5,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
 dev.off()
 
@@ -1866,7 +1871,7 @@ save(repAnnual,file="RepAnnual")
 #############################################################
 # Working on TKN
 #############################################################
-startDate <- "1971-10-01"
+startDate <- "1973-02-01"
 endDate <- "2019-06-1"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
@@ -1878,9 +1883,9 @@ Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 write.csv(Sample,"C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NWIS_TKN.csv")
 
 ##Add Kratzer's data 
-fileName <- "CK_TN_data.csv"
-Sample <- readUserSample(filePath, fileName)
-removeDuplicates(Sample)
+#fileName <- "CK_TN_data.csv"
+#Sample <- readUserSample(filePath, fileName)
+Sample <- removeDuplicates()
 
 
 
@@ -1890,7 +1895,7 @@ INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$stat
 
 # Have a look at the available range of TKN data
 range(Sample$Date)
-#  "1971-10-01" "2019-06-01"
+#  "1973-02-02" "2019-05-07"
 
 eList <- mergeReport(INFO, Daily, Sample)
 plotConcTime(eList)
@@ -1898,6 +1903,7 @@ plotConcTime(eList)
 
 # Change the working directory; redirect plot output to TKN folder
 setwd ("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/")
+setwd(filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/")
 subDir <- 'TKN/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -1947,6 +1953,8 @@ paStart <- 10
 localDaily <- getDaily(eList_TN)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = 'SanJVernalis_TKN_RawVals.txt', quote=FALSE, row.names=FALSE)
+
+write.csv(Daily,'localDaily_TKN.csv')
 
 # Plot the annual average concentration and annual flow-normalized concentration
 tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_SanJVernalis_TN.tif", height = 600, width = 800, res=120)
@@ -2159,8 +2167,8 @@ dev.off()
 localDaily <- getDaily(eList)
 
 # Will need to adjust the date range below based on each gages unique start/stop dates
-early_decade <- subset(localDaily, localDaily$Date > as.Date('1990-09-30') & localDaily$Date < as.Date('2000-10-01'))
-recent_decade <- subset(localDaily, localDaily$Date > as.Date('2001-09-30'))
+early_decade <- subset(localDaily, localDaily$Date > as.Date('1973-09-30') & localDaily$Date < as.Date('1983-10-01'))
+recent_decade <- subset(localDaily, localDaily$Date > as.Date('2009-07-30'))
 
 
 early_decade_monthly_mn <- aggregate(ConcDay ~ MonthSeq, data = early_decade, 'mean')
@@ -2195,7 +2203,7 @@ abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn$ConcDay - early_decade_mon_sd$ConcDay, x1=x[1,], y1=early_decade_mon_mn$ConcDay + early_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
 arrows(x0=x[2,], y0=recent_decade_mon_mn$ConcDay - recent_decade_mon_sd$ConcDay, x1=x[2,], y1=recent_decade_mon_mn$ConcDay + recent_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
 mtext(side=2, expression(paste(TKN,', mg ',L^-1,sep='')), line=3)
-legend(x=25, y=0.9 * mx, c("1990-2000", "2001-2011"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+legend(x=25, y=0.9 * mx, c("1973-1983", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
 
@@ -2329,7 +2337,7 @@ abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn_flx$FluxDay - early_decade_mon_sd_flx$FluxDay, x1=x[1,], y1=early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
 arrows(x0=x[2,], y0=recent_decade_mon_mn_flx$FluxDay - recent_decade_mon_sd_flx$FluxDay, x1=x[2,], y1=recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
 mtext(side=2, expression(paste(TKN,', kg ',month^-1,sep='')), line=2.5)
-legend(x=30, y=0.9 * mx, c("1990-2000", "2001-2011"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+legend(x=30, y=0.9 * mx, c("1973-1983", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
 # Apply Wilcox.text to the monthly loads here...
@@ -2435,13 +2443,13 @@ dev.off()
 ###########
 #First do flow duration analysis
 flowDuration(eList, centerDate = "06-01", qUnit = 2, span = 30)
-date1 <- "1991-06-01"
+date1 <- "1973-06-01"
 date2 <- "2000-06-01"
-date3 <- "2010-06-01"
+date3 <- "2019-06-01"
 qLow= baseQ
 qHigh=highQ7
 
-tiff("_Date_DischargeSanJVernalis_TKN_conc_no_log.tif",height = 700, width = 1000, res=120)
+tiff("Vernalis_Date_DischargeSanJVernalis_TKN_conc_no_log.tif",height = 700, width = 1000, res=120)
 plotConcQSmooth(eList,date1, date2, date3,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
 dev.off()
 
@@ -2617,7 +2625,7 @@ Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 ##Set fileName to combined Kratzer and NWIS data set
 fileName <- "NWIS_and_Kratzer_TP.csv"
 Sample <- readUserSample(filePath, fileName)
-removeDuplicates(Sample)
+Sample <- removeDuplicates()
 
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
@@ -2891,7 +2899,7 @@ dev.off()
 # --------------------------------------------------------------------------------------------------------
 # The following script is for a non-standard EGRET plot and instead help generate a plot Michael requested
 
-localDaily <- getDaily(eList)
+localDaily <- getDaily(eList_TP)
 
 # Will need to adjust the date range below based on each gages unique start/stop dates
 early_decade <- subset(localDaily, localDaily$Date > as.Date('1971-10-01') & localDaily$Date < as.Date('1981-10-01'))
@@ -3064,7 +3072,7 @@ abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn_flx$FluxDay - early_decade_mon_sd_flx$FluxDay, x1=x[1,], y1=early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
 arrows(x0=x[2,], y0=recent_decade_mon_mn_flx$FluxDay - recent_decade_mon_sd_flx$FluxDay, x1=x[2,], y1=recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
 mtext(side=2, expression(paste(TP,', kg ',month^-1,sep='')), line=2.5)
-legend(x=30, y=0.9 * mx, c("1990-2000", "2001-2011"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+legend(x=30, y=0.9 * mx, c("1972-1982", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
 # Apply Wilcox.text to the monthly loads here...
@@ -3173,20 +3181,20 @@ dev.off()
 ###########
 #First do flow duration analysis
 flowDuration(eList, centerDate = "06-01", qUnit = 2, span = 30)
-date1 <- "1971-06-01"
+date1 <- "1972-06-01"
 date2 <- "1981-06-01"
 date3 <- "1991-06-01"
 date4 <- "2001-06-01"
-date5 <- "2011-06-01"
+date5 <- "2019-06-01"
 
 qLow= baseQ
 qHigh=highQ7
 
-tiff("_Date1_Discharge_TP_conc_no_log.tif",height = 700, width = 1000, res=120)
+tiff("Vernalis_Date1_Discharge_TP_conc_no_log.tif",height = 700, width = 1000, res=120)
 plotConcQSmooth(eList,date1, date2, date3,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
 dev.off()
 
-tiff("_Date2_Discharge_TP_conc_no_log.tif",height = 700, width = 1000, res=120)
+tiff("Vernalis_Date2_Discharge_TP_conc_no_log.tif",height = 700, width = 1000, res=120)
 plotConcQSmooth(eList,date3, date4, date5,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
 dev.off()
 
@@ -3336,16 +3344,16 @@ save(repAnnual,file="RepAnnual")
 #############################################################
 # Working on SSC
 #############################################################
-startDate <- "1985-01-01"
+startDate <- "1971-01-01"
 endDate <- "2018-12-30"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "80154"  # "SSC"
-#fileName <- "_SSC.csv"
+fileName <- "Vern_SSC_edited.csv"
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
-#Sample <- readUserSample(filePath, fileName)
-Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
-removeDuplicates(Sample)
+Sample <- readUserSample(filePath, fileName)
+#Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+Sample <- removeDuplicates()
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
 
@@ -3353,6 +3361,14 @@ INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$stat
 range(Sample$Date)
 #"1985-01-15" "2018-12-19"
 eList <- mergeReport(INFO, Daily, Sample)
+# Blank out missing years
+
+startBlank = "1982-11-30"
+endBlank = "1985-01-14"
+
+eList <- blankTime(eList, startBlank, endBlank)
+
+
 
 # Change the working directory; redirect plot output to NH3 folder
 setwd("../..")
@@ -3420,40 +3436,7 @@ dev.off()
 # Look for a trend change:
 tableChange(eList, fluxUnit=6, yearPoints=c(1990,1998,2011))
 
-#UPPER TRUCKEE RV AT S UPPER TRUCKEE RD NR MEYERS 
-#Suspended sediment concentration (SSC)
-#Water Year 
-#
-#Concentration trends
-#time span       change     slope    change     slope
-#mg/L   mg/L/yr        %       %/yr
-#
-#1991  to  1996      -3.8     -0.75       -53       -11
-#1991  to  2001      -4.1     -0.41       -58      -5.8
-#1991  to  2006      -3.9     -0.26       -55      -3.7
-#1991  to  2011      -3.8     -0.19       -53      -2.7
-#1996  to  2001     -0.38    -0.076       -11      -2.3
-#1996  to  2006     -0.15    -0.015      -4.5     -0.45
-#1996  to  2011   -0.0058  -0.00038     -0.17    -0.011
-#2001  to  2006      0.23     0.046       7.8       1.6
-#2001  to  2011      0.38     0.038        13       1.3
-#2006  to  2011      0.14     0.029       4.5       0.9
-#
-#
-#Flux Trends
-#time span          change        slope       change        slope
-#10^3 tons/yr   10^3 tons/yr /yr      %         %/yr
-#1991  to  1996        -0.62        -0.12          -59          -12
-#1991  to  2001        -0.67       -0.067          -63         -6.3
-#1991  to  2006        -0.62       -0.041          -59         -3.9
-#1991  to  2011        -0.52       -0.026          -49         -2.5
-#1996  to  2001       -0.043      -0.0085          -10           -2
-#1996  to  2006       0.0045      0.00045          1.1         0.11
-#1996  to  2011         0.11       0.0072           25          1.7
-#2001  to  2006        0.047       0.0095           12          2.5
-#2001  to  2011         0.15        0.015           39          3.9
-#2006  to  2011          0.1        0.021           24          4.8
-#
+
 #Generate out-of-the-box diagnostic plots
 tiff("fluxBiasMulti_SanJVernalis_SSC.tif", height = 1200, width = 1000, res=120)
 fluxBiasMulti(eList, moreTitle = "WRTDS")
@@ -4059,19 +4042,21 @@ save(repAnnual,file="RepAnnual")
 # Working on NH4
 #############################################################
 
-startDate <- "1974-10-02"
+startDate <- "1974-10-01"
 endDate <- "2019-05-30"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00608"  # "NH4"
-#fileName <- "_NH3.csv"
+
 filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 ##The file below contains the combined NWIS and Kratzer data sets
 fileName <- "NWIS_and_Kratzer_NH3.csv"
 Sample <- readUserSample(filePath, fileName)
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
-#write.csv(Sample,"NWIS_NH3.csv")
+Sample <- removeDuplicates(Sample)
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
 
@@ -4081,7 +4066,7 @@ range(Sample$Date)
 eList <- mergeReport(INFO, Daily, Sample)
 
 # Change the working directory; redirect plot output to NH4 folder
-setwd("../..")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 subDir <- 'NH4/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -4268,8 +4253,8 @@ dev.off()
 localDaily <- getDaily(eList)
 
 # Will need to adjust the date range below based on each gages unique start/stop dates
-early_decade <- subset(localDaily, localDaily$Date > as.Date('1990-09-30') & localDaily$Date < as.Date('2000-10-01'))
-recent_decade <- subset(localDaily, localDaily$Date > as.Date('2001-09-30'))
+early_decade <- subset(localDaily, localDaily$Date > as.Date('1974-09-30') & localDaily$Date < as.Date('1984-10-01'))
+recent_decade <- subset(localDaily, localDaily$Date > as.Date('2009-06-01'))
 
 
 early_decade_monthly_mn <- aggregate(ConcDay ~ MonthSeq, data = early_decade, 'mean')
@@ -4304,7 +4289,7 @@ abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn$ConcDay - early_decade_mon_sd$ConcDay, x1=x[1,], y1=early_decade_mon_mn$ConcDay + early_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
 arrows(x0=x[2,], y0=recent_decade_mon_mn$ConcDay - recent_decade_mon_sd$ConcDay, x1=x[2,], y1=recent_decade_mon_mn$ConcDay + recent_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
 mtext(side=2, expression(paste(NH[3],', mg ',L^-1,sep='')), line=3)
-legend(x=25, y=0.9 * mx, c("1990-2000", "2001-2011"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+legend(x=25, y=0.9 * mx, c("1974-1984", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
 
@@ -4312,93 +4297,93 @@ dev.off()
 # ----------------------------------------------------------------------
 early_jan <- subset(early_decade_monthly_mn, month==1)
 recent_jan <- subset(recent_decade_monthly_mn, month==1)
-_NH3_conc_jan_wilcox <- wilcox.test(recent_jan$ConcDay, early_jan$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_conc_jan_wilcox <- wilcox.test(recent_jan$ConcDay, early_jan$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_feb <- subset(early_decade_monthly_mn, month==2)
 recent_feb <- subset(recent_decade_monthly_mn, month==2)
-_NH3_conc_feb_wilcox <- wilcox.test(recent_feb$ConcDay, early_feb$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_conc_feb_wilcox <- wilcox.test(recent_feb$ConcDay, early_feb$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_mar <- subset(early_decade_monthly_mn, month==3)
 recent_mar <- subset(recent_decade_monthly_mn, month==3)
-_NH3_conc_mar_wilcox <- wilcox.test(recent_mar$ConcDay, early_mar$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_conc_mar_wilcox <- wilcox.test(recent_mar$ConcDay, early_mar$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_apr <- subset(early_decade_monthly_mn, month==4)
 recent_apr <- subset(recent_decade_monthly_mn, month==4)
-_NH3_conc_apr_wilcox <- wilcox.test(recent_apr$ConcDay, early_apr$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_conc_apr_wilcox <- wilcox.test(recent_apr$ConcDay, early_apr$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_may <- subset(early_decade_monthly_mn, month==5)
 recent_may <- subset(recent_decade_monthly_mn, month==5)
-_NH3_conc_may_wilcox <- wilcox.test(recent_may$ConcDay, early_may$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_conc_may_wilcox <- wilcox.test(recent_may$ConcDay, early_may$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jun <- subset(early_decade_monthly_mn, month==6)
 recent_jun <- subset(recent_decade_monthly_mn, month==6)
-_NH3_conc_jun_wilcox <- wilcox.test(recent_jun$ConcDay, early_jun$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_conc_jun_wilcox <- wilcox.test(recent_jun$ConcDay, early_jun$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jul <- subset(early_decade_monthly_mn, month==7)
 recent_jul <- subset(recent_decade_monthly_mn, month==7)
-_NH3_conc_jul_wilcox <- wilcox.test(recent_jul$ConcDay, early_jul$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_conc_jul_wilcox <- wilcox.test(recent_jul$ConcDay, early_jul$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_aug <- subset(early_decade_monthly_mn, month==8)
 recent_aug <- subset(recent_decade_monthly_mn, month==8)
-_NH3_conc_aug_wilcox <- wilcox.test(recent_aug$ConcDay, early_aug$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_conc_aug_wilcox <- wilcox.test(recent_aug$ConcDay, early_aug$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_sep <- subset(early_decade_monthly_mn, month==9)
 recent_sep <- subset(recent_decade_monthly_mn, month==9)
-_NH3_conc_sep_wilcox <- wilcox.test(recent_sep$ConcDay, early_sep$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_conc_sep_wilcox <- wilcox.test(recent_sep$ConcDay, early_sep$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_oct <- subset(early_decade_monthly_mn, month==10)
 recent_oct <- subset(recent_decade_monthly_mn, month==10)
-_NH3_conc_oct_wilcox <- wilcox.test(recent_oct$ConcDay, early_oct$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_conc_oct_wilcox <- wilcox.test(recent_oct$ConcDay, early_oct$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_nov <- subset(early_decade_monthly_mn, month==11)
 recent_nov <- subset(recent_decade_monthly_mn, month==11)
-_NH3_conc_nov_wilcox <- wilcox.test(recent_nov$ConcDay, early_nov$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_conc_nov_wilcox <- wilcox.test(recent_nov$ConcDay, early_nov$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_dec <- subset(early_decade_monthly_mn, month==12)
 recent_dec <- subset(recent_decade_monthly_mn, month==12)
-_NH3_conc_dec_wilcox <- wilcox.test(recent_dec$ConcDay, early_dec$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_conc_dec_wilcox <- wilcox.test(recent_dec$ConcDay, early_dec$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
-Conc_compare <- data.frame(chng_est=c(_NH3_conc_oct_wilcox$est,
-                                      _NH3_conc_nov_wilcox$est,
-                                      _NH3_conc_dec_wilcox$est,
-                                      _NH3_conc_jan_wilcox$est,
-                                      _NH3_conc_feb_wilcox$est,
-                                      _NH3_conc_mar_wilcox$est,
-                                      _NH3_conc_apr_wilcox$est,
-                                      _NH3_conc_may_wilcox$est,
-                                      _NH3_conc_jun_wilcox$est,
-                                      _NH3_conc_jul_wilcox$est,
-                                      _NH3_conc_aug_wilcox$est,
-                                      _NH3_conc_sep_wilcox$est),
-                           low_conf=c(_NH3_conc_oct_wilcox$conf.int[1],
-                                      _NH3_conc_nov_wilcox$conf.int[1],
-                                      _NH3_conc_dec_wilcox$conf.int[1],
-                                      _NH3_conc_jan_wilcox$conf.int[1],
-                                      _NH3_conc_feb_wilcox$conf.int[1],
-                                      _NH3_conc_mar_wilcox$conf.int[1],
-                                      _NH3_conc_apr_wilcox$conf.int[1],
-                                      _NH3_conc_may_wilcox$conf.int[1],
-                                      _NH3_conc_jun_wilcox$conf.int[1],
-                                      _NH3_conc_jul_wilcox$conf.int[1],
-                                      _NH3_conc_aug_wilcox$conf.int[1],
-                                      _NH3_conc_sep_wilcox$conf.int[1]),
-                           up_conf=c(_NH3_conc_oct_wilcox$conf.int[2],
-                                     _NH3_conc_nov_wilcox$conf.int[2],
-                                     _NH3_conc_dec_wilcox$conf.int[2],
-                                     _NH3_conc_jan_wilcox$conf.int[2],
-                                     _NH3_conc_feb_wilcox$conf.int[2],
-                                     _NH3_conc_mar_wilcox$conf.int[2],
-                                     _NH3_conc_apr_wilcox$conf.int[2],
-                                     _NH3_conc_may_wilcox$conf.int[2],
-                                     _NH3_conc_jun_wilcox$conf.int[2],
-                                     _NH3_conc_jul_wilcox$conf.int[2],
-                                     _NH3_conc_aug_wilcox$conf.int[2],
-                                     _NH3_conc_sep_wilcox$conf.int[2]))
+Conc_compare <- data.frame(chng_est=c(Vern_NH3_conc_oct_wilcox$est,
+                                      Vern_NH3_conc_nov_wilcox$est,
+                                      Vern_NH3_conc_dec_wilcox$est,
+                                      Vern_NH3_conc_jan_wilcox$est,
+                                      Vern_NH3_conc_feb_wilcox$est,
+                                      Vern_NH3_conc_mar_wilcox$est,
+                                      Vern_NH3_conc_apr_wilcox$est,
+                                      Vern_NH3_conc_may_wilcox$est,
+                                      Vern_NH3_conc_jun_wilcox$est,
+                                      Vern_NH3_conc_jul_wilcox$est,
+                                      Vern_NH3_conc_aug_wilcox$est,
+                                      Vern_NH3_conc_sep_wilcox$est),
+                           low_conf=c(Vern_NH3_conc_oct_wilcox$conf.int[1],
+                                      Vern_NH3_conc_nov_wilcox$conf.int[1],
+                                      Vern_NH3_conc_dec_wilcox$conf.int[1],
+                                      Vern_NH3_conc_jan_wilcox$conf.int[1],
+                                      Vern_NH3_conc_feb_wilcox$conf.int[1],
+                                      Vern_NH3_conc_mar_wilcox$conf.int[1],
+                                      Vern_NH3_conc_apr_wilcox$conf.int[1],
+                                      Vern_NH3_conc_may_wilcox$conf.int[1],
+                                      Vern_NH3_conc_jun_wilcox$conf.int[1],
+                                      Vern_NH3_conc_jul_wilcox$conf.int[1],
+                                      Vern_NH3_conc_aug_wilcox$conf.int[1],
+                                      Vern_NH3_conc_sep_wilcox$conf.int[1]),
+                           up_conf=c(Vern_NH3_conc_oct_wilcox$conf.int[2],
+                                     Vern_NH3_conc_nov_wilcox$conf.int[2],
+                                     Vern_NH3_conc_dec_wilcox$conf.int[2],
+                                     Vern_NH3_conc_jan_wilcox$conf.int[2],
+                                     Vern_NH3_conc_feb_wilcox$conf.int[2],
+                                     Vern_NH3_conc_mar_wilcox$conf.int[2],
+                                     Vern_NH3_conc_apr_wilcox$conf.int[2],
+                                     Vern_NH3_conc_may_wilcox$conf.int[2],
+                                     Vern_NH3_conc_jun_wilcox$conf.int[2],
+                                     Vern_NH3_conc_jul_wilcox$conf.int[2],
+                                     Vern_NH3_conc_aug_wilcox$conf.int[2],
+                                     Vern_NH3_conc_sep_wilcox$conf.int[2]))
 
-write.table(Conc_compare, "_NH3_conc_wilcox.txt", quote=FALSE, row.names=FALSE)
+write.table(Conc_compare, "Vern_NH3_conc_wilcox.txt", quote=FALSE, row.names=FALSE)
 
 rng <- max(abs(c(Conc_compare$up_conf, Conc_compare$low_conf)))
-tiff("_NH3_conc_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
+tiff("Vern_NH3_conc_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
 par(mar=c(4,5,0.5,0.5))
 plot(seq(1:12), Conc_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng, rng), xlab="Month", ylab=expression(paste("Median Concentration Change, mg  ",L^-1,sep='')), las=1)
 plotCI(seq(1:12), Conc_compare$chng_est, ui=Conc_compare$up_conf, li=Conc_compare$low_conf, pch=16, add=TRUE)
@@ -4432,106 +4417,106 @@ mdat3 <- matrix(c(early_decade_mon_mn_flx$FluxDay, recent_decade_mon_mn_flx$Flux
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 mx <- max(c((early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay), (recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay)))
-tiff("timing_shift_in_NH3_load_monthly_means.tif", height=800, width=900, res=130)
+tiff("timing_shift_inVern_NH3_load_monthly_means.tif", height=800, width=900, res=130)
 x <- barplot(mdat3, beside=TRUE, las=1, ylim=c(0,mx), col = c("lightblue", "mistyrose"))
 abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn_flx$FluxDay - early_decade_mon_sd_flx$FluxDay, x1=x[1,], y1=early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
 arrows(x0=x[2,], y0=recent_decade_mon_mn_flx$FluxDay - recent_decade_mon_sd_flx$FluxDay, x1=x[2,], y1=recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
 mtext(side=2, expression(paste(NH[3],', kg ',month^-1,sep='')), line=2.5)
-legend(x=30, y=0.9 * mx, c("1990-2000", "2001-2011"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+legend(x=30, y=0.9 * mx, c("1974-1984", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
 # Apply Wilcox.text to the monthly loads here...
 early_jan_flx <- subset(early_decade_monthly_flx, month==1)
 recent_jan_flx <- subset(recent_decade_monthly_flx, month==1)
-_NH3_flux_jan_wilcox <- wilcox.test(recent_jan_flx$FluxDay, early_jan_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_flux_jan_wilcox <- wilcox.test(recent_jan_flx$FluxDay, early_jan_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_feb_flx <- subset(early_decade_monthly_flx, month==2)
 recent_feb_flx <- subset(recent_decade_monthly_flx, month==2)
-_NH3_flux_feb_wilcox <- wilcox.test(recent_feb_flx$FluxDay, early_feb_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_flux_feb_wilcox <- wilcox.test(recent_feb_flx$FluxDay, early_feb_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_mar_flx <- subset(early_decade_monthly_flx, month==3)
 recent_mar_flx <- subset(recent_decade_monthly_flx, month==3)
-_NH3_flux_mar_wilcox <- wilcox.test(recent_mar_flx$FluxDay, early_mar_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_flux_mar_wilcox <- wilcox.test(recent_mar_flx$FluxDay, early_mar_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_apr_flx <- subset(early_decade_monthly_flx, month==4)
 recent_apr_flx <- subset(recent_decade_monthly_flx, month==4)
-_NH3_flux_apr_wilcox <- wilcox.test(recent_apr_flx$FluxDay, early_apr_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_flux_apr_wilcox <- wilcox.test(recent_apr_flx$FluxDay, early_apr_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_may_flx <- subset(early_decade_monthly_flx, month==5)
 recent_may_flx <- subset(recent_decade_monthly_flx, month==5)
-_NH3_flux_may_wilcox <- wilcox.test(recent_may_flx$FluxDay, early_may_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_flux_may_wilcox <- wilcox.test(recent_may_flx$FluxDay, early_may_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jun_flx <- subset(early_decade_monthly_flx, month==6)
 recent_jun_flx <- subset(recent_decade_monthly_flx, month==6)
-_NH3_flux_jun_wilcox <- wilcox.test(recent_jun_flx$FluxDay, early_jun_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_flux_jun_wilcox <- wilcox.test(recent_jun_flx$FluxDay, early_jun_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jul_flx <- subset(early_decade_monthly_flx, month==7)
 recent_jul_flx <- subset(recent_decade_monthly_flx, month==7)
-_NH3_flux_jul_wilcox <- wilcox.test(recent_jul_flx$FluxDay, early_jul_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_flux_jul_wilcox <- wilcox.test(recent_jul_flx$FluxDay, early_jul_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_aug_flx <- subset(early_decade_monthly_flx, month==8)
 recent_aug_flx <- subset(recent_decade_monthly_flx, month==8)
-_NH3_flux_aug_wilcox <- wilcox.test(recent_aug_flx$FluxDay, early_aug_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_flux_aug_wilcox <- wilcox.test(recent_aug_flx$FluxDay, early_aug_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_sep_flx <- subset(early_decade_monthly_flx, month==9)
 recent_sep_flx <- subset(recent_decade_monthly_flx, month==9)
-_NH3_flux_sep_wilcox <- wilcox.test(recent_sep_flx$FluxDay, early_sep_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_flux_sep_wilcox <- wilcox.test(recent_sep_flx$FluxDay, early_sep_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_oct_flx <- subset(early_decade_monthly_flx, month==10)
 recent_oct_flx <- subset(recent_decade_monthly_flx, month==10)
-_NH3_flux_oct_wilcox <- wilcox.test(recent_oct_flx$FluxDay, early_oct_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_flux_oct_wilcox <- wilcox.test(recent_oct_flx$FluxDay, early_oct_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_nov_flx <- subset(early_decade_monthly_flx, month==11)
 recent_nov_flx <- subset(recent_decade_monthly_flx, month==11)
-_NH3_flux_nov_wilcox <- wilcox.test(recent_nov_flx$FluxDay, early_nov_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_flux_nov_wilcox <- wilcox.test(recent_nov_flx$FluxDay, early_nov_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_dec_flx <- subset(early_decade_monthly_flx, month==12)
 recent_dec_flx <- subset(recent_decade_monthly_flx, month==12)
-_NH3_flux_dec_wilcox <- wilcox.test(recent_dec_flx$FluxDay, early_dec_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_NH3_flux_dec_wilcox <- wilcox.test(recent_dec_flx$FluxDay, early_dec_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 
-Flux_compare <- data.frame(chng_est=c(_NH3_flux_oct_wilcox$est,
-                                      _NH3_flux_nov_wilcox$est,
-                                      _NH3_flux_dec_wilcox$est,
-                                      _NH3_flux_jan_wilcox$est,
-                                      _NH3_flux_feb_wilcox$est,
-                                      _NH3_flux_mar_wilcox$est,
-                                      _NH3_flux_apr_wilcox$est,
-                                      _NH3_flux_may_wilcox$est,
-                                      _NH3_flux_jun_wilcox$est,
-                                      _NH3_flux_jul_wilcox$est,
-                                      _NH3_flux_aug_wilcox$est,
-                                      _NH3_flux_sep_wilcox$est),
-                           low_conf=c(_NH3_flux_oct_wilcox$conf.int[1],
-                                      _NH3_flux_nov_wilcox$conf.int[1],
-                                      _NH3_flux_dec_wilcox$conf.int[1],
-                                      _NH3_flux_jan_wilcox$conf.int[1],
-                                      _NH3_flux_feb_wilcox$conf.int[1],
-                                      _NH3_flux_mar_wilcox$conf.int[1],
-                                      _NH3_flux_apr_wilcox$conf.int[1],
-                                      _NH3_flux_may_wilcox$conf.int[1],
-                                      _NH3_flux_jun_wilcox$conf.int[1],
-                                      _NH3_flux_jul_wilcox$conf.int[1],
-                                      _NH3_flux_aug_wilcox$conf.int[1],
-                                      _NH3_flux_sep_wilcox$conf.int[1]),
-                           up_conf=c(_NH3_flux_oct_wilcox$conf.int[2],
-                                     _NH3_flux_nov_wilcox$conf.int[2],
-                                     _NH3_flux_dec_wilcox$conf.int[2],
-                                     _NH3_flux_jan_wilcox$conf.int[2],
-                                     _NH3_flux_feb_wilcox$conf.int[2],
-                                     _NH3_flux_mar_wilcox$conf.int[2],
-                                     _NH3_flux_apr_wilcox$conf.int[2],
-                                     _NH3_flux_may_wilcox$conf.int[2],
-                                     _NH3_flux_jun_wilcox$conf.int[2],
-                                     _NH3_flux_jul_wilcox$conf.int[2],
-                                     _NH3_flux_aug_wilcox$conf.int[2],
-                                     _NH3_flux_sep_wilcox$conf.int[2]))
+Flux_compare <- data.frame(chng_est=c(Vern_NH3_flux_oct_wilcox$est,
+                                      Vern_NH3_flux_nov_wilcox$est,
+                                      Vern_NH3_flux_dec_wilcox$est,
+                                      Vern_NH3_flux_jan_wilcox$est,
+                                      Vern_NH3_flux_feb_wilcox$est,
+                                      Vern_NH3_flux_mar_wilcox$est,
+                                      Vern_NH3_flux_apr_wilcox$est,
+                                      Vern_NH3_flux_may_wilcox$est,
+                                      Vern_NH3_flux_jun_wilcox$est,
+                                      Vern_NH3_flux_jul_wilcox$est,
+                                      Vern_NH3_flux_aug_wilcox$est,
+                                      Vern_NH3_flux_sep_wilcox$est),
+                           low_conf=c(Vern_NH3_flux_oct_wilcox$conf.int[1],
+                                      Vern_NH3_flux_nov_wilcox$conf.int[1],
+                                      Vern_NH3_flux_dec_wilcox$conf.int[1],
+                                      Vern_NH3_flux_jan_wilcox$conf.int[1],
+                                      Vern_NH3_flux_feb_wilcox$conf.int[1],
+                                      Vern_NH3_flux_mar_wilcox$conf.int[1],
+                                      Vern_NH3_flux_apr_wilcox$conf.int[1],
+                                      Vern_NH3_flux_may_wilcox$conf.int[1],
+                                      Vern_NH3_flux_jun_wilcox$conf.int[1],
+                                      Vern_NH3_flux_jul_wilcox$conf.int[1],
+                                      Vern_NH3_flux_aug_wilcox$conf.int[1],
+                                      Vern_NH3_flux_sep_wilcox$conf.int[1]),
+                           up_conf=c(Vern_NH3_flux_oct_wilcox$conf.int[2],
+                                     Vern_NH3_flux_nov_wilcox$conf.int[2],
+                                     Vern_NH3_flux_dec_wilcox$conf.int[2],
+                                     Vern_NH3_flux_jan_wilcox$conf.int[2],
+                                     Vern_NH3_flux_feb_wilcox$conf.int[2],
+                                     Vern_NH3_flux_mar_wilcox$conf.int[2],
+                                     Vern_NH3_flux_apr_wilcox$conf.int[2],
+                                     Vern_NH3_flux_may_wilcox$conf.int[2],
+                                     Vern_NH3_flux_jun_wilcox$conf.int[2],
+                                     Vern_NH3_flux_jul_wilcox$conf.int[2],
+                                     Vern_NH3_flux_aug_wilcox$conf.int[2],
+                                     Vern_NH3_flux_sep_wilcox$conf.int[2]))
 
-write.table(Flux_compare, "_NH3_flux_wilcox.txt", quote=FALSE, row.names=FALSE)
+write.table(Flux_compare, "Vern_NH3_flux_wilcox.txt", quote=FALSE, row.names=FALSE)
 
 rng_flx <- max(abs(c(Flux_compare$up_conf, Flux_compare$low_conf)))
-tiff("_NH3_flux_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
+tiff("Vern_NH3_flux_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
 par(mar=c(4,5,0.5,0.5))
 plot(seq(1:12), Flux_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng_flx, rng_flx), xlab="Month", ylab=expression(paste("Median Flux Change, kg",sep='')), las=1)
 plotCI(seq(1:12), Flux_compare$chng_est, ui=Flux_compare$up_conf, li=Flux_compare$low_conf, pch=16, add=TRUE)
@@ -4547,13 +4532,13 @@ dev.off()
 ###########
 #First do flow duration analysis
 flowDuration(eList, centerDate = "06-01", qUnit = 2, span = 30)
-date1 <- "1991-06-01"
+date1 <- "1974-06-01"
 date2 <- "2000-06-01"
-date3 <- "2010-06-01"
+date3 <- "2019-06-01"
 qLow= baseQ
 qHigh=highQ7
 
-tiff("_Date_Discharge_NH3_conc_no_log.tif",height = 700, width = 1000, res=120)
+tiff("Vern_Date_Discharge_NH3_conc_no_log.tif",height = 700, width = 1000, res=120)
 plotConcQSmooth(eList,date1, date2, date3,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
 dev.off()
 
@@ -4563,39 +4548,7 @@ dev.off()
 # Look for a trend change:
 tableChange(eList, fluxUnit=6, yearPoints=c(1990,1998,2011))
 
-#UPPER TRUCKEE RV AT S UPPER TRUCKEE RD NR MEYERS 
-#Ammonia and ammonium
-#Water Year 
-#
-#Concentration trends
-#time span       change     slope    change     slope
-#mg/L   mg/L/yr        %       %/yr
-#
-#1991  to  1996  -0.00068  -0.00014       -19      -3.9
-#1991  to  2001  -0.00064  -6.4e-05       -18      -1.8
-#1991  to  2006   3.6e-05   2.4e-06         1     0.068
-#1991  to  2011   0.00077   3.9e-05        22       1.1
-#1996  to  2001     4e-05     8e-06       1.4      0.29
-#1996  to  2006   0.00072   7.2e-05        25       2.5
-#1996  to  2011    0.0015   9.7e-05        51       3.4
-#2001  to  2006   0.00068   0.00014        24       4.7
-#2001  to  2011    0.0014   0.00014        49       4.9
-#2006  to  2011   0.00074   0.00015        21       4.2
-#
-#
-#Flux Trends
-#time span          change        slope       change        slope
-#10^3 tons/yr   10^3 tons/yr /yr      %         %/yr
-#1991  to  1996     -2.1e-05     -4.2e-06          -19         -3.9
-#1991  to  2001     -1.1e-05     -1.1e-06         -9.6        -0.96
-#1991  to  2006        1e-05      6.8e-07          9.2         0.61
-#1991  to  2011      2.7e-05      1.3e-06           24          1.2
-#1996  to  2001      1.1e-05      2.1e-06           12          2.4
-#1996  to  2006      3.1e-05      3.1e-06           35          3.5
-#1996  to  2011      4.8e-05      3.2e-06           54          3.6
-#2001  to  2006      2.1e-05      4.2e-06           21          4.2
-#2001  to  2011      3.7e-05      3.7e-06           37          3.7
-#2006  to  2011      1.6e-05      3.3e-06           14          2.7
+#           14          2.7
 #
 #Generate out-of-the-box diagnostic plots
 tiff("fluxBiasMulti_SanJVernalis_NH4.tif", height = 1200, width = 1000, res=120)
@@ -4639,15 +4592,15 @@ mtext(side=2, expression(paste("Concentration, Inorganic Nitrogen, in mg  ",L^-1
 dev.off()
 
 
-NH3_changepoint <- read.table ("/Users/joed/LTIMP_TA/LTIMP_TA2/EGRET//NH4/EGRET_plots/_NH3_RawVals.txt",header = TRUE)
-NH3_changepoint2<-as.numeric(NH3_changepoint$FNConc) 
-NH3changepoint2.binseg=cpt.meanvar(NH3_changepoint2,test.stat='Normal',method='PELT',param.estimates=TRUE,Q=5,penalty="SIC")
-cpts(NH3changepoint2.binseg)
-tiff("/Users/joed/LTIMP_TA/LTIMP_TA2/EGRET//NH4/EGRET_plots/_NH3_Changepoint",height = 700, width = 1200, res=120)
-plot(NH3changepoint2.binseg,type='line',col="blue",ylim = c(0.002,0.005))
-dev.off()
-NH3changepoint2.binseg
-plot(NH3changepoint2.binseg,type='line',col="blue",ylim=c(0.002,0.005))
+#NH3_changepoint <- read.table ("/Users/joed/LTIMP_TA/LTIMP_TA2/EGRET//NH4/EGRET_plots/_NH3_RawVals.txt",header = TRUE)
+#NH3_changepoint2<-as.numeric(NH3_changepoint$FNConc) 
+#NH3changepoint2.binseg=cpt.meanvar(NH3_changepoint2,test.stat='Normal',method='PELT',param.estimates=TRUE,Q=5,penalty="SIC")
+#cpts(NH3changepoint2.binseg)
+#tiff("/Users/joed/LTIMP_TA/LTIMP_TA2/EGRET//NH4/EGRET_plots/_NH3_Changepoint",height = 700, width = 1200, res=120)
+#plot(NH3changepoint2.binseg,type='line',col="blue",ylim = c(0.002,0.005))
+#dev.off()
+#NH3changepoint2.binseg
+#plot(NH3changepoint2.binseg,type='line',col="blue",ylim=c(0.002,0.005))
 
 
 # ---------------------------
