@@ -225,12 +225,12 @@ filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
-Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+#Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 ##NWIS DIN data has a gap between 1974 and 1979.  We will need to supplement
 ##the missing time using Charlie Kratzer's data
-write.csv(Sample,"NWIS_nitrate.csv")
+#write.csv(Sample,"NWIS_nitrate.csv")
 
-##Add Kratzer's data to NWIS_nitrate2.csv
+##Add Kratzer's data to NWIS_nitrate2.csv Use this for all model runs
 fileName <- "NWIS_nitrate2.csv"
 Sample <- readUserSample(filePath, fileName)
 Sample <- removeDuplicates(Sample)
@@ -247,6 +247,7 @@ eList <- mergeReport(INFO, Daily, Sample)
 
 # Change the working directory; redirect plot output to NO3 folder
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 
 subDir <- 'NO3/EGRET_plots'
 if (file.exists(subDir)){
@@ -735,23 +736,23 @@ dev.off()
 
 # Exploring model behavior and adjusting model parameters
 tiff("Contours_SanJVernalis_Inorg_N.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03,qTop=5,yearStart=1990,yearEnd=2011, contourLevels=seq(0.0,0.28,by=0.005), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
+plotContours(eList, qBottom=50,qTop=2000,yearStart=1971,yearEnd=2019, contourLevels=seq(0.0,0.28,by=0.005), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
 dev.off()
 
 tiff("Log_Contours_SanJVernalis_Inorg_N.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03, qTop=8, yearStart=1990, yearEnd=2011, contourLevels=seq(-6.4,-1.5,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1971, yearEnd=2019, contourLevels=seq(-6.4,-1.5,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
 dev.off()
 
 tiff("StdErr_of_Log_Contours_SanJVernalis_Inorg_N.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03, qTop=8, yearStart=1990, yearEnd=2011, contourLevels=seq(0.35,0.88,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1971, yearEnd=2019, contourLevels=seq(0.35,0.88,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
 dev.off()
 
 tiff("Contours_Difference_Inorg_N.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1990,2011,0.03,8,maxDiff=0.1)
+plotDiffContours(eList, 1971,2019,5,1000,maxDiff=0.5)
 dev.off()
 
 tiff("Contours_PercentDifference_UT_Inorg_N.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1990,2011,0.03,8, maxDiff=100, plotPercent=TRUE)
+plotDiffContours(eList, 1971,2019,5,1000, maxDiff=100, plotPercent=TRUE)
 dev.off()
 
 plotDiffContours2 <- function (eList, year0, year1, qBottom, qTop, maxDiff, whatSurface = 3, 
@@ -939,7 +940,7 @@ plotDiffContours2 <- function (eList, year0, year1, qBottom, qTop, maxDiff, what
 
 
 tiff("Contours_PercentDifference2_Inorg_N_SanJVernalis_DIN.tif", height = 700, width = 1000, res=120)
-plotDiffContours2(eList, 1990,2011,0.05,8, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("blue","lightblue","white", "orange", "red")),tick.lwd = 1)
+plotDiffContours2(eList, 1971,2019,5,1000, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("blue","lightblue","white", "orange", "red")),tick.lwd = 1)
 dev.off()
 
 Sample$WY <- trunc(Sample$DecYear+0.25) 
