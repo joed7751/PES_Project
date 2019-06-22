@@ -233,7 +233,7 @@ write.csv(Sample,"NWIS_nitrate.csv")
 ##Add Kratzer's data to NWIS_nitrate2.csv
 fileName <- "NWIS_nitrate2.csv"
 Sample <- readUserSample(filePath, fileName)
-Sample <- removeDuplicates()
+Sample <- removeDuplicates(Sample)
 
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
@@ -1137,7 +1137,7 @@ Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 ##Add Kratzer's data to NWIS data
 fileName <- "Vern_NWIS_and_KratzerOP.csv"
 Sample <- readUserSample(filePath, fileName)
-Sample <- removeDuplicates()
+Sample <- removeDuplicates(Sample)
 
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
@@ -1885,7 +1885,7 @@ write.csv(Sample,"C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NW
 ##Add Kratzer's data 
 #fileName <- "CK_TN_data.csv"
 #Sample <- readUserSample(filePath, fileName)
-Sample <- removeDuplicates()
+Sample <- removeDuplicates(Sample)
 
 
 
@@ -2625,7 +2625,7 @@ Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 ##Set fileName to combined Kratzer and NWIS data set
 fileName <- "NWIS_and_Kratzer_TP.csv"
 Sample <- readUserSample(filePath, fileName)
-Sample <- removeDuplicates()
+Sample <- removeDuplicates(Sample)
 
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
@@ -3349,17 +3349,18 @@ endDate <- "2018-12-30"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "80154"  # "SSC"
-fileName <- "Vern_SSC_edited.csv"
+filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
+#fileName <- "Vern_SSC_edited.csv"
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
-Sample <- readUserSample(filePath, fileName)
-#Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
-Sample <- removeDuplicates()
+#Sample <- readUserSample(filePath, fileName)
+Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+Sample <- removeDuplicates(Sample)
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
 
 # Have a look at the available range of TP data
 range(Sample$Date)
-#"1985-01-15" "2018-12-19"
+#"1971-01-05" "2018-12-19"
 eList <- mergeReport(INFO, Daily, Sample)
 # Blank out missing years
 
@@ -3371,7 +3372,7 @@ eList <- blankTime(eList, startBlank, endBlank)
 
 
 # Change the working directory; redirect plot output to NH3 folder
-setwd("../..")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 subDir <- 'SSC/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
