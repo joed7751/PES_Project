@@ -1,6 +1,6 @@
 ###This is a script taken from another study, but we will do the same thing for the PES project
 ##So, the script needs to be modifed for the Vernalis site
-##OP line 1119##
+
 # Load required libraries
 library(EGRET)
 library(dataRetrieval)
@@ -447,7 +447,7 @@ recent_decade_mon_sd <- recent_decade_mon_sd[c(10:12,1:9),]
 
 mdat2 <- matrix(c(early_decade_mon_mn$ConcDay, recent_decade_mon_mn$ConcDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1971-1981", "2009-2019"),
+                dimnames = list(c("1972-1982", "2009-2019"),
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 # Be sure to adjust the legend's first decade start and stop year correctly
@@ -977,7 +977,12 @@ dev.off()
 # ---------------------------
 ####################################################################################################################################
 # Change working directory
-setwd("..")
+#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+
+##Make sure that the working directory is set properly
+
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/NO3")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -1204,7 +1209,7 @@ paLong <- 12
 paStart <- 10
 localDaily <- getDaily(eList_OP)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
-write.table(localAnnualResults, file = '_OP_RawVals.txt', quote=FALSE, row.names=FALSE)
+write.table(localAnnualResults, file = 'Vern_OP_RawVals.txt', quote=FALSE, row.names=FALSE)
 write.csv(Daily,'localDailyOP.csv')
 
 
@@ -1366,7 +1371,7 @@ recent_decade_mon_sd <- recent_decade_mon_sd[c(10:12,1:9),]
 
 mdat2 <- matrix(c(early_decade_mon_mn$ConcDay, recent_decade_mon_mn$ConcDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1980-1990", "2009-2019"),
+                dimnames = list(c("1974-1984", "2009-2019"),
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 # Be sure to adjust the legend's first decade start and stop year correctly
@@ -1503,7 +1508,7 @@ recent_decade_mon_sd_flx <- recent_decade_mon_sd_flx[c(10:12,1:9),]
 
 mdat3 <- matrix(c(early_decade_mon_mn_flx$FluxDay, recent_decade_mon_mn_flx$FluxDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1980-1990", "2009-2019"),
+                dimnames = list(c("1974-1984", "2009-2019"),
                                 c(format(seq(as.Date('1980-10-01'), as.Date('1981-09-01'), by='month'), '%b'))))
 
 mx <- max(c((early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay), (recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay)))
@@ -1603,10 +1608,10 @@ Flux_compare <- data.frame(chng_est=c(SanJVernalis_OP_flux_oct_wilcox$est,
                                      SanJVernalis_OP_flux_aug_wilcox$conf.int[2],
                                      SanJVernalis_OP_flux_sep_wilcox$conf.int[2]))
 
-write.table(Flux_compare, "_OP_flux_wilcox.txt", quote=FALSE, row.names=FALSE)
+write.table(Flux_compare, "Vern_OP_flux_wilcox.txt", quote=FALSE, row.names=FALSE)
 
 rng_flx <- max(abs(c(Flux_compare$up_conf, Flux_compare$low_conf)))
-tiff("_OP_flux_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
+tiff("Vern_OP_flux_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
 par(mar=c(4,5,0.5,0.5))
 plot(seq(1:12), Flux_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng_flx, rng_flx), xlab="Month", ylab=expression(paste("Median Flux Change, kg",sep='')), las=1)
 plotCI(seq(1:12), Flux_compare$chng_est, ui=Flux_compare$up_conf, li=Flux_compare$low_conf, pch=16, add=TRUE)
@@ -1645,42 +1650,7 @@ dev.off()
 # --------------------------------------------------------------------------------------------------------
 
 
-# Look for a trend change:
-#tableChange(eList, fluxUnit=6, yearPoints=c(1980,1990,1999,2009))
-#
-#UPPER TRUCKEE RV AT S UPPER TRUCKEE RD NR MEYERS 
-#Phosphate
-#Water Year 
-#
-#Concentration trends
-#time span       change     slope    change     slope
-#mg/L   mg/L/yr        %       %/yr
-#
-#1991  to  1996   7.3e-05   1.5e-05      0.66      0.13
-#1991  to  2001  -0.00046  -4.6e-05      -4.1     -0.41
-#1991  to  2006   0.00014   9.6e-06       1.3     0.086
-#1991  to  2011   0.00082   4.1e-05       7.4      0.37
-#1996  to  2001  -0.00053  -0.00011      -4.8     -0.95
-#1996  to  2006     7e-05     7e-06      0.63     0.063
-#1996  to  2011   0.00074     5e-05       6.7      0.44
-#2001  to  2006     6e-04   0.00012       5.7       1.1
-#2001  to  2011    0.0013   0.00013        12       1.2
-#2006  to  2011   0.00067   0.00013         6       1.2
-#
-#
-#Flux Trends
-#time span          change        slope       change        slope
-#10^3 tons/yr   10^3 tons/yr /yr      %         %/yr
-#1991  to  1996     -2.9e-05     -5.8e-06          -11         -2.2
-#1991  to  2001     -3.3e-05     -3.3e-06          -12         -1.2
-#1991  to  2006     -7.9e-06     -5.3e-07           -3         -0.2
-#1991  to  2011       -3e-06     -1.5e-07         -1.1       -0.056
-#1996  to  2001       -4e-06     -8.1e-07         -1.7        -0.34
-#1996  to  2006      2.1e-05      2.1e-06          8.8         0.88
-#1996  to  2011      2.6e-05      1.7e-06           11         0.72
-#2001  to  2006      2.5e-05        5e-06           11          2.1
-#2001  to  2011        3e-05        3e-06           13          1.3
-#2006  to  2011      4.9e-06      9.9e-07          1.9         0.38
+
 #
 #Generate out-of-the-box diagnostic plots
 tiff("fluxBiasMulti_SanJVernalis_Ortho_P.tif", height = 1200, width = 1200, res=120)
@@ -1705,7 +1675,7 @@ plotContours(eList, qBottom=5, qTop=1000, yearStart=1974, yearEnd=2019, contourL
 dev.off()
 
 tiff("Contours_Difference_Ortho_P_SanJVernalis.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1974,2019,5,1000,maxDiff=0.01)
+plotDiffContours(eList, 1974,2019,5,1000,maxDiff=0.05)
 dev.off()
 
 tiff("Contours_PercentDifference_Ortho_P_SanJVernalis.tif", height = 700, width = 1000, res=120)
@@ -1733,7 +1703,8 @@ dev.off()
 # ---------------------------
 
 # Change working directory
-setwd("..")
+##Make sure that it is set properly to your system
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/OP")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -1877,11 +1848,13 @@ endDate <- "2019-06-1"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00625"  # "TKN"
+
+filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
 filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
 
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
-write.csv(Sample,"C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NWIS_TKN.csv")
+#write.csv(Sample,"C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NWIS_TKN.csv")
 
 ##Add Kratzer's data Note: do not use Kratzer because Charlie's is TN and you want TKN
 #fileName <- "CK_TN_data.csv"
@@ -1904,7 +1877,7 @@ plotConcTime(eList)
 
 # Change the working directory; redirect plot output to TKN folder
 setwd ("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/")
-setwd(filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 subDir <- 'TKN/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -1970,39 +1943,7 @@ dev.off()
 # Look for a trend change:
 tableChange(eList, fluxUnit=6, yearPoints=c(1990, 1997, 2005,2011))
 
-#UPPER TRUCKEE RV AT S UPPER TRUCKEE RD NR MEYERS 
-#Kjeldahl nitrogen
-#Water Year 
-#
-#Concentration trends
-#time span       change     slope    change     slope
-#mg/L   mg/L/yr        %       %/yr
-#
-#1991  to  1996    -0.053    -0.011       -34      -6.8
-#1991  to  2001    -0.052   -0.0052       -33      -3.3
-#1991  to  2006     -0.05   -0.0033       -32      -2.1
-#1991  to  2011    -0.065   -0.0033       -41      -2.1
-#1996  to  2001   0.00076   0.00015      0.72      0.14
-#1996  to  2006    0.0035   0.00035       3.4      0.34
-#1996  to  2011    -0.012  -0.00081       -12     -0.77
-#2001  to  2006    0.0028   0.00055       2.6      0.53
-#2001  to  2011    -0.013   -0.0013       -12      -1.2
-#2006  to  2011    -0.016   -0.0031       -14      -2.9
-#
-#
-#Flux Trends
-#time span          change        slope       change        slope
-#10^3 tons/yr   10^3 tons/yr /yr      %         %/yr
-#1991  to  1996      -0.0033     -0.00066          -43         -8.5
-#1991  to  2001      -0.0032     -0.00032          -42         -4.2
-#1991  to  2006      -0.0028     -0.00018          -36         -2.4
-#1991  to  2011      -0.0034     -0.00017          -44         -2.2
-#1996  to  2001      7.9e-05      1.6e-05          1.8         0.36
-#1996  to  2006      0.00053      5.3e-05           12          1.2
-#1996  to  2011     -0.00011     -7.4e-06         -2.5        -0.17
-#2001  to  2006      0.00045      9.1e-05           10            2
-#2001  to  2011     -0.00019     -1.9e-05         -4.2        -0.42
-#2006  to  2011     -0.00064     -0.00013          -13         -2.6
+
 
 #Generate out-of-the-box diagnostic plots
 tiff("fluxBiasMulti_SanJVernalis_TN.tif", height = 1200, width = 1200, res=120)
@@ -2027,7 +1968,7 @@ plotContours(eList, qBottom=5, qTop=1000, yearStart=1974, yearEnd=2019, contourL
 dev.off()
 
 tiff("Contours_Difference__TN.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1974,2019,5,1000,maxDiff=0.2)
+plotDiffContours(eList, 1974,2019,5,1000,maxDiff=1.0)
 dev.off()
 
 tiff("Contours_PercentDifference__TN.tif", height = 700, width = 1000, res=120)
@@ -2191,7 +2132,7 @@ recent_decade_mon_sd <- recent_decade_mon_sd[c(10:12,1:9),]
 
 mdat2 <- matrix(c(early_decade_mon_mn$ConcDay, recent_decade_mon_mn$ConcDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1990-2000", "2001-2011"),
+                dimnames = list(c("1973-1983", "2009-2019"),
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 # Be sure to adjust the legend's first decade start and stop year correctly
@@ -2328,7 +2269,7 @@ recent_decade_mon_sd_flx <- recent_decade_mon_sd_flx[c(10:12,1:9),]
 
 mdat3 <- matrix(c(early_decade_mon_mn_flx$FluxDay, recent_decade_mon_mn_flx$FluxDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1990-2000", "2001-2011"),
+                dimnames = list(c("1973-1983", "2009-2019"),
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 mx <- max(c((early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay), (recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay)))
@@ -2483,26 +2424,7 @@ caseSetUp <- trendSetUp(eList,
                         blockLength = 200)
 eBoot <- wBT(eList, caseSetUp, fileName ="outputText.txt")
 
-#Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Reject Ho
-#best estimate is -0.0654 mg/L
-#Lower and Upper 90% CIs  -0.0959  -0.0316
-#also 95% CIs -0.1081   0.7874
-#and 50% CIs  -0.0834  -0.0532
-#approximate two-sided p-value for Conc     0.059
-#Likelihood that Flow Normalized Concentration is trending up =     0.0248 is trending down =      0.975
-#
-#Should we reject Ho that Flow Normalized Flux Trend = 0 ? Do Not Reject Ho
-#best estimate is -0.003084 10^6 kg/year
-#Lower and Upper 90% CIs -0.006083  0.005618
-#also 95% CIs -0.013042  0.485416
-#and 50% CIs -0.004486 -0.002421
-#approximate two-sided p-value for Flux      0.16
-#Likelihood that Flow Normalized Flux is trending up = 0.0842 is trending down= 0.916
-#
-#Upward trend in concentration is highly unlikely
-#Upward trend in flux is very unlikely
-#Downward trend in concentration is highly likely
-#Downward trend in flux is very likely
+
 #
 
 # 
@@ -2580,7 +2502,7 @@ plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, sh
 polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
-tiff("Ann_Flux_&_Ann_Flow_Normalized_Flux_Boot_SanJVernalis_TN.tif", height = 500, width = 600, res=110)
+tiff("Ann_Flux_&_Ann_Flow_Normalized_Flux_Boot_SanJVernalis_TKN.tif", height = 500, width = 600, res=110)
 plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
@@ -2688,7 +2610,7 @@ paLong <- 12
 paStart <- 10
 localDaily <- getDaily(eList_TP)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
-write.table(localAnnualResults, file = '_TP_RawVals.txt', quote=FALSE, row.names=FALSE)
+write.table(localAnnualResults, file = 'Vern_TP_RawVals.txt', quote=FALSE, row.names=FALSE)
 write.csv(Daily,"localDailyTP.csv")
 
 # Plot the annual average concentration and annual flow-normalized concentration
@@ -2704,39 +2626,7 @@ dev.off()
 # Look for a trend change:
 tableChange(eList, fluxUnit=6, yearPoints=c(1971,1981,1991,2001,2011))
 
-#UPPER TRUCKEE RV AT S UPPER TRUCKEE RD NR MEYERS 
-#Phosphorus
-#Water Year 
-#
-#Concentration trends
-#time span       change     slope    change     slope
-#mg/L   mg/L/yr        %       %/yr
-#
-#1991  to  1996   -0.0062   -0.0012       -19      -3.8
-#1991  to  2001   -0.0091  -0.00091       -28      -2.8
-#1991  to  2006   -0.0062  -0.00041       -19      -1.3
-#1991  to  2011   -0.0039    -2e-04       -12      -0.6
-#1996  to  2001   -0.0029  -0.00058       -11      -2.2
-#1996  to  2006   2.1e-05   2.1e-06      0.08     0.008
-#1996  to  2011    0.0023   0.00015       8.5      0.57
-#2001  to  2006    0.0029   0.00059        12       2.5
-#2001  to  2011    0.0052   0.00052        22       2.2
-#2006  to  2011    0.0023   0.00045       8.5       1.7
-#
-#
-#Flux Trends
-#time span          change        slope       change        slope
-#10^3 tons/yr   10^3 tons/yr /yr      %         %/yr
-#1991  to  1996     -0.00046     -9.3e-05          -32         -6.4
-#1991  to  2001       -5e-04       -5e-05          -34         -3.4
-#1991  to  2006     -0.00044       -3e-05          -30           -2
-#1991  to  2011     -0.00034     -1.7e-05          -23         -1.2
-#1996  to  2001     -3.4e-05     -6.9e-06         -3.4        -0.69
-#1996  to  2006      2.2e-05      2.2e-06          2.2         0.22
-#1996  to  2011      0.00012      8.1e-06           12         0.82
-#2001  to  2006      5.6e-05      1.1e-05          5.9          1.2
-#2001  to  2011      0.00016      1.6e-05           16          1.6
-#2006  to  2011        1e-04        2e-05          9.8            2
+
 #
 #Generate out-of-the-box diagnostic plots
 tiff("fluxBiasMulti_SanJVernalis_TP.tif", height = 1200, width = 1000, res=120)
@@ -2761,7 +2651,7 @@ plotContours(eList, qBottom=5, qTop=1000, yearStart=1971, yearEnd=2019, contourL
 dev.off()
 
 tiff("Contours_Difference_TP_SanJVernalis.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1971,2019,5,1000,maxDiff=0.05)
+plotDiffContours(eList, 1971,2019,5,1000,maxDiff=0.25)
 dev.off()
 
 tiff("Contours_PercentDifference_TP_SanJVernalis.tif", height = 700, width = 1000, res=120)
@@ -2926,7 +2816,7 @@ recent_decade_mon_sd <- recent_decade_mon_sd[c(10:12,1:9),]
 
 mdat2 <- matrix(c(early_decade_mon_mn$ConcDay, recent_decade_mon_mn$ConcDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1972-1982", "2009-2019"),
+                dimnames = list(c("1971-1981", "2009-2019"),
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 # Be sure to adjust the legend's first decade start and stop year correctly
@@ -3063,7 +2953,7 @@ recent_decade_mon_sd_flx <- recent_decade_mon_sd_flx[c(10:12,1:9),]
 
 mdat3 <- matrix(c(early_decade_mon_mn_flx$FluxDay, recent_decade_mon_mn_flx$FluxDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1990-2000", "2001-2011"),
+                dimnames = list(c("1971-1981", "2009-2019"),
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 mx <- max(c((early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay), (recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay)))
@@ -3372,7 +3262,7 @@ eList <- blankTime(eList, startBlank, endBlank)
 
 
 
-# Change the working directory; redirect plot output to NH3 folder
+# Change the working directory; redirect plot output to SSC folder
 setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 subDir <- 'SSC/EGRET_plots'
 if (file.exists(subDir)){
@@ -4278,7 +4168,7 @@ recent_decade_mon_sd <- recent_decade_mon_sd[c(10:12,1:9),]
 
 mdat2 <- matrix(c(early_decade_mon_mn$ConcDay, recent_decade_mon_mn$ConcDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1990-2000", "2001-2011"),
+                dimnames = list(c("1974-1984", "2009-2019"),
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 # Be sure to adjust the legend's first decade start and stop year correctly
@@ -4415,7 +4305,7 @@ recent_decade_mon_sd_flx <- recent_decade_mon_sd_flx[c(10:12,1:9),]
 
 mdat3 <- matrix(c(early_decade_mon_mn_flx$FluxDay, recent_decade_mon_mn_flx$FluxDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1990-2000", "2001-2011"),
+                dimnames = list(c("1974-1984", "2009-2019"),
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 mx <- max(c((early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay), (recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay)))
@@ -4550,7 +4440,7 @@ dev.off()
 # Look for a trend change:
 tableChange(eList, fluxUnit=6, yearPoints=c(1990,1998,2011))
 
-#           14          2.7
+
 #
 #Generate out-of-the-box diagnostic plots
 tiff("fluxBiasMulti_SanJVernalis_NH4.tif", height = 1200, width = 1000, res=120)
@@ -4575,7 +4465,7 @@ plotContours(eList, qBottom=5, qTop=1000, yearStart=1974, yearEnd=2019, contourL
 dev.off()
 
 tiff("Contours_Difference__NH4.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1974,2019,5,1000,maxDiff=50)
+plotDiffContours(eList, 1974,2019,5,1000,maxDiff=0.3)
 dev.off()
 
 tiff("Contours_PercentDifference__NH4.tif", height = 700, width = 1000, res=120)
