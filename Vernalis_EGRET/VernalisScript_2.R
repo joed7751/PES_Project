@@ -736,7 +736,7 @@ dev.off()
 
 # Exploring model behavior and adjusting model parameters
 tiff("Contours_SanJVernalis_Inorg_N.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=50,qTop=2000,yearStart=1971,yearEnd=2019, contourLevels=seq(0.0,0.28,by=0.005), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
+plotContours(eList, qBottom=5,qTop=1000,yearStart=1971,yearEnd=2019, contourLevels=seq(0.0,0.28,by=0.005), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
 dev.off()
 
 tiff("Log_Contours_SanJVernalis_Inorg_N.tif", height = 700, width = 1000, res=120)
@@ -1693,27 +1693,27 @@ dev.off()
 
 # Exploring model behavior and adjusting model parameters
 tiff("Contours_SanJVernalis_Ortho_P.tif", height = 700, width = 1000, res=120)
-plotContours(eList,qBottom=0.03,qTop=10,yearStart=1990,yearEnd=2011, contourLevels=seq(0.003,0.03,by=0.0005), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
+plotContours(eList,qBottom=5,qTop=1000,yearStart=1974,yearEnd=2019, contourLevels=seq(0.003,0.03,by=0.0005), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
 dev.off()
 
 tiff("Log_Contours_SanJVernalis_Ortho_P.tif", height = 700, width = 1000, res=120)
-plotContours(eList,qBottom=0.03, qTop=10, yearStart=1990, yearEnd=2011, contourLevels=seq(-5.75,-3.4,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
+plotContours(eList,qBottom=5, qTop=1000, yearStart=1974, yearEnd=2019, contourLevels=seq(-5.75,-3.4,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
 dev.off()
 
 tiff("StdErr_of_Log_Contours_SanJVernalis_Ortho_P.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03, qTop=10, yearStart=1990, yearEnd=2011, contourLevels=seq(0.13,0.5,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1974, yearEnd=2019, contourLevels=seq(0.13,0.5,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
 dev.off()
 
 tiff("Contours_Difference_Ortho_P_SanJVernalis.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1990,2011,0.03,10,maxDiff=0.01)
+plotDiffContours(eList, 1974,2019,5,1000,maxDiff=0.01)
 dev.off()
 
 tiff("Contours_PercentDifference_Ortho_P_SanJVernalis.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1990,2011,0.03,10,maxDiff=100, plotPercent=TRUE)
+plotDiffContours(eList, 1979,2011,5,1000,maxDiff=100, plotPercent=TRUE)
 dev.off()
 
 tiff("Contours_PercentDifference2_Ortho_P_SanJVernalis.tif", height = 700, width = 1000, res=120)
-plotDiffContours2(eList, 1990,2011,0.05,10, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("blue","lightblue","white","orange","red")),tick.lwd = 1)
+plotDiffContours2(eList, 1974,2019,5,1000, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("blue","lightblue","white","orange","red")),tick.lwd = 1)
 dev.off()
 
 
@@ -1883,7 +1883,7 @@ Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 write.csv(Sample,"C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NWIS_TKN.csv")
 
-##Add Kratzer's data 
+##Add Kratzer's data Note: do not use Kratzer because Charlie's is TN and you want TKN
 #fileName <- "CK_TN_data.csv"
 #Sample <- readUserSample(filePath, fileName)
 Sample <- removeDuplicates(Sample)
@@ -2015,27 +2015,27 @@ dev.off()
 
 # Exploring model behavior and adjusting model parameters
 tiff("Contours_SanJVernalis_TN.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03,qTop=10,yearStart=1990,yearEnd=2011, contourLevels=seq(0.01,0.5,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
+plotContours(eList, qBottom=5,qTop=1000,yearStart=1973,yearEnd=2019, contourLevels=seq(0.01,0.5,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
 dev.off()
 
 tiff("Log_Contours_SanJVernalis_TN.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03, qTop=10, yearStart=1990, yearEnd=2011, contourLevels=seq(-4.1,-0.45,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1974, yearEnd=2019, contourLevels=seq(-4.1,-0.45,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
 dev.off()
 
 tiff("StdErr_of_Log_Contours_SanJVernalis_TN.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03, qTop=10, yearStart=1990, yearEnd=2011, contourLevels=seq(0.32,0.61,by=0.005), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1974, yearEnd=2019, contourLevels=seq(0.32,0.61,by=0.005), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
 dev.off()
 
 tiff("Contours_Difference__TN.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1990,2011,0.03,10,maxDiff=0.2)
+plotDiffContours(eList, 1974,2019,5,1000,maxDiff=0.2)
 dev.off()
 
 tiff("Contours_PercentDifference__TN.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1990,2011,0.03,10, maxDiff=100, plotPercent=TRUE)
+plotDiffContours(eList, 1974,2019,5,1000, maxDiff=100, plotPercent=TRUE)
 dev.off()
 
 tiff("Contours_PercentDifference2__TN.tif", height = 700, width = 1000, res=120)
-plotDiffContours2(eList, 1990,2011,0.03,10, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("blue","lightblue","white","orange","red")),tick.lwd = 1)
+plotDiffContours2(eList, 1974,2019,5,1000, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("blue","lightblue","white","orange","red")),tick.lwd = 1)
 dev.off()
 
 Sample$WY <- trunc(Sample$DecYear+0.25) 
@@ -2749,27 +2749,27 @@ dev.off()
 
 # Exploring model behavior and adjusting model parameters
 tiff("Contours_SanJVernalis_TP.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03,qTop=10,yearStart=1990,yearEnd=2011, contourLevels=seq(0.01,0.08,by=0.001), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
+plotContours(eList, qBottom=5,qTop=1000,yearStart=1971,yearEnd=2019, contourLevels=seq(0.01,0.08,by=0.001), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
 dev.off()
 
 tiff("Log_Contours_SanJVernalis_TP.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03, qTop=10, yearStart=1990, yearEnd=2011, contourLevels=seq(-4.380,-2.7,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1971, yearEnd=2019, contourLevels=seq(-4.380,-2.7,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
 dev.off()
 
 tiff("StdErr_of_Log_Contours_SanJVernalis_TP.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03, qTop=10, yearStart=1990, yearEnd=2011, contourLevels=seq(0.16,0.45,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1971, yearEnd=2019, contourLevels=seq(0.16,0.45,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
 dev.off()
 
 tiff("Contours_Difference_TP_SanJVernalis.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1990,2011,0.03,10,maxDiff=0.05)
+plotDiffContours(eList, 1971,2019,5,1000,maxDiff=0.05)
 dev.off()
 
 tiff("Contours_PercentDifference_TP_SanJVernalis.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1990,2011,0.03,10, maxDiff=100, plotPercent=TRUE)
+plotDiffContours(eList, 1971,2019,5,1000, maxDiff=100, plotPercent=TRUE)
 dev.off()
 
 tiff("Contours_PercentDifference2_TP_SanJVernalis.tif", height = 700, width = 1000, res=120)
-plotDiffContours2(eList, 1990,2011,0.05,10, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("purple","blue","lightblue","white","yellow", "orange", "red")),tick.lwd = 1)
+plotDiffContours2(eList, 1971,2019,5,1000, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("purple","blue","lightblue","white","yellow", "orange", "red")),tick.lwd = 1)
 dev.off()
 
 Sample$WY <- trunc(Sample$DecYear+0.25) 
@@ -3351,7 +3351,7 @@ siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "80154"  # "SSC"
 filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
-#fileName <- "Vern_SSC_edited.csv"
+#fileName <- "VernVern_SSC_edited.csv"
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 #Sample <- readUserSample(filePath, fileName)
 Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
@@ -3383,27 +3383,27 @@ if (file.exists(subDir)){
 }
 plotConcTime(eList)
 # Plot water quality data
-tiff("Conc_vs_Time_SanJVernalis_SSC.tif", height = 600, width = 800, res=120)
+tiff("Conc_vs_Time_SanJVernalisVern_SSC.tif", height = 600, width = 800, res=120)
 plotConcTime(eList)
 dev.off()
 
 # Now, a classic Q-C plot
-tiff("Conc-Q_SanJVernalis_SSC.tif", height = 600, width = 800, res=120)
+tiff("Conc-Q_SanJVernalisVern_SSC.tif", height = 600, width = 800, res=120)
 plotConcQ(eList, logScale=TRUE)
 dev.off()
 
 # The data set as flux values rather than as concentrations
-tiff("Flux-Q_SanJVernalis_SSC.tif", height = 600, width = 800, res=120)
+tiff("Flux-Q_SanJVernalisVern_SSC.tif", height = 600, width = 800, res=120)
 plotFluxQ(eList, fluxUnit=4)
 dev.off()
 
 # Monthly boxplots
-tiff("Monthly-Conc_BoxPlots_SanJVernalis_SSC.tif", height = 600, width = 800, res=120)
+tiff("Monthly-Conc_BoxPlots_SanJVernalisVern_SSC.tif", height = 600, width = 800, res=120)
 boxConcMonth(eList, logScale=TRUE)
 dev.off()
 
 # Flow on days sampled vs. all other days
-tiff("Flow_on_days_sampled_vs_all_other_days_SanJVernalis_SSC.tif", height = 600, width = 800, res=120)
+tiff("Flow_on_days_sampled_vs_all_other_days_SanJVernalisVern_SSC.tif", height = 600, width = 800, res=120)
 boxQTwice(eList, qUnit=1)
 dev.off()
 
@@ -3421,17 +3421,17 @@ paLong <- 12
 paStart <- 10
 localDaily <- getDaily(eList)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
-write.table(localAnnualResults, file = 'Vernalis_SSC_RawVals.txt', quote=FALSE, row.names=FALSE)
+write.table(localAnnualResults, file = 'VernalisVern_SSC_RawVals.txt', quote=FALSE, row.names=FALSE)
 
-write.csv(Daily,'localDaily_Vern_SSC.csv')
+write.csv(Daily,'localDaily_VernVern_SSC.csv')
 
 # Plot the annual average concentration and annual flow-normalized concentration
-tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_SanJVernalis_SSC.tif", height = 600, width = 800, res=120)
+tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_SanJVernalisVern_SSC.tif", height = 600, width = 800, res=120)
 plotConcHist(eList, plotFlowNorm=TRUE)
 dev.off()
 
 # Plot the annual flux and annual flow-normalized flux
-tiff("Ann_Flux_&_Ann_Flow_Normalized_Flux_SanJVernalis_SSC.tif", height = 600, width = 800, res=120)
+tiff("Ann_Flux_&_Ann_Flow_Normalized_Flux_SanJVernalisVern_SSC.tif", height = 600, width = 800, res=120)
 plotFluxHist(eList, plotFlowNorm = TRUE) # fluxMax) # fluxMax
 dev.off()
 
@@ -3440,41 +3440,41 @@ tableChange(eList, fluxUnit=6, yearPoints=c(1990,1998,2011))
 
 
 #Generate out-of-the-box diagnostic plots
-tiff("fluxBiasMulti_SanJVernalis_SSC.tif", height = 1200, width = 1000, res=120)
+tiff("fluxBiasMulti_SanJVernalisVern_SSC.tif", height = 1200, width = 1000, res=120)
 fluxBiasMulti(eList, moreTitle = "WRTDS")
 dev.off()
 
-tiff("Modeled_Daily_Conc_wObservations_SanJVernalis_SSC.tif", height = 800, width = 1000, res=120)
+tiff("Modeled_Daily_Conc_wObservations_SanJVernalisVern_SSC.tif", height = 800, width = 1000, res=120)
 plotConcTimeDaily(eList)
 dev.off()
 
 # Exploring model behavior and adjusting model parameters
-tiff("Contours_SanJVernalis_SSC.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03,qTop=10,yearStart=1990,yearEnd=2011, contourLevels=seq(0,50,by=1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
+tiff("Contours_SanJVernalisVern_SSC.tif", height = 700, width = 1000, res=120)
+plotContours(eList, qBottom=5,qTop=1000,yearStart=1971,yearEnd=2019, contourLevels=seq(0,50,by=1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
 dev.off()
 
-tiff("Log_Contours_SanJVernalis_SSC.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03, qTop=10, yearStart=1990, yearEnd=2011, contourLevels=seq(-2.4,4,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
+tiff("Log_Contours_SanJVernalisVern_SSC.tif", height = 700, width = 1000, res=120)
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1971, yearEnd=2019, contourLevels=seq(-2.4,4,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
 dev.off()
 
-tiff("StdErr_of_Log_Contours_SanJVernalis_SSC.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03, qTop=10, yearStart=1990, yearEnd=2011, contourLevels=seq(0.38,0.98,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
+tiff("StdErr_of_Log_Contours_SanJVernalisVern_SSC.tif", height = 700, width = 1000, res=120)
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1971, yearEnd=2019, contourLevels=seq(0.38,0.98,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
 dev.off()
 
-tiff("Contours_Difference__SSC.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1990,2011,0.03,10,maxDiff=50)
+tiff("Contours_Difference_Vern_SSC.tif", height = 700, width = 1000, res=120)
+plotDiffContours(eList, 1971,2019,5,1000,maxDiff=50)
 dev.off()
 
-tiff("Contours_PercentDifference__SSC.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1990,2011,0.03,10, maxDiff=100, plotPercent=TRUE)
+tiff("Contours_PercentDifference_Vern_SSC.tif", height = 700, width = 1000, res=120)
+plotDiffContours(eList, 1971,2019,5,1000, maxDiff=100, plotPercent=TRUE)
 dev.off()
 
-tiff("Contours_PercentDifference2_SSC_SanJVernalis.tif", height = 700, width = 1000, res=120)
-plotDiffContours2(eList, 1990,2011,0.05,10, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("blue","lightblue","white","yellow", "orange", "red")),tick.lwd = 1)
+tiff("Contours_PercentDifference2Vern_SSC_SanJVernalis.tif", height = 700, width = 1000, res=120)
+plotDiffContours2(eList, 1971,2019,5,1000, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("blue","lightblue","white","yellow", "orange", "red")),tick.lwd = 1)
 dev.off()
 
 Sample$WY <- trunc(Sample$DecYear+0.25) 
-tiff("Monthly_Boxplot_Inorg_SSC_SanJVernalis.tif", height = 700, width = 1000, res=120)
+tiff("Monthly_Boxplot_InorgVern_SSC_SanJVernalis.tif", height = 700, width = 1000, res=120)
 par(mar=c(4,6,0.5,0.5))
 boxplot(Sample$ConcAve~Sample$WY,log="y",varwidth=TRUE,ylim=c(0.1,1000),yaxs="i",xlab="Water Year",las=1) 
 mtext(side=2, expression(paste("Concentration, Inorganic Nitrogen, in mg  ",L^-1,sep="")),line=4)
@@ -3502,7 +3502,7 @@ highQ7_txt_cfs <- format(highQ7 * 35.315, digits=2)
 # The following bit of script generates a figure discussed by Joe in an email on 6/2/17
 # -------------------------------------------------------------------------------------
 
-tiff("Discharge_specific_trends_SSC_centered_on_06-01.tif", height = 600, width = 1200, res=120)
+tiff("Discharge_specific_trendsVern_SSC_centered_on_06-01.tif", height = 600, width = 1200, res=120)
 par(mar=c(4,6,4.1,8))
 plotConcTimeSmooth(eList, q1 = baseQ, q2 = medQ, q3 = highQ7, centerDate='06-01', 
                    yearStart=localDaily$waterYear[1], yearEnd=localDaily$waterYear[nrow(localDaily)], 
@@ -3555,7 +3555,7 @@ out2 <- data.frame(Date=out2$Date, Q=out2$Q, Conc=out2$ConcDay, wyr=out2$waterYe
 out2$JulianWYR <- ifelse(out2$Julian > 273, out2$Julian - 273, 92 + out2$Julian)
 
 # Plot it
-tiff("JulianDay_of_Max_SSC_Conc.tif", height = 600, width = 800, res=120)
+tiff("JulianDay_of_MaxVern_SSC_Conc.tif", height = 600, width = 800, res=120)
 plot(out2$wyr, out2$JulianWYR, pch=16, xlab='Water Year', ylab='Julian Day', yaxs='i', ylim=c(0,370), las=1)
 dev.off()
 
@@ -3573,7 +3573,7 @@ out_m2 <- localDaily[out_m$AbsConcDay,]
 out_m2 <- data.frame(Date=out_m2$Date, Q=out_m2$Q, Conc30=out_m2$ConcDay_30day, wyr=out_m2$waterYear, Julian=yday(as.Date(out_m2$Date)))
 out_m2$JulianWYR <- ifelse(out_m2$Julian > 273, out_m2$Julian - 273, 92 + out_m2$Julian)
 
-tiff("JulianDay_of_Max_SSC_Conc_Using_30_rollingAvg.tif", height = 600, width = 800, res=120)
+tiff("JulianDay_of_MaxVern_SSC_Conc_Using_30_rollingAvg.tif", height = 600, width = 800, res=120)
 plot(out_m2$wyr, out_m2$JulianWYR, pch=16, xlab='Water Year', ylab='Julian Day', yaxs='i', ylim=c(0,370), las=1)
 dev.off()
 
@@ -3581,7 +3581,7 @@ dev.off()
 # Next, I'll try using the flow-normalized concentration (same general code flow as above)
 # First, try plotting flow-normalized concentration:
 # Plot it
-tiff("Flow_Normalized_Conc_TC1_SSC.tif", height = 600, width = 800, res=120)
+tiff("Flow_Normalized_Conc_TC1Vern_SSC.tif", height = 600, width = 800, res=120)
 plot(as.Date(localDaily$Date), localDaily$FNConc, typ='l', las=1, xlab='Time', ylab='Flow-normalized Concentration')
 dev.off()
 
@@ -3593,7 +3593,7 @@ out2_FN <- data.frame(Date=out2_FN$Date, Q=out2_FN$Q, Conc=out2_FN$FNConc, wyr=o
 out2_FN$JulianWYR <- ifelse(out2_FN$Julian > 273, out2_FN$Julian - 273, 92 + out2_FN$Julian)
 
 # Plot it
-tiff("JulianDay_of_Max_SSC_Flow_Normalized_Conc.tif", height = 600, width = 800, res=120)
+tiff("JulianDay_of_MaxVern_SSC_Flow_Normalized_Conc.tif", height = 600, width = 800, res=120)
 plot(out2_FN$wyr, out2_FN$JulianWYR, pch=16, xlab='Water Year', ylab='Julian Day', yaxs='i', ylim=c(0,370), las=1)
 dev.off()
 
@@ -3633,7 +3633,7 @@ mdat2 <- matrix(c(early_decade_mon_mn$ConcDay, recent_decade_mon_mn$ConcDay),
 # Be sure to adjust the legend's first decade start and stop year correctly
 mx <- max(c((early_decade_mon_mn$ConcDay + early_decade_mon_sd$ConcDay), (recent_decade_mon_mn$ConcDay + recent_decade_mon_sd$ConcDay)))
 
-tiff("timing_shift_in_SSC_conc_monthly_means.tif", height=800, width=900, res=130)
+tiff("timing_shift_inVern_SSC_conc_monthly_means.tif", height=800, width=900, res=130)
 par(mar=c(3,5,2,1))
 x <- barplot(mdat2, beside=TRUE, las=1, ylim=c(0,mx), col = c("lightblue", "mistyrose"))
 abline(h=0)
@@ -3648,93 +3648,93 @@ dev.off()
 # ----------------------------------------------------------------------
 early_jan <- subset(early_decade_monthly_mn, month==1)
 recent_jan <- subset(recent_decade_monthly_mn, month==1)
-_SSC_conc_jan_wilcox <- wilcox.test(recent_jan$ConcDay, early_jan$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_conc_jan_wilcox <- wilcox.test(recent_jan$ConcDay, early_jan$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_feb <- subset(early_decade_monthly_mn, month==2)
 recent_feb <- subset(recent_decade_monthly_mn, month==2)
-_SSC_conc_feb_wilcox <- wilcox.test(recent_feb$ConcDay, early_feb$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_conc_feb_wilcox <- wilcox.test(recent_feb$ConcDay, early_feb$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_mar <- subset(early_decade_monthly_mn, month==3)
 recent_mar <- subset(recent_decade_monthly_mn, month==3)
-_SSC_conc_mar_wilcox <- wilcox.test(recent_mar$ConcDay, early_mar$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_conc_mar_wilcox <- wilcox.test(recent_mar$ConcDay, early_mar$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_apr <- subset(early_decade_monthly_mn, month==4)
 recent_apr <- subset(recent_decade_monthly_mn, month==4)
-_SSC_conc_apr_wilcox <- wilcox.test(recent_apr$ConcDay, early_apr$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_conc_apr_wilcox <- wilcox.test(recent_apr$ConcDay, early_apr$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_may <- subset(early_decade_monthly_mn, month==5)
 recent_may <- subset(recent_decade_monthly_mn, month==5)
-_SSC_conc_may_wilcox <- wilcox.test(recent_may$ConcDay, early_may$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_conc_may_wilcox <- wilcox.test(recent_may$ConcDay, early_may$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jun <- subset(early_decade_monthly_mn, month==6)
 recent_jun <- subset(recent_decade_monthly_mn, month==6)
-_SSC_conc_jun_wilcox <- wilcox.test(recent_jun$ConcDay, early_jun$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_conc_jun_wilcox <- wilcox.test(recent_jun$ConcDay, early_jun$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jul <- subset(early_decade_monthly_mn, month==7)
 recent_jul <- subset(recent_decade_monthly_mn, month==7)
-_SSC_conc_jul_wilcox <- wilcox.test(recent_jul$ConcDay, early_jul$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_conc_jul_wilcox <- wilcox.test(recent_jul$ConcDay, early_jul$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_aug <- subset(early_decade_monthly_mn, month==8)
 recent_aug <- subset(recent_decade_monthly_mn, month==8)
-_SSC_conc_aug_wilcox <- wilcox.test(recent_aug$ConcDay, early_aug$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_conc_aug_wilcox <- wilcox.test(recent_aug$ConcDay, early_aug$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_sep <- subset(early_decade_monthly_mn, month==9)
 recent_sep <- subset(recent_decade_monthly_mn, month==9)
-_SSC_conc_sep_wilcox <- wilcox.test(recent_sep$ConcDay, early_sep$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_conc_sep_wilcox <- wilcox.test(recent_sep$ConcDay, early_sep$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_oct <- subset(early_decade_monthly_mn, month==10)
 recent_oct <- subset(recent_decade_monthly_mn, month==10)
-_SSC_conc_oct_wilcox <- wilcox.test(recent_oct$ConcDay, early_oct$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_conc_oct_wilcox <- wilcox.test(recent_oct$ConcDay, early_oct$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_nov <- subset(early_decade_monthly_mn, month==11)
 recent_nov <- subset(recent_decade_monthly_mn, month==11)
-_SSC_conc_nov_wilcox <- wilcox.test(recent_nov$ConcDay, early_nov$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_conc_nov_wilcox <- wilcox.test(recent_nov$ConcDay, early_nov$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_dec <- subset(early_decade_monthly_mn, month==12)
 recent_dec <- subset(recent_decade_monthly_mn, month==12)
-_SSC_conc_dec_wilcox <- wilcox.test(recent_dec$ConcDay, early_dec$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_conc_dec_wilcox <- wilcox.test(recent_dec$ConcDay, early_dec$ConcDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
-Conc_compare <- data.frame(chng_est=c(_SSC_conc_oct_wilcox$est,
-                                      _SSC_conc_nov_wilcox$est,
-                                      _SSC_conc_dec_wilcox$est,
-                                      _SSC_conc_jan_wilcox$est,
-                                      _SSC_conc_feb_wilcox$est,
-                                      _SSC_conc_mar_wilcox$est,
-                                      _SSC_conc_apr_wilcox$est,
-                                      _SSC_conc_may_wilcox$est,
-                                      _SSC_conc_jun_wilcox$est,
-                                      _SSC_conc_jul_wilcox$est,
-                                      _SSC_conc_aug_wilcox$est,
-                                      _SSC_conc_sep_wilcox$est),
-                           low_conf=c(_SSC_conc_oct_wilcox$conf.int[1],
-                                      _SSC_conc_nov_wilcox$conf.int[1],
-                                      _SSC_conc_dec_wilcox$conf.int[1],
-                                      _SSC_conc_jan_wilcox$conf.int[1],
-                                      _SSC_conc_feb_wilcox$conf.int[1],
-                                      _SSC_conc_mar_wilcox$conf.int[1],
-                                      _SSC_conc_apr_wilcox$conf.int[1],
-                                      _SSC_conc_may_wilcox$conf.int[1],
-                                      _SSC_conc_jun_wilcox$conf.int[1],
-                                      _SSC_conc_jul_wilcox$conf.int[1],
-                                      _SSC_conc_aug_wilcox$conf.int[1],
-                                      _SSC_conc_sep_wilcox$conf.int[1]),
-                           up_conf=c(_SSC_conc_oct_wilcox$conf.int[2],
-                                     _SSC_conc_nov_wilcox$conf.int[2],
-                                     _SSC_conc_dec_wilcox$conf.int[2],
-                                     _SSC_conc_jan_wilcox$conf.int[2],
-                                     _SSC_conc_feb_wilcox$conf.int[2],
-                                     _SSC_conc_mar_wilcox$conf.int[2],
-                                     _SSC_conc_apr_wilcox$conf.int[2],
-                                     _SSC_conc_may_wilcox$conf.int[2],
-                                     _SSC_conc_jun_wilcox$conf.int[2],
-                                     _SSC_conc_jul_wilcox$conf.int[2],
-                                     _SSC_conc_aug_wilcox$conf.int[2],
-                                     _SSC_conc_sep_wilcox$conf.int[2]))
+Conc_compare <- data.frame(chng_est=c(Vern_SSC_conc_oct_wilcox$est,
+                                      Vern_SSC_conc_nov_wilcox$est,
+                                      Vern_SSC_conc_dec_wilcox$est,
+                                      Vern_SSC_conc_jan_wilcox$est,
+                                      Vern_SSC_conc_feb_wilcox$est,
+                                      Vern_SSC_conc_mar_wilcox$est,
+                                      Vern_SSC_conc_apr_wilcox$est,
+                                      Vern_SSC_conc_may_wilcox$est,
+                                      Vern_SSC_conc_jun_wilcox$est,
+                                      Vern_SSC_conc_jul_wilcox$est,
+                                      Vern_SSC_conc_aug_wilcox$est,
+                                      Vern_SSC_conc_sep_wilcox$est),
+                           low_conf=c(Vern_SSC_conc_oct_wilcox$conf.int[1],
+                                      Vern_SSC_conc_nov_wilcox$conf.int[1],
+                                      Vern_SSC_conc_dec_wilcox$conf.int[1],
+                                      Vern_SSC_conc_jan_wilcox$conf.int[1],
+                                      Vern_SSC_conc_feb_wilcox$conf.int[1],
+                                      Vern_SSC_conc_mar_wilcox$conf.int[1],
+                                      Vern_SSC_conc_apr_wilcox$conf.int[1],
+                                      Vern_SSC_conc_may_wilcox$conf.int[1],
+                                      Vern_SSC_conc_jun_wilcox$conf.int[1],
+                                      Vern_SSC_conc_jul_wilcox$conf.int[1],
+                                      Vern_SSC_conc_aug_wilcox$conf.int[1],
+                                      Vern_SSC_conc_sep_wilcox$conf.int[1]),
+                           up_conf=c(Vern_SSC_conc_oct_wilcox$conf.int[2],
+                                     Vern_SSC_conc_nov_wilcox$conf.int[2],
+                                     Vern_SSC_conc_dec_wilcox$conf.int[2],
+                                     Vern_SSC_conc_jan_wilcox$conf.int[2],
+                                     Vern_SSC_conc_feb_wilcox$conf.int[2],
+                                     Vern_SSC_conc_mar_wilcox$conf.int[2],
+                                     Vern_SSC_conc_apr_wilcox$conf.int[2],
+                                     Vern_SSC_conc_may_wilcox$conf.int[2],
+                                     Vern_SSC_conc_jun_wilcox$conf.int[2],
+                                     Vern_SSC_conc_jul_wilcox$conf.int[2],
+                                     Vern_SSC_conc_aug_wilcox$conf.int[2],
+                                     Vern_SSC_conc_sep_wilcox$conf.int[2]))
 
-write.table(Conc_compare, "_SSC_conc_wilcox.txt", quote=FALSE, row.names=FALSE)
+write.table(Conc_compare, "Vern_SSC_conc_wilcox.txt", quote=FALSE, row.names=FALSE)
 
 rng <- max(abs(c(Conc_compare$up_conf, Conc_compare$low_conf)))
-tiff("_SSC_conc_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
+tiff("Vern_SSC_conc_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
 par(mar=c(4,5,0.5,0.5))
 plot(seq(1:12), Conc_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng, rng), xlab="Month", ylab=expression(paste("Median Concentration Change, mg  ",L^-1,sep='')), las=1)
 plotCI(seq(1:12), Conc_compare$chng_est, ui=Conc_compare$up_conf, li=Conc_compare$low_conf, pch=16, add=TRUE)
@@ -3768,7 +3768,7 @@ mdat3 <- matrix(c(early_decade_mon_mn_flx$FluxDay, recent_decade_mon_mn_flx$Flux
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 mx <- max(c((early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay), (recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay)))
-tiff("timing_shift_in_SSC_load_monthly_means.tif", height=800, width=900, res=130)
+tiff("timing_shift_inVern_SSC_load_monthly_means.tif", height=800, width=900, res=130)
 x <- barplot(mdat3, beside=TRUE, las=1, ylim=c(0,mx), col = c("lightblue", "mistyrose"))
 abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn_flx$FluxDay - early_decade_mon_sd_flx$FluxDay, x1=x[1,], y1=early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
@@ -3780,94 +3780,94 @@ dev.off()
 # Apply Wilcox.text to the monthly loads here...
 early_jan_flx <- subset(early_decade_monthly_flx, month==1)
 recent_jan_flx <- subset(recent_decade_monthly_flx, month==1)
-_SSC_flux_jan_wilcox <- wilcox.test(recent_jan_flx$FluxDay, early_jan_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_flux_jan_wilcox <- wilcox.test(recent_jan_flx$FluxDay, early_jan_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_feb_flx <- subset(early_decade_monthly_flx, month==2)
 recent_feb_flx <- subset(recent_decade_monthly_flx, month==2)
-_SSC_flux_feb_wilcox <- wilcox.test(recent_feb_flx$FluxDay, early_feb_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_flux_feb_wilcox <- wilcox.test(recent_feb_flx$FluxDay, early_feb_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_mar_flx <- subset(early_decade_monthly_flx, month==3)
 recent_mar_flx <- subset(recent_decade_monthly_flx, month==3)
-_SSC_flux_mar_wilcox <- wilcox.test(recent_mar_flx$FluxDay, early_mar_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_flux_mar_wilcox <- wilcox.test(recent_mar_flx$FluxDay, early_mar_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_apr_flx <- subset(early_decade_monthly_flx, month==4)
 recent_apr_flx <- subset(recent_decade_monthly_flx, month==4)
-_SSC_flux_apr_wilcox <- wilcox.test(recent_apr_flx$FluxDay, early_apr_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_flux_apr_wilcox <- wilcox.test(recent_apr_flx$FluxDay, early_apr_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_may_flx <- subset(early_decade_monthly_flx, month==5)
 recent_may_flx <- subset(recent_decade_monthly_flx, month==5)
-_SSC_flux_may_wilcox <- wilcox.test(recent_may_flx$FluxDay, early_may_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_flux_may_wilcox <- wilcox.test(recent_may_flx$FluxDay, early_may_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jun_flx <- subset(early_decade_monthly_flx, month==6)
 recent_jun_flx <- subset(recent_decade_monthly_flx, month==6)
-_SSC_flux_jun_wilcox <- wilcox.test(recent_jun_flx$FluxDay, early_jun_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_flux_jun_wilcox <- wilcox.test(recent_jun_flx$FluxDay, early_jun_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_jul_flx <- subset(early_decade_monthly_flx, month==7)
 recent_jul_flx <- subset(recent_decade_monthly_flx, month==7)
-_SSC_flux_jul_wilcox <- wilcox.test(recent_jul_flx$FluxDay, early_jul_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_flux_jul_wilcox <- wilcox.test(recent_jul_flx$FluxDay, early_jul_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_aug_flx <- subset(early_decade_monthly_flx, month==8)
 recent_aug_flx <- subset(recent_decade_monthly_flx, month==8)
-_SSC_flux_aug_wilcox <- wilcox.test(recent_aug_flx$FluxDay, early_aug_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_flux_aug_wilcox <- wilcox.test(recent_aug_flx$FluxDay, early_aug_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_sep_flx <- subset(early_decade_monthly_flx, month==9)
 recent_sep_flx <- subset(recent_decade_monthly_flx, month==9)
-_SSC_flux_sep_wilcox <- wilcox.test(recent_sep_flx$FluxDay, early_sep_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_flux_sep_wilcox <- wilcox.test(recent_sep_flx$FluxDay, early_sep_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_oct_flx <- subset(early_decade_monthly_flx, month==10)
 recent_oct_flx <- subset(recent_decade_monthly_flx, month==10)
-_SSC_flux_oct_wilcox <- wilcox.test(recent_oct_flx$FluxDay, early_oct_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_flux_oct_wilcox <- wilcox.test(recent_oct_flx$FluxDay, early_oct_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_nov_flx <- subset(early_decade_monthly_flx, month==11)
 recent_nov_flx <- subset(recent_decade_monthly_flx, month==11)
-_SSC_flux_nov_wilcox <- wilcox.test(recent_nov_flx$FluxDay, early_nov_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_flux_nov_wilcox <- wilcox.test(recent_nov_flx$FluxDay, early_nov_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 early_dec_flx <- subset(early_decade_monthly_flx, month==12)
 recent_dec_flx <- subset(recent_decade_monthly_flx, month==12)
-_SSC_flux_dec_wilcox <- wilcox.test(recent_dec_flx$FluxDay, early_dec_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
+Vern_SSC_flux_dec_wilcox <- wilcox.test(recent_dec_flx$FluxDay, early_dec_flx$FluxDay, exact=TRUE, conf.int = TRUE, conf.level = 0.9)
 
 
-Flux_compare <- data.frame(chng_est=c(_SSC_flux_oct_wilcox$est,
-                                      _SSC_flux_nov_wilcox$est,
-                                      _SSC_flux_dec_wilcox$est,
-                                      _SSC_flux_jan_wilcox$est,
-                                      _SSC_flux_feb_wilcox$est,
-                                      _SSC_flux_mar_wilcox$est,
-                                      _SSC_flux_apr_wilcox$est,
-                                      _SSC_flux_may_wilcox$est,
-                                      _SSC_flux_jun_wilcox$est,
-                                      _SSC_flux_jul_wilcox$est,
-                                      _SSC_flux_aug_wilcox$est,
-                                      _SSC_flux_sep_wilcox$est),
-                           low_conf=c(_SSC_flux_oct_wilcox$conf.int[1],
-                                      _SSC_flux_nov_wilcox$conf.int[1],
-                                      _SSC_flux_dec_wilcox$conf.int[1],
-                                      _SSC_flux_jan_wilcox$conf.int[1],
-                                      _SSC_flux_feb_wilcox$conf.int[1],
-                                      _SSC_flux_mar_wilcox$conf.int[1],
-                                      _SSC_flux_apr_wilcox$conf.int[1],
-                                      _SSC_flux_may_wilcox$conf.int[1],
-                                      _SSC_flux_jun_wilcox$conf.int[1],
-                                      _SSC_flux_jul_wilcox$conf.int[1],
-                                      _SSC_flux_aug_wilcox$conf.int[1],
-                                      _SSC_flux_sep_wilcox$conf.int[1]),
-                           up_conf=c(_SSC_flux_oct_wilcox$conf.int[2],
-                                     _SSC_flux_nov_wilcox$conf.int[2],
-                                     _SSC_flux_dec_wilcox$conf.int[2],
-                                     _SSC_flux_jan_wilcox$conf.int[2],
-                                     _SSC_flux_feb_wilcox$conf.int[2],
-                                     _SSC_flux_mar_wilcox$conf.int[2],
-                                     _SSC_flux_apr_wilcox$conf.int[2],
-                                     _SSC_flux_may_wilcox$conf.int[2],
-                                     _SSC_flux_jun_wilcox$conf.int[2],
-                                     _SSC_flux_jul_wilcox$conf.int[2],
-                                     _SSC_flux_aug_wilcox$conf.int[2],
-                                     _SSC_flux_sep_wilcox$conf.int[2]))
+Flux_compare <- data.frame(chng_est=c(Vern_SSC_flux_oct_wilcox$est,
+                                      Vern_SSC_flux_nov_wilcox$est,
+                                      Vern_SSC_flux_dec_wilcox$est,
+                                      Vern_SSC_flux_jan_wilcox$est,
+                                      Vern_SSC_flux_feb_wilcox$est,
+                                      Vern_SSC_flux_mar_wilcox$est,
+                                      Vern_SSC_flux_apr_wilcox$est,
+                                      Vern_SSC_flux_may_wilcox$est,
+                                      Vern_SSC_flux_jun_wilcox$est,
+                                      Vern_SSC_flux_jul_wilcox$est,
+                                      Vern_SSC_flux_aug_wilcox$est,
+                                      Vern_SSC_flux_sep_wilcox$est),
+                           low_conf=c(Vern_SSC_flux_oct_wilcox$conf.int[1],
+                                      Vern_SSC_flux_nov_wilcox$conf.int[1],
+                                      Vern_SSC_flux_dec_wilcox$conf.int[1],
+                                      Vern_SSC_flux_jan_wilcox$conf.int[1],
+                                      Vern_SSC_flux_feb_wilcox$conf.int[1],
+                                      Vern_SSC_flux_mar_wilcox$conf.int[1],
+                                      Vern_SSC_flux_apr_wilcox$conf.int[1],
+                                      Vern_SSC_flux_may_wilcox$conf.int[1],
+                                      Vern_SSC_flux_jun_wilcox$conf.int[1],
+                                      Vern_SSC_flux_jul_wilcox$conf.int[1],
+                                      Vern_SSC_flux_aug_wilcox$conf.int[1],
+                                      Vern_SSC_flux_sep_wilcox$conf.int[1]),
+                           up_conf=c(Vern_SSC_flux_oct_wilcox$conf.int[2],
+                                     Vern_SSC_flux_nov_wilcox$conf.int[2],
+                                     Vern_SSC_flux_dec_wilcox$conf.int[2],
+                                     Vern_SSC_flux_jan_wilcox$conf.int[2],
+                                     Vern_SSC_flux_feb_wilcox$conf.int[2],
+                                     Vern_SSC_flux_mar_wilcox$conf.int[2],
+                                     Vern_SSC_flux_apr_wilcox$conf.int[2],
+                                     Vern_SSC_flux_may_wilcox$conf.int[2],
+                                     Vern_SSC_flux_jun_wilcox$conf.int[2],
+                                     Vern_SSC_flux_jul_wilcox$conf.int[2],
+                                     Vern_SSC_flux_aug_wilcox$conf.int[2],
+                                     Vern_SSC_flux_sep_wilcox$conf.int[2]))
 
-write.table(Flux_compare, "_SSC_flux_wilcox.txt", quote=FALSE, row.names=FALSE)
+write.table(Flux_compare, "Vern_SSC_flux_wilcox.txt", quote=FALSE, row.names=FALSE)
 
 rng_flx <- max(abs(c(Flux_compare$up_conf, Flux_compare$low_conf)))
-tiff("_SSC_flux_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
+tiff("Vern_SSC_flux_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
 par(mar=c(4,5,0.5,0.5))
 plot(seq(1:12), Flux_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng_flx, rng_flx), xlab="Month", ylab=expression(paste("Median Flux Change, kg",sep='')), las=1)
 plotCI(seq(1:12), Flux_compare$chng_est, ui=Flux_compare$up_conf, li=Flux_compare$low_conf, pch=16, add=TRUE)
@@ -3889,7 +3889,7 @@ date3 <- "2010-06-01"
 qLow= baseQ
 qHigh=highQ7
 
-tiff("_Date_Discharge_SSC_conc_no_log.tif",height = 700, width = 1000, res=120)
+tiff("_Date_DischargeVern_SSC_conc_no_log.tif",height = 700, width = 1000, res=120)
 plotConcQSmooth(eList,date1, date2, date3,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
 dev.off()
 
@@ -3943,7 +3943,7 @@ eBoot <- wBT(eList, caseSetUp, fileName ="outputText.txt")
 #Downward trend in flux is likely                             
 #
 
-saveEGRETci(eList, eBoot, caseSetUp, fileName = "EGRETci_output_SSC_.RData")
+saveEGRETci(eList, eBoot, caseSetUp, fileName = "EGRETci_outputVern_SSC_.RData")
 
 plotHistogramTrend2 <-
   function (eBoot, caseSetUp, eList, xSeq = seq(-100, 100, 10), 
@@ -3980,7 +3980,7 @@ plotHistogramTrend2 <-
     axis(4, tcl = 0.5, labels = FALSE)
   }
 
-tiff("histo_SSC__Trend_conc_flux.tif", height = 700, width = 1200, res=120)
+tiff("histoVern_SSC__Trend_conc_flux.tif", height = 700, width = 1200, res=120)
 par(mfrow=c(1,2))
 plotHistogramTrend2(eBoot, caseSetUp, eList, flux=FALSE, xSeq = seq(-800000,8000000,5),las=1,xlim=c(-150,50))
 abline(h=0)
@@ -4012,22 +4012,22 @@ conc.poly.y <- c(CIAnnualResults$FNConcLow,rev(CIAnnualResults$FNConcHigh))
 flux.poly.x <- c(CIAnnualResults$Year,rev(CIAnnualResults$Year))
 flux.poly.y <- c(CIAnnualResults$FNFluxLow*365,rev(CIAnnualResults$FNFluxHigh*365))
 
-tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_Boot_SanJVernalis_SSC.tif", height = 500, width = 600, res=110)
+tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_Boot_SanJVernalisVern_SSC.tif", height = 500, width = 600, res=110)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
-tiff("Ann_Flux_&_Ann_Flow_Normalized_Flux_Boot_SanJVernalis_SSC.tif", height = 500, width = 600, res=110)
+tiff("Ann_Flux_&_Ann_Flow_Normalized_Flux_Boot_SanJVernalisVern_SSC.tif", height = 500, width = 600, res=110)
 plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
-setSweave("_Conc_SSC_EGRETCI",7,7)
+setSweave("_ConcVern_SSC_EGRETCI",7,7)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
 
-setSweave("_Flux_SSC_EGRETCI",7,7)
+setSweave("_FluxVern_SSC_EGRETCI",7,7)
 plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
@@ -4088,7 +4088,7 @@ plotConcQ(eList, logScale=TRUE)
 dev.off()
 
 # The data set as flux values rather than as concentrations
-tiff("Flux-Q_SanJVernalis_NH4.tif", height = 600, width = 800, res=120)
+tiff("FluxQ_SanJVernalis_NH4.tif", height = 600, width = 800, res=120)
 plotFluxQ(eList, fluxUnit=4)
 dev.off()
 
@@ -4563,27 +4563,27 @@ dev.off()
 
 # Exploring model behavior and adjusting model parameters
 tiff("Contours_SanJVernalis_NH4.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03,qTop=10,yearStart=1990,yearEnd=2011, contourLevels=seq(0,50,by=1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
+plotContours(eList, qBottom=5,qTop=1000,yearStart=1974,yearEnd=2019, contourLevels=seq(0,50,by=1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
 dev.off()
 
 tiff("Log_Contours_SanJVernalis_NH4.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03, qTop=10, yearStart=1990, yearEnd=2011, contourLevels=seq(-2.4,4,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1974, yearEnd=2019, contourLevels=seq(-2.4,4,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
 dev.off()
 
 tiff("StdErr_of_Log_Contours_SanJVernalis_NH4.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=0.03, qTop=10, yearStart=1990, yearEnd=2011, contourLevels=seq(0.38,0.98,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1974, yearEnd=2019, contourLevels=seq(0.38,0.98,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
 dev.off()
 
 tiff("Contours_Difference__NH4.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1990,2011,0.03,10,maxDiff=50)
+plotDiffContours(eList, 1974,2019,5,1000,maxDiff=50)
 dev.off()
 
 tiff("Contours_PercentDifference__NH4.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1990,2011,0.03,10, maxDiff=100, plotPercent=TRUE)
+plotDiffContours(eList, 1974,2019,5,1000, maxDiff=100, plotPercent=TRUE)
 dev.off()
 
 tiff("Contours_PercentDifference2_NH4_SanJVernalis.tif", height = 700, width = 1000, res=120)
-plotDiffContours2(eList, 1990,2011,0.05,10, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("blue","lightblue","white","yellow", "orange", "red")),tick.lwd = 1)
+plotDiffContours2(eList, 1974,2019,5,1000, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("blue","lightblue","white","yellow", "orange", "red")),tick.lwd = 1)
 dev.off()
 
 Sample$WY <- trunc(Sample$DecYear+0.25) 
@@ -4662,7 +4662,7 @@ eBoot <- wBT(eList, caseSetUp, fileName ="outputText.txt")
 #2001  to  2011      3.7e-05      3.7e-06           37          3.7
 #2006  to  2011      1.6e-05      3.3e-06           14          2.7
 #
-saveEGRETci(eList, eBoot, caseSetUp, fileName = "EGRETci_output_SSC_.RData")
+saveEGRETci(eList, eBoot, caseSetUp, fileName = "EGRETci_outputVern_SSC_.RData")
 
 plotHistogramTrend2 <-
   function (eBoot, caseSetUp, eList, xSeq = seq(-100, 100, 10), 
@@ -4741,12 +4741,12 @@ plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxi
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
-setSweave("_Conc_NH4_EGRETCI",7,7)
+setSweave("Vern_Conc_NH4_EGRETCI",7,7)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
 
-setSweave("_Flux_NH4_EGRETCI",7,7)
+setSweave("Vern_Flux_NH4_EGRETCI",7,7)
 plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
