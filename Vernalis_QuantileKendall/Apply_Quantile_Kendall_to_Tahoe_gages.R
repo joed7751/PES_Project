@@ -14,12 +14,12 @@ library(zoo)
 library(plotrix)
 
 #dat <- read.table(textConnection("staid  start  end  name
-#10336698  1979-10-01  2017-02-18   Third_Crk_nr_Crystal_Bay_NV
+#11303500  1923-10-01   2019-06-01   San Joaquin River at Vernalis
 
 
 
 
-setwd('/users/joed/Documents/Documents19/Biogeochemistry_2019/Freeport_QuantileKendall')
+setwd('/users/joed/Documents/Documents19/Biogeochemistry_2019/Vernalis_Quantile_Kendall')
 
 #for (i in (1:nrow(dat))){
     
@@ -29,11 +29,11 @@ setwd('/users/joed/Documents/Documents19/Biogeochemistry_2019/Freeport_QuantileK
 #    end   <- dat[i,'end']
 #    fileName <- paste0(dat[i,'name'],".pdf")
 
-    sta <- "11447650"
+    sta <- "11303500"
     param <- "00060"
-    start <- "1948-10-01"
-      end   <- "2019-04-27"
-       fileName <- "SacFreeport.pdf"
+    start <- "1923-10-01"
+      end   <- "2019-06-01"
+       fileName <- "Vernalis.pdf"
     
     paStart <- 4
     paLong <- 12
@@ -42,10 +42,10 @@ setwd('/users/joed/Documents/Documents19/Biogeochemistry_2019/Freeport_QuantileK
     # but for seasonal analyses pick the combination of paStart and paLong that
     # is appropriate for your work
     # for this next command I had to figure out the best start and end dates to get full water years
-    filePath <- '/users/joed/Documents/Documents19/Biogeochemistry_2019/Freeport_QuantileKendall/'
-    fileName <- "FreeportDaily_cfs.csv"
-    #Daily <- readNWISDaily(sta,param,startDate = start, endDate = end)
-    Daily <-readUserDaily(filePath, fileName, hasHeader = TRUE, separator = ",", qUnit = 1)
+    #filePath <- '/users/joed/Documents/Documents19/Biogeochemistry_2019/Vernalis_Quantile_Kendall/'
+    #fileName <- "VernalisDaily_cfs.csv"
+    Daily <- readNWISDaily(sta,param,startDate = start, endDate = end)
+    #Daily <-readUserDaily(filePath, fileName, hasHeader = TRUE, separator = ",", qUnit = 1)
     
     # If there are NA's in Daily$Q, functions won't work, replace with interpolated values
     if(any(is.na(Daily$Q))){
@@ -61,7 +61,7 @@ setwd('/users/joed/Documents/Documents19/Biogeochemistry_2019/Freeport_QuantileK
     eList <- as.egret(INFO,Daily)
     eList <- setPA(eList,paStart = paStart, paLong = paLong, window = 30)
     #old width and height were 12 and 10
-    pdf(file = "Freeportquantile.pdf", width =6, height = 5)
+    pdf(file = "Vernalisquantile.pdf", width =6, height = 5)
       par(mfrow=c(2,2))
       plotFlowSingleKendall(eList, istat = 1, qUnit = 2,cex=0.5,cex.axis = 0.65, cex.main = 0.65,cex.lab=0.75,col='blue')
       plotFlowSingleKendall(eList, istat = 4, qUnit = 2,cex=0.5,cex.axis = 0.65, cex.main = 0.65, cex.lab=0.75)
@@ -94,10 +94,10 @@ setwd('/users/joed/Documents/Documents19/Biogeochemistry_2019/Freeport_QuantileK
     zvals   <- qnorm(pvals)
     name    <- paste(eList$INFO$shortName,
                      "\nAdjusted Mann Kendall significance",
-                     "  ", "1948-2019")
+                     "  ", "1923-2019")
     # old width and height were 8 and 6
     #filename2 <- paste0('Mann_Kendall_',dat[i,4],'.pdf')
-    filename2 <- 'SacFreeport.pdf'
+    filename2 <- 'Vernalis.pdf'
     pdf(file = filename2, width = 6, height = 4)
       plot(results$z,results$slopePct,
            col = color, 
