@@ -234,7 +234,7 @@ Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 fileName <- "NWIS_nitrate2.csv"
 Sample <- readUserSample(filePath, fileName)
 Sample <- removeDuplicates(Sample)
-
+write.csv(Sample,'Sample_NO3.csv')
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
