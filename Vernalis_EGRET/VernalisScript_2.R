@@ -982,7 +982,7 @@ dev.off()
 
 ##Make sure that the working directory is set properly
 
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/NO3")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/NO3/")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -993,34 +993,14 @@ if (file.exists(subDir)){
 
 #Interactive function to set up trend analysis:
 caseSetUp <- trendSetUp(eList, 
-                        year1=1991, 
-                        year2=2011, 
+                        year1=1972, 
+                        year2=2018, 
                         nBoot = 200, 
                         bootBreak = 100, 
                         blockLength = 200)
 eBoot <- wBT(eList, caseSetUp, fileName ="outputText.txt")
 
-#Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Reject Ho
-#best estimate is -0.00736 mg/L
-#Lower and Upper 90% CIs -0.01041 -0.00282
-#also 95% CIs-0.01124 -0.00248
-#and 50% CIs -0.00833 -0.00485
-#* Note p-value should be considered to be < stated value
-#approximate two-sided p-value for Conc      0.02
-#Likelihood that Flow Normalized Concentration is trending up =    0.00495 is trending down =      0.995
-#
-#Should we reject Ho that Flow Normalized Flux Trend = 0 ? Do Not Reject Ho
-#best estimate is -0.0001151 10^6 kg/year
-#Lower and Upper 90% CIs -2.76e-04  3.75e-05
-#also 95% CIs -3.47e-04  5.32e-05
-#and 50% CIs -1.69e-04 -3.50e-05
-#approximate two-sided p-value for Flux       0.3
-#Likelihood that Flow Normalized Flux is trending up = 0.153 is trending down= 0.847
-#
-#Upward trend in concentration is highly unlikely
-#Upward trend in flux is unlikely
-#Downward trend in concentration is highly likely
-#Downward trend in flux is likely
+
 #
 
 saveEGRETci(eList, eBoot, caseSetUp, fileName = "EGRETci_output_NO3")
@@ -1118,7 +1098,7 @@ graphics.off()
 
 saveEGRETci(eList, eBoot, fileName="N_Boot_NO3")
 save(repAnnual,file="RepAnnual")
-#
+write.csv(repAnnual,'reAnnual.csv')
 
 
 ##########################################################################################################################################
@@ -1701,10 +1681,11 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package
 # ---------------------------
-
+#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 # Change working directory
 ##Make sure that it is set properly to your system
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/OP")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/OP/")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -1715,8 +1696,8 @@ if (file.exists(subDir)){
 
 #Interactive function to set up trend analysis:
 caseSetUp <- trendSetUp(eList, 
-                        year1=1991, 
-                        year2=2011, 
+                        year1=1975, 
+                        year2=2018, 
                         nBoot = 200, 
                         bootBreak = 100, 
                         blockLength = 200)
@@ -2404,9 +2385,10 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package
 # ---------------------------
-
+#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 # Change working directory
-setwd("..")
+setwd(""/Users/joed/PES_Project/Vernalis_EGRET/TKN/"")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -2417,8 +2399,8 @@ if (file.exists(subDir)){
 
 #Interactive function to set up trend analysis:
 caseSetUp <- trendSetUp(eList, 
-                        year1=1991, 
-                        year2=2011, 
+                        year1=1974, 
+                        year2=2018, 
                         nBoot = 200, 
                         bootBreak = 100, 
                         blockLength = 200)
@@ -3093,9 +3075,10 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package
 # ---------------------------
-
+#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 # Change working directory
-setwd("..")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/TP/")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -3106,35 +3089,14 @@ if (file.exists(subDir)){
 
 #Interactive function to set up trend analysis:
 caseSetUp <- trendSetUp(eList, 
-                        year1=1991, 
-                        year2=2011, 
+                        year1=1972, 
+                        year2=2018, 
                         nBoot = 200, 
                         bootBreak = 100, 
                         blockLength = 200)
 eBoot <- wBT(eList, caseSetUp, fileName ="outputText_TP.txt")
 
-#Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Reject Ho
-#best estimate is -0.00392 mg/L
-#Lower and Upper 90% CIs -0.010593 -0.000426
-#also 95% CIs-0.012237  0.001596
-#and 50% CIs -0.006782 -0.002892
-#approximate two-sided p-value for Conc     0.074
-#Likelihood that Flow Normalized Concentration is trending up =     0.0324 is trending down =      0.968
-#
-#Should we reject Ho that Flow Normalized Flux Trend = 0 ? Do Not Reject Ho
-#best estimate is -0.0003109 10^6 kg/year
-#Lower and Upper 90% CIs -8.64e-04  1.02e-04
-#also 95% CIs -1.03e-03  2.64e-04
-#and 50% CIs -5.87e-04 -1.85e-04
-#approximate two-sided p-value for Flux      0.18
-#Likelihood that Flow Normalized Flux is trending up = 0.088 is trending down= 0.912
-#
-#Upward trend in concentration is highly unlikely
-#Upward trend in flux is very unlikely
-#Downward trend in concentration is highly likely
-#Downward trend in flux is very likely
-#                                                            
-#
+
 # 
 saveEGRETci(eList, eBoot, caseSetUp, fileName = "EGRETci_output_TP")
 
@@ -3791,7 +3753,8 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package
 # ---------------------------
-
+#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 # Change working directory
 setwd("..")
 subDir <- 'EGRETci_plots'
@@ -3804,33 +3767,14 @@ if (file.exists(subDir)){
 
 #Interactive function to set up trend analysis:
 caseSetUp <- trendSetUp(eList, 
-                        year1=1991, 
-                        year2=2011, 
+                        year1=1972, 
+                        year2=2018, 
                         nBoot = 200, 
                         bootBreak = 100, 
                         blockLength = 200)
 eBoot <- wBT(eList, caseSetUp, fileName ="outputText.txt")
 #
-#Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Do Not Reject Ho
-#best estimate is   -3.77 mg/L
-#Lower and Upper 90% CIs    -9.81    85.81
-#also 95% CIs  -35.60  1593.68
-#and 50% CIs    -5.90    -2.51
-#approximate two-sided p-value for Conc      0.17
-#Likelihood that Flow Normalized Concentration is trending up =     0.0842 is trending down =      0.916
-#
-#Should we reject Ho that Flow Normalized Flux Trend = 0 ? Do Not Reject Ho
-#best estimate is  -0.4692 10^6 kg/year
-#Lower and Upper 90% CIs   -2.916   48.136
-#also 95% CIs  -12.099  705.523
-#and 50% CIs   -0.915   -0.314
-#approximate two-sided p-value for Flux      0.22
-#Likelihood that Flow Normalized Flux is trending up = 0.114 is trending down= 0.886
-#
-#Upward trend in concentration is very unlikely
-#Upward trend in flux is unlikely
-#Downward trend in concentration is very likely
-#Downward trend in flux is likely                             
+                
 #
 
 saveEGRETci(eList, eBoot, caseSetUp, fileName = "EGRETci_outputVern_SSC_.RData")
@@ -4498,9 +4442,10 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package
 # ---------------------------
-
+#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/NH4/")
 # Change working directory
-setwd("..")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/NH4/")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -4511,46 +4456,14 @@ if (file.exists(subDir)){
 
 #Interactive function to set up trend analysis:
 caseSetUp <- trendSetUp(eList, 
-                        year1=1991, 
-                        year2=2011, 
+                        year1=1975, 
+                        year2=2018, 
                         nBoot = 200, 
                         bootBreak = 100, 
                         blockLength = 200)
 eBoot <- wBT(eList, caseSetUp, fileName ="outputText.txt")
 #
-#UPPER TRUCKEE RV AT S UPPER TRUCKEE RD NR MEYERS 
-#Ammonia and ammonium
-#Water Year 
-#
-#Concentration trends
-#time span       change     slope    change     slope
-#mg/L   mg/L/yr        %       %/yr
-#
-#1991  to  1996  -0.00068  -0.00014       -19      -3.9
-#1991  to  2001  -0.00064  -6.4e-05       -18      -1.8
-#1991  to  2006   3.6e-05   2.4e-06         1     0.068
-#1991  to  2011   0.00077   3.9e-05        22       1.1
-#1996  to  2001     4e-05     8e-06       1.4      0.29
-#996  to  2006   0.00072   7.2e-05        25       2.5
-#1996  to  2011    0.0015   9.7e-05        51       3.4
-#2001  to  2006   0.00068   0.00014        24       4.7
-#2001  to  2011    0.0014   0.00014        49       4.9
-#2006  to  2011   0.00074   0.00015        21       4.2
-#
-#
-#Flux Trends
-#time span          change        slope       change        slope
-#10^3 tons/yr   10^3 tons/yr /yr      %         %/yr
-#1991  to  1996     -2.1e-05     -4.2e-06          -19         -3.9
-#1991  to  2001     -1.1e-05     -1.1e-06         -9.6        -0.96
-#1991  to  2006        1e-05      6.8e-07          9.2         0.61
-#1991  to  2011      2.7e-05      1.3e-06           24          1.2
-#1996  to  2001      1.1e-05      2.1e-06           12          2.4
-#1996  to  2006      3.1e-05      3.1e-06           35          3.5
-#1996  to  2011      4.8e-05      3.2e-06           54          3.6
-#2001  to  2006      2.1e-05      4.2e-06           21          4.2
-#2001  to  2011      3.7e-05      3.7e-06           37          3.7
-#2006  to  2011      1.6e-05      3.3e-06           14          2.7
+
 #
 saveEGRETci(eList, eBoot, caseSetUp, fileName = "EGRETci_outputVern_SSC_.RData")
 
