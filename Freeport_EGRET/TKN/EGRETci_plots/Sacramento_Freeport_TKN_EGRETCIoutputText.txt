@@ -1,0 +1,34 @@
+
+
+ SACRAMENTO R A FREEPORT CA    Kjeldahl nitrogen
+
+ Water Year
+
+  Bootstrap process, for change from Water Year  1974  to Water Year  2018
+                   data set runs from Water Year 1973 to Water Year 2019
+  Bootstrap block length in days 200
+  bootBreak is 50  confStop is 0.7
+
+ WRTDS estimated concentration change is  -0.264  mg/L
+ WRTDS estimated flux change is           -4.079  10^6 kg/yr
+
+Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Do Not Reject Ho
+ best estimate is  -0.264 mg/L
+  Lower and Upper 90% CIs  -0.3979   0.0295
+ also 95% CIs  -0.4115   0.1041 
+ and 50% CIs  -0.3427  -0.2106
+ approximate two-sided p-value for Conc      0.12
+ Likelihood that Flow Normalized Concentration is trending up =     0.0572  is trending down =      0.943
+
+Should we reject Ho that Flow Normalized Flux Trend = 0 ? Reject Ho
+ best estimate is   -4.079 10^6 kg/year
+  Lower and Upper 90% CIs   -6.521   -0.121
+ also 95% CIs   -6.796    0.642 
+ and 50% CIs   -5.275   -3.224
+ approximate two-sided p-value for Flux      0.08
+ Likelihood that Flow Normalized Flux is trending up = 0.0423  is trending down= 0.958
+
+ Upward trend in concentration is very unlikely 
+ Upward trend in flux is highly unlikely
+ Downward trend in concentration is very likely 
+ Downward trend in flux is highly likely

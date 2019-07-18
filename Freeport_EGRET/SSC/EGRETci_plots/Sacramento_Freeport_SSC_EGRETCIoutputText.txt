@@ -1,0 +1,26 @@
+
+
+ SACRAMENTO R A FREEPORT CA    Suspended sediment concentration (SSC)
+
+ Water Year
+
+  Bootstrap process, for change from Water Year  1974  to Water Year  2017
+                   data set runs from Water Year 1974 to Water Year 2018
+  Bootstrap block length in days 200
+  bootBreak is 50  confStop is 0.7
+
+ WRTDS estimated concentration change is 3268296  mg/L
+ WRTDS estimated flux change is               NA  10^6 kg/yr
+
+Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Do Not Reject Ho
+ best estimate is 3268296 mg/L
+  Lower and Upper 90% CIs  -965160  3794652
+ also 95% CIs -1378867  3837247 
+ and 50% CIs  2409964  3597752
+ approximate two-sided p-value for Conc      0.23
+ Likelihood that Flow Normalized Concentration is trending up =      0.888  is trending down =      0.112RStudioGD 
+        2 
+RStudioGD 
+        2 
+RStudioGD 
+        2 

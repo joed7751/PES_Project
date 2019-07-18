@@ -1,0 +1,36 @@
+
+
+ SACRAMENTO R A FREEPORT CA    Phosphorus
+
+ Water Year
+
+  Bootstrap process, for change from Water Year  1971  to Water Year  2018
+                   data set runs from Water Year 1971 to Water Year 2019
+  Bootstrap block length in days 200
+  bootBreak is 50  confStop is 0.7
+
+ WRTDS estimated concentration change is -0.0925  mg/L
+ WRTDS estimated flux change is           -1.544  10^6 kg/yr
+
+Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Reject Ho
+ best estimate is -0.0925 mg/L
+  Lower and Upper 90% CIs  -0.1142  -0.0724
+ also 95% CIs  -0.1154  -0.0680 
+ and 50% CIs  -0.1018  -0.0840
+ approximate two-sided p-value for Conc     0.039
+* Note p-value should be considered to be < stated value
+ Likelihood that Flow Normalized Concentration is trending up =     0.0098  is trending down =       0.99
+
+Should we reject Ho that Flow Normalized Flux Trend = 0 ? Reject Ho
+ best estimate is   -1.544 10^6 kg/year
+  Lower and Upper 90% CIs   -2.129   -1.012
+ also 95% CIs   -2.165   -0.787 
+ and 50% CIs   -1.806   -1.334
+ approximate two-sided p-value for Flux     0.039
+* Note p-value should be considered to be < stated value
+ Likelihood that Flow Normalized Flux is trending up = 0.0098  is trending down= 0.99
+
+ Upward trend in concentration is highly unlikely 
+ Upward trend in flux is highly unlikely
+ Downward trend in concentration is highly likely 
+ Downward trend in flux is highly likely
