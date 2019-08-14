@@ -218,12 +218,12 @@ endDate <- "2019-06-01"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00631"  # "NO3 and NO2"
-filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
+#filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
 
 ##Will need to change filePath for Dina's computer
-#filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
+filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 ##NWIS DIN data has a gap between 1974 and 1979.  We will need to supplement
@@ -977,12 +977,12 @@ dev.off()
 # ---------------------------
 ####################################################################################################################################
 # Change working directory
-#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NO3/")
 #setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 
 ##Make sure that the working directory is set properly
 
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/NO3/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/NO3/")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -1107,13 +1107,13 @@ write.csv(repAnnual,'reAnnual.csv')
 #############################################################################
 
 startDate <- "1974-10-01"
-endDate <- "2019-05-30"
+endDate <- "2019-06-01"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00671"
 
 filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
-filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
+#filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
 
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
@@ -1830,7 +1830,7 @@ siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00625"  # "TKN"
 
-filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
+#filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
 filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
 
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
@@ -2517,8 +2517,8 @@ endDate <- "2019-06-01"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00665"  # "TP"
-#filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
-filePath <- ("/Users/joed/PES_Project/Vernalis_EGRET/")
+filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
+#filePath <- ("/Users/joed/PES_Project/Vernalis_EGRET/")
 #setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
@@ -3073,7 +3073,7 @@ dev.off()
 
 
 # ---------------------------
-# Now run the EGRETci package
+# Now run the EGRETci package for TP
 # ---------------------------
 #setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 #setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
@@ -3197,35 +3197,42 @@ save(repAnnual,file="RepAnnual")
 #############################################################
 # Working on SSC
 #############################################################
-startDate <- "1971-01-01"
-endDate <- "2018-12-30"
+startDate <- "1985-01-14"
+endDate <- "2019-06-01"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "80154"  # "SSC"
-filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
-#fileName <- "VernVern_SSC_edited.csv"
+filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
+#filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
-#Sample <- readUserSample(filePath, fileName)
-Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
-Sample <- removeDuplicates(Sample)
+
+fileName <- "VernVern_SSC_edited.csv"
+#Sample1 <- readUserSample(filePath, fileName)
+Sample1 <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+Sample2 <- removeDuplicates(Sample1)
+Sample <- removeDuplicates(Sample2)
+write.csv(Sample,'Sample_SSC.csv')
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
 
 # Have a look at the available range of TP data
 range(Sample$Date)
-#"1971-01-05" "2018-12-19"
 eList <- mergeReport(INFO, Daily, Sample)
+
+
 # Blank out missing years
 
-startBlank = "1982-11-30"
-endBlank = "1985-01-14"
+#startBlank = "1982-11-30"
+#endBlank = "1985-01-14"
 
-eList <- blankTime(eList, startBlank, endBlank)
+#eList <- blankTime(eList, startBlank, endBlank)
 
 
 
 # Change the working directory; redirect plot output to SSC folder
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 subDir <- 'SSC/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
