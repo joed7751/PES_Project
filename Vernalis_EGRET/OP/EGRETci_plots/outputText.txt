@@ -1,0 +1,34 @@
+
+
+ SAN JOAQUIN R NR VERNALIS CA    Phosphate
+
+ Water Year
+
+  Bootstrap process, for change from Water Year  1975  to Water Year  2018
+                   data set runs from Water Year 1975 to Water Year 2019
+  Bootstrap block length in days 200
+  bootBreak is 100  confStop is 0.7
+
+ WRTDS estimated concentration change is -0.00832  mg/L
+ WRTDS estimated flux change is         -0.04584  10^6 kg/yr
+
+Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Do Not Reject Ho
+ best estimate is -0.00832 mg/L
+  Lower and Upper 90% CIs -0.02109  0.01685
+ also 95% CIs -0.02741  0.03285 
+ and 50% CIs -0.01233  0.00241
+ approximate two-sided p-value for Conc      0.64
+ Likelihood that Flow Normalized Concentration is trending up =      0.322  is trending down =      0.678
+
+Should we reject Ho that Flow Normalized Flux Trend = 0 ? Do Not Reject Ho
+ best estimate is -0.04584 10^6 kg/year
+  Lower and Upper 90% CIs -0.15708  0.06560
+ also 95% CIs -0.17183  0.10353 
+ and 50% CIs -0.08182 -0.00602
+ approximate two-sided p-value for Flux      0.48
+ Likelihood that Flow Normalized Flux is trending up = 0.243  is trending down= 0.757
+
+ Upward trend in concentration is unlikely 
+ Upward trend in flux is unlikely
+ Downward trend in concentration is likely 
+ Downward trend in flux is likely

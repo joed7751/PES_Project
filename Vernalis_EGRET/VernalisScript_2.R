@@ -1107,7 +1107,7 @@ write.csv(repAnnual,'reAnnual.csv')
 #############################################################################
 
 startDate <- "1974-10-01"
-endDate <- "2019-06-01"
+endDate <- "2019-05-30"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00671"
@@ -1138,7 +1138,7 @@ eList <- mergeReport(INFO, Daily, Sample)
 ######
 # Change the working directory; redirect plot output to OP folder
 #setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 subDir <- 'OP/EGRET_plots'
 if (file.exists(subDir)){
@@ -1486,6 +1486,7 @@ recent_decade_mon_sd_flx <- aggregate(FluxDay ~ month, data = recent_decade_mont
 recent_decade_mon_mn_flx <- recent_decade_mon_mn_flx[c(10:12,1:9),]
 recent_decade_mon_sd_flx <- recent_decade_mon_sd_flx[c(10:12,1:9),]
 
+
 mdat3 <- matrix(c(early_decade_mon_mn_flx$FluxDay, recent_decade_mon_mn_flx$FluxDay),
                 nrow=2,ncol = 12, byrow=TRUE,
                 dimnames = list(c("1974-1984", "2009-2019"),
@@ -1681,11 +1682,12 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package
 # ---------------------------
-#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
-#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 # Change working directory
 ##Make sure that it is set properly to your system
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/OP/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/OP/")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/OP/")
+
+
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -1858,7 +1860,7 @@ plotConcTime(eList)
 
 # Change the working directory; redirect plot output to TKN folder
 setwd ("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/")
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 subDir <- 'TKN/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -2385,10 +2387,10 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package
 # ---------------------------
-#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
-#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+
 # Change working directory
-setwd(""/Users/joed/PES_Project/Vernalis_EGRET/TKN/"")
+#setwd(""/Users/joed/PES_Project/Vernalis_EGRET/TKN/"")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/TKN/")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -2519,8 +2521,8 @@ QParameterCd <- "00060"
 parameterCd <- "00665"  # "TP"
 filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
 #filePath <- ("/Users/joed/PES_Project/Vernalis_EGRET/")
-#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 
@@ -3075,10 +3077,10 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package for TP
 # ---------------------------
-#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
-#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/TP/")
+
 # Change working directory
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/TP/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/TP/")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -3206,12 +3208,11 @@ filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
 #filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
-
+write.csv(Daily,'Daily_SSC.csv')
 fileName <- "VernVern_SSC_edited.csv"
 #Sample1 <- readUserSample(filePath, fileName)
-Sample1 <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
-Sample2 <- removeDuplicates(Sample1)
-Sample <- removeDuplicates(Sample2)
+Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
+Sample <- removeDuplicates(Sample)
 write.csv(Sample,'Sample_SSC.csv')
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
