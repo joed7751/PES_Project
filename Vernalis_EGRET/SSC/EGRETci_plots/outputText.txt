@@ -1,0 +1,13 @@
+
+
+ SAN JOAQUIN R NR VERNALIS CA    Suspended sediment concentration (SSC)
+
+ Water Year
+
+  Bootstrap process, for change from Water Year  1985  to Water Year  2019
+                   data set runs from Water Year 1985 to Water Year 2019
+  Bootstrap block length in days 200
+  bootBreak is 100  confStop is 0.7
+
+ WRTDS estimated concentration change is      NA  mg/L
+ WRTDS estimated flux change is               NA  10^6 kg/yr
