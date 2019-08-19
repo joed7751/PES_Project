@@ -247,7 +247,7 @@ eList <- mergeReport(INFO, Daily, Sample)
 
 # Change the working directory; redirect plot output to NO3 folder
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 
 subDir <- 'NO3/EGRET_plots'
 if (file.exists(subDir)){
@@ -296,9 +296,10 @@ MonthlyResults <- calculateMonthlyResults(eList)
 paLong <- 12
 paStart <- 10
 localDaily <- getDaily(eList)
+localDaily_NO3 <- localDaily
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = 'SanJ_Vernalis_NO3_RawVals.txt', quote=FALSE, row.names=FALSE)
-write.csv(Daily,'localDailyNO3.csv')
+write.csv(localDaily,'localDailyNO3.csv')
 
 # Determine which flow rates to use for discharge-specific trends
 
@@ -1190,7 +1191,7 @@ paStart <- 10
 localDaily <- getDaily(eList_OP)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = 'Vern_OP_RawVals.txt', quote=FALSE, row.names=FALSE)
-write.csv(Daily,'localDailyOP.csv')
+write.csv(localDaily,'localDailyOP.csv')
 
 
 # Plot the annual average concentration and annual flow-normalized concentration
@@ -1911,7 +1912,7 @@ localDaily <- getDaily(eList_TN)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = 'SanJVernalis_TKN_RawVals.txt', quote=FALSE, row.names=FALSE)
 
-write.csv(Daily,'localDaily_TKN.csv')
+write.csv(localDaily,'localDaily_TKN.csv')
 
 # Plot the annual average concentration and annual flow-normalized concentration
 tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_SanJVernalis_TN.tif", height = 600, width = 800, res=120)
@@ -2544,7 +2545,7 @@ range(Sample$Date)
 eList <- mergeReport(INFO, Daily, Sample)
 
 # Change the working directory; redirect plot output to TP folder
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/")
 subDir <- 'TP/EGRET_plots'
 if (file.exists(subDir)){
@@ -2595,7 +2596,7 @@ paStart <- 10
 localDaily <- getDaily(eList_TP)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = 'Vern_TP_RawVals.txt', quote=FALSE, row.names=FALSE)
-write.csv(Daily,"localDailyTP.csv")
+write.csv(localDaily,"localDailyTP.csv")
 
 # Plot the annual average concentration and annual flow-normalized concentration
 tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_SanJVernalis_TP.tif", height = 600, width = 800, res=120)
@@ -3277,7 +3278,7 @@ localDaily <- getDaily(eList)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = 'VernalisVern_SSC_RawVals.txt', quote=FALSE, row.names=FALSE)
 
-write.csv(Daily,'localDaily_VernVern_SSC.csv')
+write.csv(localDaily,'localDaily_VernVern_SSC.csv')
 
 # Plot the annual average concentration and annual flow-normalized concentration
 tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_SanJVernalisVern_SSC.tif", height = 600, width = 800, res=120)
@@ -3890,8 +3891,8 @@ parameterCd <- "00608"  # "NH4"
 
 filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
 #filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
-#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
-setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/")
 
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 ##The file below contains the combined NWIS and Kratzer data sets
@@ -3960,7 +3961,7 @@ localDaily <- getDaily(eList_NH3)
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = 'Vernalis_NH3_RawVals.txt', quote=FALSE, row.names=FALSE)
 
-write.csv(Daily,'localDailyNH3.csv')
+write.csv(localDaily,'localDailyNH3.csv')
 
 # Plot the annual average concentration and annual flow-normalized concentration
 tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_SanJVernalis_NH4.tif", height = 600, width = 800, res=120)
