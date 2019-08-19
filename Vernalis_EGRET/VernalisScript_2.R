@@ -3756,7 +3756,7 @@ dev.off()
 
 
 # ---------------------------
-# Now run the EGRETci package
+# Now run the EGRETci package this was ran  on 8/19/2019
 # ---------------------------
 setwd("/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/SSC/")
 #setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
