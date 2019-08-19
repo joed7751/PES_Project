@@ -1,0 +1,34 @@
+
+
+ SAN JOAQUIN R NR VERNALIS CA    Ammonia and ammonium
+
+ Water Year
+
+  Bootstrap process, for change from Water Year  1975  to Water Year  2018
+                   data set runs from Water Year 1975 to Water Year 2019
+  Bootstrap block length in days 200
+  bootBreak is 100  confStop is 0.7
+
+ WRTDS estimated concentration change is  -0.114  mg/L
+ WRTDS estimated flux change is          -0.2563  10^6 kg/yr
+
+Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Reject Ho
+ best estimate is  -0.114 mg/L
+  Lower and Upper 90% CIs  -0.1419  -0.0469
+ also 95% CIs  -0.1494  -0.0112 
+ and 50% CIs  -0.1204  -0.0956
+ approximate two-sided p-value for Conc     0.035
+ Likelihood that Flow Normalized Concentration is trending up =     0.0149  is trending down =      0.985
+
+Should we reject Ho that Flow Normalized Flux Trend = 0 ? Reject Ho
+ best estimate is  -0.2563 10^6 kg/year
+  Lower and Upper 90% CIs  -0.3808  -0.0513
+ also 95% CIs  -0.4102  -0.0167 
+ and 50% CIs  -0.3129  -0.1995
+ approximate two-sided p-value for Flux     0.038
+ Likelihood that Flow Normalized Flux is trending up = 0.0149  is trending down= 0.985
+
+ Upward trend in concentration is highly unlikely 
+ Upward trend in flux is highly unlikely
+ Downward trend in concentration is highly likely 
+ Downward trend in flux is highly likely

@@ -1107,7 +1107,7 @@ write.csv(repAnnual,'reAnnual.csv')
 #############################################################################
 
 startDate <- "1974-10-01"
-endDate <- "2019-06-01"
+endDate <- "2019-05-30"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00671"
@@ -1138,7 +1138,7 @@ eList <- mergeReport(INFO, Daily, Sample)
 ######
 # Change the working directory; redirect plot output to OP folder
 #setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 subDir <- 'OP/EGRET_plots'
 if (file.exists(subDir)){
@@ -1486,6 +1486,7 @@ recent_decade_mon_sd_flx <- aggregate(FluxDay ~ month, data = recent_decade_mont
 recent_decade_mon_mn_flx <- recent_decade_mon_mn_flx[c(10:12,1:9),]
 recent_decade_mon_sd_flx <- recent_decade_mon_sd_flx[c(10:12,1:9),]
 
+
 mdat3 <- matrix(c(early_decade_mon_mn_flx$FluxDay, recent_decade_mon_mn_flx$FluxDay),
                 nrow=2,ncol = 12, byrow=TRUE,
                 dimnames = list(c("1974-1984", "2009-2019"),
@@ -1681,11 +1682,12 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package
 # ---------------------------
-#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
-#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 # Change working directory
 ##Make sure that it is set properly to your system
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/OP/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/OP/")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/OP/")
+
+
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -1858,7 +1860,7 @@ plotConcTime(eList)
 
 # Change the working directory; redirect plot output to TKN folder
 setwd ("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/")
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 subDir <- 'TKN/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -2385,10 +2387,10 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package
 # ---------------------------
-#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
-#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+
 # Change working directory
-setwd(""/Users/joed/PES_Project/Vernalis_EGRET/TKN/"")
+#setwd(""/Users/joed/PES_Project/Vernalis_EGRET/TKN/"")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/TKN/")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -2519,8 +2521,8 @@ QParameterCd <- "00060"
 parameterCd <- "00665"  # "TP"
 filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
 #filePath <- ("/Users/joed/PES_Project/Vernalis_EGRET/")
-#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
 
@@ -3075,10 +3077,10 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package for TP
 # ---------------------------
-#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
-#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/TP/")
+
 # Change working directory
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/TP/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/TP/")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -3197,21 +3199,23 @@ save(repAnnual,file="RepAnnual")
 #############################################################
 # Working on SSC
 #############################################################
-startDate <- "1985-01-14"
+startDate <- "1985-10-01"
 endDate <- "2019-06-01"
 siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "80154"  # "SSC"
+
 filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
-#filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
 setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 
-fileName <- "VernVern_SSC_edited.csv"
-#Sample1 <- readUserSample(filePath, fileName)
-Sample1 <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
-Sample2 <- removeDuplicates(Sample1)
-Sample <- removeDuplicates(Sample2)
+
+##the missing time using Charlie Kratzer's data
+
+##Set fileName to combined Kratzer and NWIS data set
+fileName <- "SSC_Vern_edited2.csv"
+Sample <- readUserSample(filePath, fileName)
+Sample <- removeDuplicates(Sample)
 write.csv(Sample,'Sample_SSC.csv')
 INFO <- readNWISInfo(siteNumber = siteNumber, parameterCd = parameterCd, interactive=FALSE)
 INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$station_nm," ")[[1]][2])
@@ -3219,15 +3223,6 @@ INFO$staAbbrev <- paste(strsplit(INFO$station_nm," ")[[1]][1],strsplit(INFO$stat
 # Have a look at the available range of TP data
 range(Sample$Date)
 eList <- mergeReport(INFO, Daily, Sample)
-
-
-# Blank out missing years
-
-#startBlank = "1982-11-30"
-#endBlank = "1985-01-14"
-
-#eList <- blankTime(eList, startBlank, endBlank)
-
 
 
 # Change the working directory; redirect plot output to SSC folder
@@ -3295,7 +3290,7 @@ plotFluxHist(eList, plotFlowNorm = TRUE) # fluxMax) # fluxMax
 dev.off()
 
 # Look for a trend change:
-tableChange(eList, fluxUnit=6, yearPoints=c(1990,1998,2011))
+tableChange(eList, fluxUnit=6, yearPoints=c(1986,1996,2006,2016))
 
 
 #Generate out-of-the-box diagnostic plots
@@ -3309,27 +3304,27 @@ dev.off()
 
 # Exploring model behavior and adjusting model parameters
 tiff("Contours_SanJVernalisVern_SSC.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=5,qTop=1000,yearStart=1971,yearEnd=2019, contourLevels=seq(0,50,by=1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
+plotContours(eList, qBottom=5,qTop=1000,yearStart=1986,yearEnd=2019, contourLevels=seq(0,50,by=1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red"))) 
 dev.off()
 
 tiff("Log_Contours_SanJVernalisVern_SSC.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=5, qTop=1000, yearStart=1971, yearEnd=2019, contourLevels=seq(-2.4,4,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1986, yearEnd=2019, contourLevels=seq(-2.4,4,by=0.1), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=1) 
 dev.off()
 
 tiff("StdErr_of_Log_Contours_SanJVernalisVern_SSC.tif", height = 700, width = 1000, res=120)
-plotContours(eList, qBottom=5, qTop=1000, yearStart=1971, yearEnd=2019, contourLevels=seq(0.38,0.98,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
+plotContours(eList, qBottom=5, qTop=1000, yearStart=1986, yearEnd=2019, contourLevels=seq(0.38,0.98,by=0.01), color.palette = colorRampPalette(c("violet", "purple", "blue", "cyan", "green", "yellow", "orange", "red")), whatSurface=2) 
 dev.off()
 
 tiff("Contours_Difference_Vern_SSC.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1971,2019,5,1000,maxDiff=50)
+plotDiffContours(eList, 1986,2019,5,1000,maxDiff=50)
 dev.off()
 
 tiff("Contours_PercentDifference_Vern_SSC.tif", height = 700, width = 1000, res=120)
-plotDiffContours(eList, 1971,2019,5,1000, maxDiff=100, plotPercent=TRUE)
+plotDiffContours(eList, 1986,2019,5,1000, maxDiff=100, plotPercent=TRUE)
 dev.off()
 
 tiff("Contours_PercentDifference2Vern_SSC_SanJVernalis.tif", height = 700, width = 1000, res=120)
-plotDiffContours2(eList, 1971,2019,5,1000, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("blue","lightblue","white","yellow", "orange", "red")),tick.lwd = 1)
+plotDiffContours2(eList, 1986,2019,5,1000, maxDiff=c(-100,100), plotPercent=TRUE, lwd=3, color.palette=colorRampPalette(c("blue","lightblue","white","yellow", "orange", "red")),tick.lwd = 1)
 dev.off()
 
 Sample$WY <- trunc(Sample$DecYear+0.25) 
@@ -3463,14 +3458,14 @@ dev.off()
 localDaily <- getDaily(eList)
 
 # Will need to adjust the date range below based on each gages unique start/stop dates
-early_decade <- subset(localDaily, localDaily$Date > as.Date('1990-09-30') & localDaily$Date < as.Date('2000-10-01'))
-recent_decade <- subset(localDaily, localDaily$Date > as.Date('2001-09-30'))
+early_decade <- subset(localDaily, localDaily$Date > as.Date('1985-10-01') & localDaily$Date < as.Date('1995-10-01'))
+recent_decade <- subset(localDaily, localDaily$Date > as.Date('2009-07-01'))
 
 
 early_decade_monthly_mn <- aggregate(ConcDay ~ MonthSeq, data = early_decade, 'mean')
 recent_decade_monthly_mn <- aggregate(ConcDay ~ MonthSeq, data = recent_decade, 'mean')
 
-# early_decade_monthly_mn$month <- format(seq(as.Date('1972-10-01'), as.Date('1982-09-30'), by='month'), '%b')
+#early_decade_monthly_mn$month <- format(seq(as.Date('1972-10-01'), as.Date('1982-09-30'), by='month'), '%b')
 early_decade_monthly_mn$month <- rep(c(10:12,1:9), times=10)
 early_decade_mon_mn <- aggregate(ConcDay ~ month, data = early_decade_monthly_mn, 'mean')
 early_decade_mon_sd <- aggregate(ConcDay ~ month, data = early_decade_monthly_mn, 'sd')
@@ -3486,8 +3481,8 @@ recent_decade_mon_sd <- recent_decade_mon_sd[c(10:12,1:9),]
 
 mdat2 <- matrix(c(early_decade_mon_mn$ConcDay, recent_decade_mon_mn$ConcDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1990-2000", "2001-2011"),
-                                c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
+                dimnames = list(c("1985-1995", "2009-2019"),
+                                c(format(seq(as.Date('1985-10-01'), as.Date('1986-09-30'), by='month'), '%b'))))
 
 # Be sure to adjust the legend's first decade start and stop year correctly
 mx <- max(c((early_decade_mon_mn$ConcDay + early_decade_mon_sd$ConcDay), (recent_decade_mon_mn$ConcDay + recent_decade_mon_sd$ConcDay)))
@@ -3499,7 +3494,7 @@ abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn$ConcDay - early_decade_mon_sd$ConcDay, x1=x[1,], y1=early_decade_mon_mn$ConcDay + early_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
 arrows(x0=x[2,], y0=recent_decade_mon_mn$ConcDay - recent_decade_mon_sd$ConcDay, x1=x[2,], y1=recent_decade_mon_mn$ConcDay + recent_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
 mtext(side=2, expression(paste(SSC,', mg ',L^-1,sep='')), line=3)
-legend(x=25, y=0.9 * mx, c("1990-2000", "2001-2011"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+legend(x=25, y=0.9 * mx, c("1985-1995", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
 
@@ -3742,14 +3737,17 @@ dev.off()
 ###########
 #First do flow duration analysis
 flowDuration(eList, centerDate = "06-01", qUnit = 2, span = 30)
-date1 <- "1991-06-01"
-date2 <- "2000-06-01"
-date3 <- "2010-06-01"
+
+date1 <- "1985-06-01"
+date2 <- "1995-06-01"
+date3 <- "2005-06-01"
+date4 <- "2015-06-01"
+
 qLow= baseQ
 qHigh=highQ7
 
-tiff("_Date_DischargeVern_SSC_conc_no_log.tif",height = 700, width = 1000, res=120)
-plotConcQSmooth(eList,date1, date2, date3,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
+tiff("Vernalis_Date_DischargeVern_SSC_conc_no_log.tif",height = 700, width = 1000, res=120)
+plotConcQSmooth(eList,date1, date2, date3, qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
 dev.off()
 
 
@@ -3760,10 +3758,9 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package
 # ---------------------------
-#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/SSC/")
 #setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 # Change working directory
-setwd("..")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -3774,8 +3771,8 @@ if (file.exists(subDir)){
 
 #Interactive function to set up trend analysis:
 caseSetUp <- trendSetUp(eList, 
-                        year1=1972, 
-                        year2=2018, 
+                        year1=1985, 
+                        year2=2019, 
                         nBoot = 200, 
                         bootBreak = 100, 
                         blockLength = 200)
@@ -3891,8 +3888,10 @@ siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "00608"  # "NH4"
 
-filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
+#filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/")
 
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 ##The file below contains the combined NWIS and Kratzer data sets
@@ -3909,7 +3908,8 @@ range(Sample$Date)
 eList <- mergeReport(INFO, Daily, Sample)
 
 # Change the working directory; redirect plot output to NH4 folder
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/")
 subDir <- 'NH4/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -4452,7 +4452,8 @@ dev.off()
 #setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 #setwd("/Users/joed/PES_Project/Vernalis_EGRET/NH4/")
 # Change working directory
-setwd("/Users/joed/PES_Project/Vernalis_EGRET/NH4/")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/NH4/")
+#setwd("/Users/joed/PES_Project/Vernalis_EGRET/NH4/")
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
