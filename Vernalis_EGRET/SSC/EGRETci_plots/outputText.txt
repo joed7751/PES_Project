@@ -4,10 +4,23 @@
 
  Water Year
 
-  Bootstrap process, for change from Water Year  1985  to Water Year  2019
+  Bootstrap process, for change from Water Year  1985  to Water Year  2018
                    data set runs from Water Year 1985 to Water Year 2019
   Bootstrap block length in days 200
   bootBreak is 100  confStop is 0.7
 
- WRTDS estimated concentration change is      NA  mg/L
+ WRTDS estimated concentration change is  570792  mg/L
  WRTDS estimated flux change is               NA  10^6 kg/yr
+
+Should we reject Ho that Flow Normalized Concentration Trend = 0 ? Reject Ho
+ best estimate is  570792 mg/L
+  Lower and Upper 90% CIs   137140   699880
+ also 95% CIs  -300437   709637 
+ and 50% CIs   501719   612329
+ approximate two-sided p-value for Conc     0.075
+ Likelihood that Flow Normalized Concentration is trending up =      0.963  is trending down =     0.0373null device 
+          1 
+null device 
+          1 
+null device 
+          1 

@@ -3758,7 +3758,7 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package
 # ---------------------------
-setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/SSC/")
+setwd("/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/SSC/")
 #setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
 # Change working directory
 subDir <- 'EGRETci_plots'
@@ -3772,7 +3772,7 @@ if (file.exists(subDir)){
 #Interactive function to set up trend analysis:
 caseSetUp <- trendSetUp(eList, 
                         year1=1985, 
-                        year2=2019, 
+                        year2=2018, 
                         nBoot = 200, 
                         bootBreak = 100, 
                         blockLength = 200)
@@ -3860,12 +3860,12 @@ plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxi
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
-setSweave("_ConcVern_SSC_EGRETCI",7,7)
+setSweave("Vernalis_ConcVern_SSC_EGRETCI",7,7)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
 
-setSweave("_FluxVern_SSC_EGRETCI",7,7)
+setSweave("Vernalis_FluxVern_SSC_EGRETCI",7,7)
 plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
