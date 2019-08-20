@@ -75,12 +75,12 @@ annualSeries <- makeAnnualSeries(eList)
 
 
 # -------------------------------
-#setwd("/Users/joed/PES_Project/Vernalis_EGRET/") 
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/") 
 
 
 # Uncomment the following for Eric, and Dina will need to set this up for her path
 # --------------------------------
-setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 
 # Set working directory so plots are written to appropriate location
 subDir <- './Q'
@@ -3206,8 +3206,10 @@ siteNumber <- "11303500"
 QParameterCd <- "00060"
 parameterCd <- "80154"  # "SSC"
 
-filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
-setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+filePath <- "/Users/joed/PES_Project/Vernalis_EGRET/"
+#filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/"
+#setwd ("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+setwd ("/Users/joed/PES_Project/Vernalis_EGRET/")
 Daily <- readNWISDaily(siteNumber, QParameterCd, startDate, endDate)
 
 
@@ -3227,8 +3229,8 @@ eList <- mergeReport(INFO, Daily, Sample)
 
 
 # Change the working directory; redirect plot output to SSC folder
-#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
-setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+#setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET")
 subDir <- 'SSC/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -3275,10 +3277,11 @@ MonthlyResults <- calculateMonthlyResults(eList)
 paLong <- 12
 paStart <- 10
 localDaily <- getDaily(eList)
+write.csv(localDaily,'localDaily_SSC.csv')
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = 'VernalisVern_SSC_RawVals.txt', quote=FALSE, row.names=FALSE)
 
-write.csv(localDaily,'localDaily_VernVern_SSC.csv')
+write.csv(localDaily,'localDaily_Vern_SSC.csv')
 
 # Plot the annual average concentration and annual flow-normalized concentration
 tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_SanJVernalisVern_SSC.tif", height = 600, width = 800, res=120)
@@ -3619,7 +3622,7 @@ recent_decade_mon_sd_flx <- recent_decade_mon_sd_flx[c(10:12,1:9),]
 
 mdat3 <- matrix(c(early_decade_mon_mn_flx$FluxDay, recent_decade_mon_mn_flx$FluxDay),
                 nrow=2,ncol = 12, byrow=TRUE,
-                dimnames = list(c("1990-2000", "2001-2011"),
+                dimnames = list(c("1985-1995", "2009-2019"),
                                 c(format(seq(as.Date('1973-10-01'), as.Date('1974-09-01'), by='month'), '%b'))))
 
 mx <- max(c((early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay), (recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay)))
@@ -3629,7 +3632,7 @@ abline(h=0)
 arrows(x0=x[1,], y0=early_decade_mon_mn_flx$FluxDay - early_decade_mon_sd_flx$FluxDay, x1=x[1,], y1=early_decade_mon_mn_flx$FluxDay + early_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
 arrows(x0=x[2,], y0=recent_decade_mon_mn_flx$FluxDay - recent_decade_mon_sd_flx$FluxDay, x1=x[2,], y1=recent_decade_mon_mn_flx$FluxDay + recent_decade_mon_sd_flx$FluxDay, angle=90, length=0.04, code=3)
 mtext(side=2, expression(paste(SSC,', kg ',month^-1,sep='')), line=2.5)
-legend(x=30, y=0.9 * mx, c("1990-2000", "2001-2011"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+legend(x=30, y=0.9 * mx, c("1985-1995", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
 # Apply Wilcox.text to the monthly loads here...
@@ -3759,8 +3762,8 @@ dev.off()
 # ---------------------------
 # Now run the EGRETci package this was ran  on 8/19/2019
 # ---------------------------
-setwd("/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/SSC/")
-#setwd("/Users/joed/PES_Project/Vernalis_EGRET/")
+#setwd("/Users/dsaleh/Documents/GitHub/PES_Project/Vernalis_EGRET/SSC/")
+setwd("/Users/joed/PES_Project/Vernalis_EGRET/SSC/")
 # Change working directory
 subDir <- 'EGRETci_plots'
 if (file.exists(subDir)){
@@ -3772,18 +3775,19 @@ if (file.exists(subDir)){
 
 #Interactive function to set up trend analysis:
 caseSetUp <- trendSetUp(eList, 
-                        year1=1985, 
-                        year2=2018, 
+                        year1=1987, 
+                        year2=2017, 
                         nBoot = 200, 
                         bootBreak = 100, 
                         blockLength = 200)
-eBoot <- wBT(eList, caseSetUp, fileName ="outputText.txt")
-#
-                
-#
+eBoot <- wBT(eList, caseSetUp, fileName ="outputText_SSC.txt")
 
-saveEGRETci(eList, eBoot, caseSetUp, fileName = "EGRETci_outputVern_SSC_.RData")
 
+# 
+saveEGRETci(eList, eBoot, caseSetUp, fileName = "EGRETci_output_SSC")
+CIAnnualResults <- ciCalculations(eList, nBoot = 100, blockLength = 200, widthCI = 90)
+
+save(eList,CIAnnualResults, file="CIAnnualResults.RData")
 plotHistogramTrend2 <-
   function (eBoot, caseSetUp, eList, xSeq = seq(-100, 100, 10), 
             flux = TRUE, printTitle = TRUE, cex.main = 1.1, col.fill = "grey", xlim = c(-100,100),
@@ -3819,12 +3823,12 @@ plotHistogramTrend2 <-
     axis(4, tcl = 0.5, labels = FALSE)
   }
 
-tiff("histoVern_SSC__Trend_conc_flux.tif", height = 700, width = 1200, res=120)
+tiff("histo_SSC_UpTruck_Trend_conc_flux.tif", height = 700, width = 1200, res=120)
 par(mfrow=c(1,2))
-plotHistogramTrend2(eBoot, caseSetUp, eList, flux=FALSE, xSeq = seq(-800000,8000000,5),las=1,xlim=c(-150,50))
+plotHistogramTrend2(eBoot, caseSetUp, eList, flux=FALSE, xSeq = seq(-8000,8000,5),las=1,xlim=c(-100,100))
 abline(h=0)
 
-plotHistogramTrend2(eBoot, caseSetUp, eList, flux=TRUE, xSeq = seq(-5000000,50000000,5),las=1,xlim=c(-200,200))
+plotHistogramTrend2(eBoot, caseSetUp, eList, flux=TRUE, xSeq = seq(-50000,50000,5),las=1)
 abline(h=0)
 dev.off()
 
@@ -3841,7 +3845,7 @@ nCores <- detectCores() - coreOut
 cl <- makeCluster(nCores)
 registerDoParallel(cl)
 repAnnual <- foreach(n = 1:nBoot,.packages=c('EGRETci')) %dopar% {
-  annualResults <- bootAnnual(eList, blockLength, startSeed = n)  
+  annualResults <- bootAnnual(eList, blockLength,startSeed = n)  
 }
 stopCluster(cl)
 
@@ -3851,32 +3855,32 @@ conc.poly.y <- c(CIAnnualResults$FNConcLow,rev(CIAnnualResults$FNConcHigh))
 flux.poly.x <- c(CIAnnualResults$Year,rev(CIAnnualResults$Year))
 flux.poly.y <- c(CIAnnualResults$FNFluxLow*365,rev(CIAnnualResults$FNFluxHigh*365))
 
-tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_Boot_SanJVernalisVern_SSC.tif", height = 500, width = 600, res=110)
+tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_Boot_SanJVernalis_SSC.tif", height = 500, width = 600, res=110)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
-tiff("Ann_Flux_&_Ann_Flow_Normalized_Flux_Boot_SanJVernalisVern_SSC.tif", height = 500, width = 600, res=110)
+tiff("Ann_Flux_&_Ann_Flow_Normalized_Flux_Boot_SanJVernalis_SSC.tif", height = 500, width = 600, res=110)
 plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
-setSweave("Vernalis_ConcVern_SSC_EGRETCI",7,7)
+setSweave("Vern_SSC_Conc_EGRETCI",7,7)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
 
-setSweave("Vernalis_FluxVern_SSC_EGRETCI",7,7)
+setSweave("SanJVernalis_SSC_fluxEGRETCI",7,7)
 plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 graphics.off()
-
 
 saveEGRETci(eList, eBoot, fileName="SSC_Boot_.RData")
 save(repAnnual,file="RepAnnual")
 
 # load(file="N_Boot.RData")
 # load(file="RepAnnual")
+
 
 
 #############################################################
