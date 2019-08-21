@@ -4573,3 +4573,24 @@ save(repAnnual,file="RepAnnual")
 
 # load(file="N_Boot.RData")
 # load(file="RepAnnual")
+
+
+Vernalis_Am_Nitrate_ratio <- read.csv("AmmNitrateRatio.csv")
+attach(Vernalis_Am_Nitrate_ratio)
+#Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
+#Vernalis_Am_Nitrate_ratio <- data.frame(Vernalis_Am_Nitrate_ratio,Rdate)
+setSweave ('Vernalis_NH3_NO3_Ratio',5,5)
+plot(Rdate,NH3NO3Ratio,type="line",col='forestgreen',ylim=c(0,0.6))
+par(new = TRUE)
+
+plot(Rdate,NH3Concmm,type="line",lwd=0.75,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.2),col="red")
+points(Rdate,NO3Concmm,type='line',col='blue',lwd=0.75)
+axis(side=4)
+mtext("nutrient concentration",side=4,line=3)
+legend("topleft",c("NH3:NO3 Ratio","Ammonium","Nitrate"),col=c("forestgreen","red","blue"),lwd=c(0.75,0.5,0.5))
+graphics.off()
+
+
+attach(Vernalis_Am_Nitrate_ratio)
+qplot(Month, NH3NO3Ratio, data = Vernalis_Am_Nitrate_ratio,group=Month,ylim=c(0,1),xlim=c(0,13), geom= "boxplot")
+
