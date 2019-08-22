@@ -4574,7 +4574,7 @@ save(repAnnual,file="RepAnnual")
 # load(file="N_Boot.RData")
 # load(file="RepAnnual")
 
-
+## plot ammonium to nitrate ratio
 Vernalis_Am_Nitrate_ratio <- read.csv("AmmNitrateRatio.csv")
 attach(Vernalis_Am_Nitrate_ratio)
 #Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
@@ -4594,3 +4594,56 @@ graphics.off()
 attach(Vernalis_Am_Nitrate_ratio)
 qplot(Month, NH3NO3Ratio, data = Vernalis_Am_Nitrate_ratio,group=Month,ylim=c(0,1),xlim=c(0,13), geom= "boxplot")
 
+#####plot nitrate to OP ratio
+Vern_Nitrate_OP_ratio <- read.csv('Vern_NO3_OPRatio.csv')
+attach(Vern_Nitrate_OP_ratio)
+#Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
+#Vern_Nitrate_OP_ratio <- data.frame(Vern_Nitrate_OP_ratio,Rdate)
+setSweave ('Vernalis_N_OP_Ratio',6,6)
+plot(Rdate,NO3OPRatio,type="line",col='forestgreen',lwd=0.75)
+par(new = TRUE)
+
+plot(Rdate,OPConcmm,type="line",lwd=0.75,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.2),col="orange")
+points(Rdate,NO3Concmm,type='line',col='blue',lwd=0.75,lty=2)
+axis(side=4)
+mtext("nutrient concentration",side=4,line=3)
+legend("topleft",c("NP Ratio","Nitrate","OrthoP"),col=c("forestgreen","blue","orange"),lty=c(1,2,1),lwd=c(0.75,0.5,0.5))
+graphics.off()
+
+#####plot TN TP ratio
+
+Vern_TN_TP_ratio <- read.csv("TNTPRatio.csv")
+attach(Vern_TN_TP_ratio)
+#Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
+#Vern_TN_TP_ratio <- data.frame(Vern_TN_TP_ratio,Rdate)
+setSweave ('Vern_TN_TP_Ratio',5,5)
+plot(Rdate,TNTPRatio,type="line",col='forestgreen',ylim=c(0,30))
+par(new = TRUE)
+plot(Rdate,(TKNConcmm+NO3Concmm),type="line",lwd=0.75,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.3),col="red")
+
+points(Rdate,TPConcmm,type='line',col='blue',lwd=0.75)
+axis(side=4)
+mtext("nutrient concentration",side=4,line=3)
+legend("topleft",c("TN:TP Ratio","Total Nitrogen","Total Phosphorus"),col=c("forestgreen","red","blue"),lwd=c(0.75,0.5,0.5))
+graphics.off()
+
+qplot(Month, TNTPRatio, data = Vern_TN_TP_ratio,group=Month,ylim=c(0,30),xlim=c(0,13), geom= "boxplot")
+
+########plot DIN OP Ratio
+Vern_DIN_Nitrate_ratio <- read.csv("DINOPRatio.csv")
+attach(Vern_DIN_Nitrate_ratio)
+#Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
+#Vern_DIN_Nitrate_ratio <- data.frame(Vern_DIN_Nitrate_ratio,Rdate)
+setSweave ('Vern_DIN_OP_Ratio',5,5)
+plot(Rdate,DINOPRatio,type="line",col='forestgreen',lwd=0.5,ylim=c(0,250))
+par(new = TRUE)
+
+plot(Rdate,NH3Concmm,type="line",lwd=0.5,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.2),col="red")
+points(Rdate,NO3Concmm,type='line',col='blue',lwd=0.5)
+points(Rdate,OPConcmm,type='line',col='orange',lwd=0.5)
+axis(side=4)
+mtext("nutrient concentration",side=4,line=3)
+legend("topleft",c("DIN:OP Ratio","Ammonium","Nitrate","orthophosphate"),col=c("forestgreen","red","blue","orange"),lwd=c(0.5,0.5,0.5,0.5))
+graphics.off()
+
+qplot(Month, DINOPRatio, data = Vern_DIN_Nitrate_ratio,group=Month,ylim=c(0,60),xlim=c(0,13), geom= "boxplot")
