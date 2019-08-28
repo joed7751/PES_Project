@@ -315,16 +315,17 @@ eList_NO3 <- eList
 
 
 MonthlyResults <- calculateMonthlyResults(eList_NO3)
-
+write.csv(MonthlyResults,'MonthlyResults_NO3.csv')
 # Dump NO3-related flow-normalized data to text file for bringing together with other monitoring sites
 #LocalDaily puts all of the modeling results into a single data frame, called localDaily
+fluxunit=3
 paLong <- 12
 paStart <- 10
 localDaily <- getDaily(eList_NO3)
 write.csv(localDaily,'localDailyNO3.csv')
 localAnnualResults <- setupYears(paStart = paStart, paLong = paLong, localDaily = localDaily)
 write.table(localAnnualResults, file = 'SacFreeport_NO3_RawVals.txt', quote=FALSE, row.names=FALSE)
-
+write.table(localAnnualResults, file = 'SacFreeport_NO3_RawVals.csv', quote=FALSE, row.names=FALSE)
 # Plot the annual average concentration and annual flow-normalized concentration
 tiff("Ann_Avg_Conc_&_Ann_Flow_Normalized_Conc_InorganicN_Sacramento_Freeport.tif", height = 600, width = 800, res=120)
 plotConcHist(eList_NO3, plotFlowNorm=TRUE)
@@ -341,7 +342,7 @@ plotFluxHist(eList_NO3, plotFlowNorm = TRUE)
 dev.off()
 
 # Look for a trend change:
-tableChange(eList_NO3, fluxUnit=6, yearPoints=c(1974,1992,2000,2006,2015))
+tableChange(eList_NO3, fluxUnit=4, yearPoints=c(1974,1992,2000,2006,2015))
 
 
 
@@ -1131,10 +1132,10 @@ dev.off()
 #plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 #graphics.off()
 #postscript("Sacramento_Freeport_nitrate_flux_CI",7,7)
-#plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
+#plotFluxHistBoot(eList, fluxUnit=4, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
 #graphics.off()
 postscript("Sacramento_Freeport_Ann_Flux_&_Ann_Flow_Normalized_NO3_Flux_Boot.ps", family="Courier", height=6.25, width=7.25)
-plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
+plotFluxHistBoot(eList, fluxUnit=4, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
@@ -1918,14 +1919,14 @@ polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
 tiff("Ann_Flux_&_Ann_Flow_Normalized_Flux_Boot_Sacramento_Freeport_OP.tif", height = 500, width = 600, res=110)
-plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
+plotFluxHistBoot(eList, fluxUnit=4, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 setSweave("Sacramento_Freeport_SRP_Conc_CI",7,7)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 graphics.off()
 setSweave("Sacramento_Freeport_SRP_flux_CI",7,7)
-plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
+plotFluxHistBoot(eList, fluxUnit=4, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
 graphics.off()
 saveEGRETci(eList, eBoot, fileName="N_Boot")
 #save(repAnnual,file="RepAnnual")
@@ -2601,14 +2602,14 @@ polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
 tiff("Ann_Flux_&_Ann_Flow_Normalized_TKN_Flux_Boot.tif", height = 500, width = 600, res=110)
-plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=FALSE, showYAxis=TRUE, col=4)
+plotFluxHistBoot(eList, fluxUnit=4, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=FALSE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 setSweave("Sacramento_Freeport_TKN_Conc_CI",7,7)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 graphics.off()
 setSweave("Sacramento_Freeport_TKN_flux_CI",7,7)
-plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
+plotFluxHistBoot(eList, fluxUnit=4, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
 graphics.off()
 saveEGRETci(eList, eBoot, fileName="N_Boot")
 #save(repAnnual,file="RepAnnual")
@@ -3283,14 +3284,14 @@ polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
 tiff("Ann_Flux_&_Ann_Flow_Normalized_TP_Flux_Boot.tif", height = 500, width = 600, res=110)
-plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=FALSE, showYAxis=TRUE, col=4)
+plotFluxHistBoot(eList, fluxUnit=4, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=FALSE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 setSweave("Sacramento_Freeport_TP_Conc_CI",7,7)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 graphics.off()
 setSweave("Sacramento_Freeport_TP_flux_CI",7,7)
-plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
+plotFluxHistBoot(eList, fluxUnit=4, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
 graphics.off()
 saveEGRETci(eList, eBoot, fileName="N_Boot")
 #save(repAnnual,file="RepAnnual")
@@ -3971,14 +3972,14 @@ polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
 tiff("Sacramento_Freeport_Ann_Flux_&_Ann_Flow_Normalized_SS_Flux_Boot.tif", height = 500, width = 600, res=110)
-plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
+plotFluxHistBoot(eList, fluxUnit=4, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 setSweave("Sacramento_Freeport_SSC_Conc_CI",7,7)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 graphics.off()
 setSweave("Sacramento_Freeport_SSC_flux_CI",7,7)
-plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
+plotFluxHistBoot(eList, fluxUnit=4, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
 graphics.off()
 saveEGRETci(eList, eBoot, fileName="N_Boot")
 #save(repAnnual,file="RepAnnual")
@@ -4678,14 +4679,14 @@ polygon(x=conc.poly.x, y=conc.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 
 tiff("Sacramento_Freeport_Ann_Flux_&_Ann_Flow_Normalized_NH3_Flux_Boot.tif", height = 500, width = 600, res=110)
-plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
+plotFluxHistBoot(eList, fluxUnit=4, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
 polygon(x=flux.poly.x, y=flux.poly.y, col=rgb(24,116,205,40,max=255),border=NA)
 dev.off()
 setSweave("Sacramento_Freeport_NH3_Conc_CI",7,7)
 plotConcHistBoot(eList, CIAnnualResults, plotFlowNorm=TRUE, showYLabels=TRUE, showYAxis=TRUE,col=4)
 graphics.off()
 setSweave("Sacramento_Freeport_NH3_flux_CI",7,7)
-plotFluxHistBoot(eList, fluxUnit=13, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
+plotFluxHistBoot(eList, fluxUnit=4, CIAnnualResults, plotFluxNorm = TRUE, showYLabels=TRUE, showYAxis=TRUE, col=4)
 graphics.off()
 saveEGRETci(eList, eBoot, fileName="N_Boot")
 #save(repAnnual,file="RepAnnual")
@@ -4703,16 +4704,151 @@ setSweave("SensorDateTime_Shifted",5,5)
 timePlot(Rdate,NO3_Shifted,Plot=list(name="Freeport NO3 Sensor",what='lines',width='hairline',color='blue'))
 graphics.off()
 
-Nitrate_FullRecord_Freeport <- read.csv('Nitrate_fullRecord_Freeport.csv')
-attach(Nitrate_FullRecord_Freeport)
-Rdate <- strptime(as.character(datetime),("%Y-%m-%d%H:%M"))
-Nitrate_FullRecord_Freeport <- data.frame(Nitrate_FullRecord_Freeport,Rdate)
+Nitrate_EGRET_Short <- read.csv('localDailyNO3_EGRET_Short.csv')
+attach(Nitrate_EGRET_Short)
+Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
+Nitrate_EGRET_Short <- data.frame(Nitrate_EGRET_Short,Rdate)
+
+#####plot sensor nitrate
+
+Nitrate_Sensor_Freeport <- read.csv('NO3_Sensor_2013_Present.csv')
+attach(Nitrate_Sensor_Freeport)
+#Rdate <- strptime(as.character(datetime),("%Y-%m-%d%H:%M"))
+#Nitrate_Sensor_Freeport <-data.frame(Nitrate_Sensor_Freeport,Rdate)
+#Nitrate_FullRecord_Freeport <- data.frame(Nitrate_FullRecord_Freeport,Rdate)
+
+attach(Nitrate_Sensor_Freeport)
 setSweave("Nitrate_full_Record_shifted",5,5)
 timePlot(Rdate,Nitrate_Shifted,Plot=list(name="Freeport NO3 Sensor Shifted",what='lines',width='hairline',color='blue'))
+attach(Nitrate_EGRET_Short)
+points(Date,NO3_Daily_Conc,type='line')
+
 graphics.off()
 
-attach(Nitrate_FullRecord_Freeport)
+attach(Nitrate_Sensor_Freeport)
 setSweave("Discharge_fullRecord",5,5)
-timePlot(Rdate,Discharge,Plot=list(name="Freeport NO3 Sensor Shifted",what='points',symbol='circle',size=0.005,color='blue'))
+timePlot(Rdate,Discharge,Plot=list(name="Freeport NO3 Sensor Shifted",what='points',symbol='circle',size=0.0005,color='blue'))
 graphics.off()
 
+###plot nitrate sensor and EGRET output
+attach(Nitrate_Sensor_Freeport)
+setSweave("Nitrate_full_Record_shifted_test",5,5)
+plot(Rdate,Nitrate_Shifted,type="line",col="blue",ylim=c(0,1))
+attach(Nitrate_EGRET_Short)
+points(Rdate,NO3_Daily_Conc,type='line',col='red')
+graphics.off()
+
+attach(Nitrate_EGRET_Short)
+setSweave("EGRET_NO3_test",5,5)
+plot(Rdate,NO3_Daily_Conc,type='line',col='red')
+graphics.off()
+
+#########plot sensor Nitrate and Freeport discharge
+attach(Nitrate_Sensor_Freeport)
+setSweave("Nitrate_shifted_Discharge",5,5)
+plot(Rdate,Discharge*0.0283169,type="line",lwd=0.15,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(-50,3000),col="gray74")
+par(new = TRUE)
+plot(Rdate,Nitrate_Shifted,type="line",col="blue",ylim=c(0,1))
+axis(side=4)
+mtext("Discharge, cubic meters per second",side=4,line=3)
+legend("topleft",c("NO3 Concentration","Discharge"),col=c("blue","gray74"),lwd=c(0.5,0.5))
+graphics.off()
+########################
+#####Now add load
+#######################
+Nitrate_Sensor_Freeport_Load <- read.csv('NO3_Sensor_2013_Present_withLoad.csv')
+attach(Nitrate_Sensor_Freeport_Load)
+#Rdate <- strptime(as.character(datetime),("%Y-%m-%d%H:%M"))
+#Nitrate_Sensor_Freeport_Load <-data.frame(Nitrate_Sensor_Freeport_Load,Rdate)
+setSweave("Nitrate_Sensor_Load",5,5)
+plot(Rdate,Load_kg,type='line',col='aquamarine',ylim=c(-100,700))
+par(new = TRUE)
+plot(Rdate,Discharge_cms,type="line",lwd=0.15,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(-50,3000),col="black")
+axis(side=4)
+mtext("Discharge, cubic meters per second",side=4,line=3)
+legend("topleft",c("NO3 Load, kg","Discharge, cubic meters per second"),col=c("aquamarine","black"),lwd=c(0.5,0.5))
+graphics.off()
+
+
+
+
+
+#####plot nitrate to OP ratio
+Freeport_Nitrate_OP_ratio <- read.csv('Freeport_Nitrate_OP.csv')
+attach(Freeport_Nitrate_OP_ratio)
+#Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
+#Freeport_Nitrate_OP_ratio <- data.frame(Freeport_Nitrate_OP_ratio,Rdate)
+setSweave ('Freeport_N_OP_Ratio',6,6)
+plot(Rdate,NPRatio,type="line",col='forestgreen',lwd=0.75)
+par(new = TRUE)
+
+plot(Rdate,OPConcmm,type="line",lwd=0.75,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.03),col="orange")
+points(Rdate,NO3concmm,type='line',col='blue',lwd=0.75,lty=2)
+axis(side=4)
+mtext("nutrient concentration",side=4,line=3)
+legend("topleft",c("NP Ratio","Nitrate","OrthoP"),col=c("forestgreen","blue","orange"),lty=c(1,2,1),lwd=c(0.75,0.5,0.5))
+graphics.off()
+
+attach(Freeport_Nitrate_OP_ratio)
+setSweave("NitratePRatioBox",6,6)
+boxPlot(NPRatio,group=Month,Box=list(type='extended',fill="turquoise",ylabels = "Auto",xtitle="month",xtitle='month',ytitle = "NP Ratio",caption = "N P Ratio"))
+addTitle("NPRatio")
+graphics.off()
+
+#####plot ammonia to nitrate ratio ratio
+
+Freeport_Am_Nitrate_ratio <- read.csv("Freeport_Am_NO3Ratio.csv")
+attach(Freeport_Am_Nitrate_ratio)
+#Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
+#Freeport_Am_Nitrate_ratio <- data.frame(Freeport_Am_Nitrate_ratio,Rdate)
+setSweave ('Freeport_NH3_NO3_Ratio',5,5)
+plot(Rdate,AmNitrateRatio,type="line",col='forestgreen',ylim=c(0,3))
+par(new = TRUE)
+
+plot(Rdate,NH3ConcMM,type="line",lwd=0.75,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.025),col="red")
+points(Rdate,NO3Concmm,type='line',col='blue',lwd=0.75)
+axis(side=4)
+mtext("nutrient concentration",side=4,line=3)
+legend("topleft",c("NH3:NO3 Ratio","Ammonium","Nitrate"),col=c("forestgreen","red","blue"),lwd=c(0.75,0.5,0.5))
+graphics.off()
+
+
+attach(Freeport_Am_Nitrate_ratio)
+
+qplot(Month, AmNitrateRatio, data = Freeport_Am_Nitrate_ratio,group=Month,ylim=c(0,5),xlim=c(0,13), geom= "boxplot")
+
+#####plot TN TP ratio
+
+Freeport_TN_TP_ratio <- read.csv("TNTNRatio.csv")
+attach(Freeport_TN_TP_ratio)
+#Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
+#Freeport_TN_TP_ratio <- data.frame(Freeport_TN_TP_ratio,Rdate)
+setSweave ('Freeport_TN_TP_Ratio',5,5)
+plot(Rdate,TNTPRatio,type="line",col='forestgreen',ylim=c(0,30))
+par(new = TRUE)
+plot(Rdate,(TKNConcmm+NO3Concmm),type="line",lwd=0.75,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.1),col="red")
+
+points(Rdate,TPConcmm,type='line',col='blue',lwd=0.75)
+axis(side=4)
+mtext("nutrient concentration",side=4,line=3)
+legend("topleft",c("TN:TP Ratio","Total Kjeldahl N","Total Phosphorus"),col=c("forestgreen","red","blue"),lwd=c(0.75,0.5,0.5))
+graphics.off()
+
+qplot(Month, TNTPRatio, data = Freeport_TN_TP_ratio,group=Month,ylim=c(0,30),xlim=c(0,13), geom= "boxplot")
+
+########plot DIN OP Ratio
+Freeport_DIN_Nitrate_ratio <- read.csv("Freeport_DIN_OP.csv")
+attach(Freeport_DIN_Nitrate_ratio)
+#Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
+#Freeport_DIN_Nitrate_ratio <- data.frame(Freeport_DIN_Nitrate_ratio,Rdate)
+setSweave ('Freeport_DIN_OP_Ratio',5,5)
+plot(Rdate,DINOPRatio,type="line",col='forestgreen',lwd=0.5,ylim=c(0,25))
+par(new = TRUE)
+
+plot(Rdate,NH3Concmm,type="line",lwd=0.5,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.025),col="red")
+points(Rdate,NO3concmm,type='line',col='blue',lwd=0.5)
+points(Rdate,OPConcmm,type='line',col='orange',lwd=0.5)
+axis(side=4)
+mtext("nutrient concentration",side=4,line=3)
+legend("topleft",c("DIN:OP Ratio","Ammonium","Nitrate","orthophosphate"),col=c("forestgreen","red","blue","orange"),lwd=c(0.5,0.5,0.5,0.5))
+graphics.off()
