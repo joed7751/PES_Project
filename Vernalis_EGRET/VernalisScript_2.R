@@ -3066,13 +3066,24 @@ date5 <- "2019-06-01"
 qLow= baseQ
 qHigh=highQ7
 
+pdf(file = "Vernalis_Date1_Discharge_TP_conc_no_log.pdf",width = 10, height = 10)
+par(mfrow=c(2,2))
+plotConcQSmooth(eList,date1, date2, date3,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
+dev.off()
+
 tiff("Vernalis_Date1_Discharge_TP_conc_no_log.tif",height = 700, width = 1000, res=120)
 plotConcQSmooth(eList,date1, date2, date3,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
+dev.off()
+
+pdf(file= "Vernalis_Date2_Discharge_TP_conc_no_log.pdf",width = 10, height = 10)
+par(mfrow=c(2,2))
+plotConcQSmooth(eList,date3, date4, date5,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
 dev.off()
 
 tiff("Vernalis_Date2_Discharge_TP_conc_no_log.tif",height = 700, width = 1000, res=120)
 plotConcQSmooth(eList,date3, date4, date5,qLow, qHigh, logScale=FALSE,printLegend =TRUE,legendLeft=0,legendTop=0,printTitle=TRUE)
 dev.off()
+
 
 
 # ---------------------------
