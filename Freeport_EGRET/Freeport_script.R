@@ -236,18 +236,14 @@ annualSeries <- makeAnnualSeries(eList)
 
 ########Start the analysis for Nitrate
 #############
-
-
-
-#
-
 startDate    <- "1974-10-01"
 endDate      <- "2019-04-30"
 siteNumber<-  11447650
 QParameterCd <- "00060"
 parameterCd  <- "00631"  # "NO3"
 ##For the Freeport site, the truncated Q csv file is used to correspond to the available data
-filePath <- "/users/joed/Documents/Documents19/Biogeochemistry_2019/Freeport_EGRET/"
+#filePath <- "/users/joed/Documents/Documents19/Biogeochemistry_2019/Freeport_EGRET/"
+filePath <- "C:/Users/dsaleh/Documents/GitHub/PES_Project/Freeport_EGRET/"
 fileName <- "FreeportDaily_truncated_cfs.csv"
 Daily <-readUserDaily(filePath, fileName, hasHeader = TRUE, separator = ",", qUnit = 1)
 #Sample <- readNWISSample(siteNumber, parameterCd, startDate, endDate)
@@ -268,7 +264,7 @@ range(Sample$Date)
 eList <- mergeReport(INFO, Daily, Sample)
 
 #Change the working directory; redirect plot output to NO3 folder, this keeps all of the analysis for each type of nutrient separate
-setwd("..")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Freeport_EGRET")
 subDir <- 'NO3/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -524,6 +520,14 @@ mtext(side=2, expression(paste(NO[3],', mg ',L^-1,sep='')), line=3)
 legend(x=25, y=0.9 * mx, c("1975-1985", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
+pdf("timing_shift_in_NO3_conc_monthly_means.pdf")
+x <- barplot(mdat2, beside=TRUE, las=1, ylim=c(0,mx), col = c("lightblue", "mistyrose"))
+abline(h=0)
+arrows(x0=x[1,], y0=early_decade_mon_mn$ConcDay - early_decade_mon_sd$ConcDay, x1=x[1,], y1=early_decade_mon_mn$ConcDay + early_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
+arrows(x0=x[2,], y0=recent_decade_mon_mn$ConcDay - recent_decade_mon_sd$ConcDay, x1=x[2,], y1=recent_decade_mon_mn$ConcDay + recent_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
+mtext(side=2, expression(paste(NO[3],', mg ',L^-1,sep='')), line=3)
+legend(x=25, y=0.9 * mx, c("1975-1985", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+dev.off()
 
 # Now attempting a Wilcox Test (aka Mann-Whitney-Wilcoxon Rank Sum test)
 # ----------------------------------------------------------------------
@@ -617,6 +621,14 @@ write.table(Conc_compare, "Sacramento_Freeport_NO3_conc_wilcox.txt", quote=FALSE
 rng <- max(abs(c(Conc_compare$up_conf, Conc_compare$low_conf)))
 tiff("Sacramento_Freeport_NO3_conc_shift_wilcox_Vert_Bars.tif", height=600, width=800, res=130)
 par(mar=c(4,5,0.5,0.5))
+plot(seq(1:12), Conc_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng, rng), xlab="Month", ylab=expression(paste("Median Concentration Change, mg  ",L^-1,sep='')), las=1)
+plotCI(seq(1:12), Conc_compare$chng_est, ui=Conc_compare$up_conf, li=Conc_compare$low_conf, pch=16, add=TRUE)
+abline(h=0)
+axis(side=1,at=seq(1,12,by=1), labels=format(c(seq(as.Date("2000-10-01"), as.Date("2000-12-01"), by="month"), seq(as.Date("2000-01-01"), as.Date("2000-09-01"), by="month")),'%b'), las=2)
+legend('topright', c("Median difference", "90% Confidence Interval for the Median"), pch=c(16,NA), lwd=c(NA,1), pt.cex=c(1,NA), pt.bg=c('black',NA), bty='n', bg='white')
+dev.off()
+
+pdf("Sacramento_Freeport_NO3_conc_shift_wilcox_Vert_Bars.pdf")
 plot(seq(1:12), Conc_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng, rng), xlab="Month", ylab=expression(paste("Median Concentration Change, mg  ",L^-1,sep='')), las=1)
 plotCI(seq(1:12), Conc_compare$chng_est, ui=Conc_compare$up_conf, li=Conc_compare$low_conf, pch=16, add=TRUE)
 abline(h=0)
@@ -4017,7 +4029,7 @@ range(Sample$Date)
 eList <- mergeReport(INFO, Daily, Sample)
 
 # Change the working directory; redirect plot output to NH3 folder
-setwd("../..")
+setwd("C:/Users/dsaleh/Documents/GitHub/PES_Project/Freeport_EGRET/")
 subDir <- 'NH3/EGRET_plots'
 if (file.exists(subDir)){
   setwd(file.path(getwd(),subDir))
@@ -4248,6 +4260,14 @@ mtext(side=2, expression(paste(NH[3],', mg ',L^-1,sep='')), line=3)
 legend(x=25, y=0.9 * mx, c("1980-1990", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
 dev.off()
 
+pdf("timing_shift_in_NH4_conc_monthly_means.pdf")
+x <- barplot(mdat2, beside=TRUE, las=1, ylim=c(0,mx), col = c("lightblue", "mistyrose"))
+abline(h=0)
+arrows(x0=x[1,], y0=early_decade_mon_mn$ConcDay - early_decade_mon_sd$ConcDay, x1=x[1,], y1=early_decade_mon_mn$ConcDay + early_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
+arrows(x0=x[2,], y0=recent_decade_mon_mn$ConcDay - recent_decade_mon_sd$ConcDay, x1=x[2,], y1=recent_decade_mon_mn$ConcDay + recent_decade_mon_sd$ConcDay, angle=90, length=0.04, code=3)
+mtext(side=2, expression(paste(NH[3],', mg ',L^-1,sep='')), line=3)
+legend(x=25, y=0.9 * mx, c("1980-1990", "2009-2019"), pch=c(22,22), pt.cex=2, pt.bg=c("lightblue", "mistyrose"), bty='n', xpd=TRUE)
+dev.off()
 
 # Now attempting a Wilcox Test (aka Mann-Whitney-Wilcoxon Rank Sum test)
 # ----------------------------------------------------------------------
@@ -4348,6 +4368,13 @@ axis(side=1,at=seq(1,12,by=1), labels=format(c(seq(as.Date("2000-10-01"), as.Dat
 legend('topright', c("Median difference", "90% Confidence Interval for the Median"), pch=c(16,NA), lwd=c(NA,1), pt.cex=c(1,NA), pt.bg=c('black',NA), bty='n', bg='white')
 dev.off()
 
+pdf("Sacramento_Freeport_NH4_conc_shift_wilcox_Vert_Bars.pdf")
+plot(seq(1:12), Conc_compare$chng_est, typ='h', lend=1, lwd=15, col='white', xaxt='n', xlim=c(1,13), ylim=c(-rng, rng), xlab="Month", ylab=expression(paste("Median Concentration Change, mg  ",L^-1,sep='')), las=1)
+plotCI(seq(1:12), Conc_compare$chng_est, ui=Conc_compare$up_conf, li=Conc_compare$low_conf, pch=16, add=TRUE)
+abline(h=0)
+axis(side=1,at=seq(1,12,by=1), labels=format(c(seq(as.Date("2000-10-01"), as.Date("2000-12-01"), by="month"), seq(as.Date("2000-01-01"), as.Date("2000-09-01"), by="month")),'%b'), las=2)
+legend('topright', c("Median difference", "90% Confidence Interval for the Median"), pch=c(16,NA), lwd=c(NA,1), pt.cex=c(1,NA), pt.bg=c('black',NA), bty='n', bg='white')
+dev.off()
 
 # Now do the load
 # ---------------
