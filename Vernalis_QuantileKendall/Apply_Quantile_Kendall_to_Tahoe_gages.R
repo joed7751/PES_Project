@@ -31,7 +31,7 @@ setwd('/users/joed/Documents/Documents19/Biogeochemistry_2019/Vernalis_Quantile_
 
     sta <- "11303500"
     param <- "00060"
-    start <- "1923-10-01"
+    start <- "1970-10-01"
       end   <- "2019-06-01"
        fileName <- "Vernalis.pdf"
     
@@ -94,7 +94,7 @@ setwd('/users/joed/Documents/Documents19/Biogeochemistry_2019/Vernalis_Quantile_
     zvals   <- qnorm(pvals)
     name    <- paste(eList$INFO$shortName,
                      "\nAdjusted Mann Kendall significance",
-                     "  ", "1923-2019")
+                     "  ", "1970-2019")
     # old width and height were 8 and 6
     #filename2 <- paste0('Mann_Kendall_',dat[i,4],'.pdf')
     filename2 <- 'Vernalis.pdf'
