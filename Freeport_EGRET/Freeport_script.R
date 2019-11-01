@@ -4829,7 +4829,7 @@ attach(Freeport_Am_Nitrate_ratio)
 #Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
 #Freeport_Am_Nitrate_ratio <- data.frame(Freeport_Am_Nitrate_ratio,Rdate)
 setSweave ('Freeport_NH3_NO3_Ratio',5,5)
-plot(Rdate,AmNitrateRatio,type="line",col='forestgreen',ylim=c(0,3))
+plot(Rdate,AmNitrateRatio,type="line",col='forestgreen',ylim=c(0,4))
 par(new = TRUE)
 
 plot(Rdate,NH3ConcMM,type="line",lwd=0.75,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.025),col="red")
