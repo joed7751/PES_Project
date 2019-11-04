@@ -4822,14 +4822,14 @@ boxPlot(NPRatio,group=Month,Box=list(type='extended',fill="turquoise",ylabels = 
 addTitle("NPRatio")
 graphics.off()
 
-#####plot ammonia to nitrate ratio ratio
+#####plot ammonium to nitrate ratio ratio
 
 Freeport_Am_Nitrate_ratio <- read.csv("Freeport_Am_NO3Ratio.csv")
 attach(Freeport_Am_Nitrate_ratio)
 #Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
 #Freeport_Am_Nitrate_ratio <- data.frame(Freeport_Am_Nitrate_ratio,Rdate)
 setSweave ('Freeport_NH3_NO3_Ratio',5,5)
-plot(Rdate,AmNitrateRatio,type="line",col='forestgreen',ylim=c(0,3))
+plot(Rdate,AmNitrateRatio,type="line",col='forestgreen',ylim=c(0,4))
 par(new = TRUE)
 
 plot(Rdate,NH3ConcMM,type="line",lwd=0.75,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.025),col="red")
@@ -4843,6 +4843,25 @@ graphics.off()
 attach(Freeport_Am_Nitrate_ratio)
 
 qplot(Month, AmNitrateRatio, data = Freeport_Am_Nitrate_ratio,group=Month,ylim=c(0,5),xlim=c(0,13), geom= "boxplot")
+
+
+############plot nitrate to ammonium ratio
+
+
+#Freeport_Am_Nitrate_ratio <- read.csv("Freeport_Am_NO3Ratio.csv")
+attach(Freeport_Am_Nitrate_ratio)
+#Rdate <- strptime(as.character(Date),("%Y-%m-%d"))
+#Freeport_Am_Nitrate_ratio <- data.frame(Freeport_Am_Nitrate_ratio,Rdate)
+setSweave ('Freeport_N03_Nh4_Ratio',5,5)
+plot(Rdate,(NO3Concmm/NH3ConcMM),type="line",lwd=0.75,col='forestgreen',ylim=c(0,30))
+par(new = TRUE)
+
+plot(Rdate,NH3ConcMM,type="line",lwd=0.5,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.025),col="red")
+points(Rdate,NO3Concmm,type='line',col='blue',lwd=0.5)
+axis(side=4)
+mtext("nutrient concentration",side=4,line=3)
+legend("topleft",c("NO3:NH4 Ratio","Ammonium","Nitrate"),col=c("forestgreen","red","blue"),lwd=c(0.75,0.5,0.5))
+graphics.off()
 
 #####plot TN TP ratio
 
