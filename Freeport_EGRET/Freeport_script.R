@@ -4856,12 +4856,20 @@ setSweave ('Freeport_N03_Nh4_Ratio',5,5)
 plot(Rdate,(NO3Concmm/NH3ConcMM),type="line",lwd=0.75,col='forestgreen',ylim=c(0,30))
 par(new = TRUE)
 
-plot(Rdate,NH3ConcMM,type="line",lwd=0.5,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.025),col="red")
-points(Rdate,NO3Concmm,type='line',col='blue',lwd=0.5)
+plot(Rdate,NH3ConcMM*1000,type="line",lwd=0.5,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,25),col="red")
+points(Rdate,NO3Concmm*1000,type='line',col='blue',lwd=0.5)
 axis(side=4)
 mtext("nutrient concentration",side=4,line=3)
 legend("topleft",c("NO3:NH4 Ratio","Ammonium","Nitrate"),col=c("forestgreen","red","blue"),lwd=c(0.75,0.5,0.5))
 graphics.off()
+
+attach(Freeport_Am_Nitrate_ratio)
+
+qplot(Month, NO3Concmm/NH3ConcMM, data = Freeport_Am_Nitrate_ratio,group=Month,ylim=c(0,30),xlim=c(0,13), geom= "boxplot")
+
+attach(Freeport_Am_Nitrate_ratio)
+
+qplot(Month, NH3ConcMM*1000, data = Freeport_Am_Nitrate_ratio,group=Month,ylim=c(0,30),xlim=c(0,13), geom= "boxplot")
 
 #####plot TN TP ratio
 
