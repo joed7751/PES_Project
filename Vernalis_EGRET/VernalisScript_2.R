@@ -4659,12 +4659,15 @@ setSweave ('Vernalis_NO3_NH4_Ratio',5,5)
 plot(Rdate,(NO3Concmm/NH3Concmm),type="line",lwd=0.75,col='forestgreen',ylim=c(0,150))
 par(new = TRUE)
 
-plot(Rdate,NH3Concmm,type="line",lwd=0.5,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,0.2),col="red")
-points(Rdate,NO3Concmm,type='line',col='blue',lwd=0.5)
+plot(Rdate,NH3Concmm*1000,type="line",lwd=0.5,xaxt = "n", yaxt = "n", ylab = "", xlab = "",ylim=c(0,200),col="red")
+points(Rdate,NO3Concmm*1000,type='line',col='blue',lwd=0.5)
 axis(side=4)
 mtext("nutrient concentration",side=4,line=3)
 legend("topleft",c("NO3:NH4 Ratio","Ammonium","Nitrate"),col=c("forestgreen","red","blue"),lwd=c(0.75,0.5,0.5))
 graphics.off()
+
+attach(Vernalis_Am_Nitrate_ratio)
+qplot(Month, NO3Concmm/NH3Concmm, data = Vernalis_Am_Nitrate_ratio,group=Month,ylim=c(0,130),xlim=c(0,13), geom= "boxplot")
 
 #####plot nitrate to OP ratio
 Vern_Nitrate_OP_ratio <- read.csv('Vern_NO3_OPRatio.csv')
