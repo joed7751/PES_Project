@@ -35,7 +35,7 @@ setwd('/users/joed/Documents/Documents19/Biogeochemistry_2019/Freeport_QuantileK
       end   <- "2019-04-27"
        fileName <- "SacFreeport.pdf"
     
-    paStart <- 4
+    paStart <- 10
     paLong <- 12
     
     # Bob Hirsch: note, for annual analyses it is best to use paStart = 4, paLong = 12
