@@ -35,7 +35,7 @@ setwd('/users/joed/Documents/Documents19/Biogeochemistry_2019/Vernalis_Quantile_
       end   <- "2019-06-01"
        fileName <- "Vernalis.pdf"
     
-    paStart <- 4
+    paStart <- 10
     paLong <- 12
     
     # Bob Hirsch: note, for annual analyses it is best to use paStart = 4, paLong = 12
